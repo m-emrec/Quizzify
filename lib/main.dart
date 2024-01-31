@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trivia/config/routes/routes.dart';
 import 'package:trivia/config/theme/theme.dart';
+import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
 
 void main() async {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       themeAnimationDuration: const Duration(seconds: 1),
       themeAnimationCurve: Curves.easeOutCirc,
-      home: const SignUpPage(),
+      home: const SignInPage(),
     );
   }
 }

@@ -1,17 +1,22 @@
 import "package:flutter/material.dart";
 import 'package:trivia/core/constants/app_color.dart';
 
+final AppColors _appColors = AppColors();
+final AppTextThemes _appTextTheme = AppTextThemes();
+
 class AppTheme {
   final ThemeData _lightTheme = ThemeData(
     /// brightness
     brightness: Brightness.light,
 
     /// widget themes
-    appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
-    scaffoldBackgroundColor: AppColors().scaffoldColor,
+    appBarTheme: AppBarTheme(
+      backgroundColor: _appColors.scaffoldColor,
+    ),
+    scaffoldBackgroundColor: _appColors.scaffoldColor,
 
     /// TextTheme
-    textTheme: AppTextThemes().textTheme,
+    textTheme: _appTextTheme.textTheme,
   );
 
   ThemeData get lightTheme => _lightTheme;

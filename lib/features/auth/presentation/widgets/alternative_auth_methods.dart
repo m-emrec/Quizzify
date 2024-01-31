@@ -10,6 +10,10 @@ class AlternativeAuthMethods extends StatelessWidget {
     super.key,
   });
 
+  final String _googleButtonLabel = "Sign in with Google";
+  final String _facebookButtonLabel = "Sign in with Facebook";
+  final String _or = "OR";
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +23,7 @@ class AlternativeAuthMethods extends StatelessWidget {
         Row(
           children: [
             ResponsiveGoogleSignInButton(
-              label: "Sign up with Google",
+              label: _googleButtonLabel,
               onPressed: () {},
             ),
           ],
@@ -28,7 +32,7 @@ class AlternativeAuthMethods extends StatelessWidget {
         Row(
           children: [
             ResponsiveFacebookButton(
-              label: "Sign up with Facebook",
+              label: _facebookButtonLabel,
               onPressed: () {},
             ),
           ],
@@ -43,7 +47,7 @@ class AlternativeAuthMethods extends StatelessWidget {
               ),
             ),
             Text(
-              "OR",
+              _or,
               style: context.textTheme.labelSmall,
             ),
             const Expanded(

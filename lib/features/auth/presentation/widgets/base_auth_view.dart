@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:trivia/core/constants/app_color.dart';
+
+import '../../../../core/constants/app_paddings.dart';
 
 class BaseAuthView extends StatelessWidget {
   final Widget body;
@@ -16,7 +16,13 @@ class BaseAuthView extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: body,
+        body: Padding(
+          padding: AppPaddings().pageHPadding,
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: body,
+          ),
+        ),
       ),
     );
   }
