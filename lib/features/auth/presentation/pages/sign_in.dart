@@ -5,9 +5,10 @@ import 'package:trivia/features/auth/presentation/pages/sign_in_mixin.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 
 import '../../../../core/constants/app_color.dart';
+// ignore: unused_import
 import '../../../../core/constants/app_paddings.dart';
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
-import '../../../../core/shared/widgets/clikable_text.dart';
+import '../../../../core/shared/widgets/clickable_text.dart';
 import '../widgets/alternative_auth_methods.dart';
 import '../widgets/input_fields.dart';
 
