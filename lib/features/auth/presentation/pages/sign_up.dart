@@ -8,7 +8,8 @@ import 'package:trivia/core/shared/widgets/buttons/responsive_elevated_button.da
 import 'package:trivia/core/shared/widgets/clickable_text.dart';
 import 'package:trivia/core/shared/widgets/snackbars/custom_snackbar.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_up_mixin.dart';
+import 'package:trivia/features/auth/presentation/mixins/auth_mixin.dart';
+import 'package:trivia/features/auth/presentation/mixins/sign_up_mixin.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 import 'package:trivia/logger.dart';
 
@@ -23,7 +24,8 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> with SignUpPageMixin {
+class _SignUpPageState extends State<SignUpPage>
+    with SignUpPageMixin, AuthMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
@@ -48,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpPageMixin {
                   context,
                   controller: emailController,
                   textInputAction: TextInputAction.next,
-                  validator: (_) => emailValidator(),
+                  validator: (val) => emailValidator(val ?? ""),
                 ),
                 32.ph,
 
@@ -56,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpPageMixin {
                 PasswordTextField(
                   context,
                   controller: passwordController,
-                  validator: (value) => passwordValidator(),
+                  validator: (value) => passwordValidator(value ?? ""),
                 ),
                 //! sign up button
                 32.ph,

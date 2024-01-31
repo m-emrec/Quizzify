@@ -13,8 +13,13 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<DataState> signInUserWithEmail(
-      {required String email, required String password}) {
-    throw UnimplementedError();
+      {required String email, required String password}) async {
+    return _firebaseConnection.readData(
+      {
+        "email": email,
+        "password": password,
+      },
+    );
   }
 
   @override

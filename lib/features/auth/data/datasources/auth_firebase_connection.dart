@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/core/resources/firestore_connection.dart';
+import 'package:trivia/logger.dart';
 
 class AuthFirebaseConnection extends FireStoreConnection {
   @override
@@ -28,8 +29,22 @@ class AuthFirebaseConnection extends FireStoreConnection {
   }
 
   @override
-  Future<DataState> readData(Map? param) {
-    throw UnimplementedError();
+  Future<DataState> readData(Map? param) async {
+    try {
+      if (param != null) {
+        await firebaseAuth.signInWithEmailAndPassword(
+          email: param["email"],
+          password: param["password"],
+        );
+      } else {
+        throw Exception("Unknown error occurred!").toString();
+      }
+      return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
+    } catch (e) {
+      return DataFailed(e.toString());
+    }
   }
 
   @override

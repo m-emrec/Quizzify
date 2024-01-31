@@ -30,11 +30,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       this._signInUserWithFacebook)
       : super(AuthInitial()) {
     on<AuthEvent>((event, emit) {});
-    on<AuthSignUpWithEmail>(onAuthSignUpWithEmail);
+    on<AuthSignUpWithEmailEvent>(onAuthSignUpWithEmail);
+    on<AuthSignInWithEmailEvent>(onAuthSignInWithEmailEvent);
   }
 
   FutureOr<void> onAuthSignUpWithEmail(
-      AuthSignUpWithEmail event, Emitter<AuthState> emit) async {
+      AuthSignUpWithEmailEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoadingState());
     try {
       final DataState dataState = await _signUpUserWithEmailUsecase({
@@ -52,6 +53,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           e.toString(),
         ),
       );
+    }
+  }
+
+  FutureOr<void> onAuthSignInWithEmailEvent(
+      AuthSignInWithEmailEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
+    try {
+      final DataState dataState = await _signInWithEmailUsecase({
+        "email": event.email,
+        "password": event.password,
+      });
+
+      if (dataState is DataSuccess) {
+        emit(AuthSuccessState());
+      } else {
+        emit(AuthFailedState(dataState.exception ?? ""));
+      }
+    } catch (e) {
+      logger.e(e);
+      emit(AuthFailedState(e.toString()));
     }
   }
 }

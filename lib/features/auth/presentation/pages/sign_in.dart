@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_in_mixin.dart';
+import 'package:trivia/core/extensions/navigation_extension.dart';
+import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:trivia/features/auth/presentation/mixins/auth_mixin.dart';
+import 'package:trivia/features/auth/presentation/mixins/sign_in_mixin.dart';
+import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 
 import '../../../../core/constants/app_color.dart';
@@ -20,68 +25,77 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> with SignInMixin {
+class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
-      body: Column(
-        children: [
-          //! Alternative Sing up methods
-          const AlternativeAuthMethods(),
-          48.ph,
+      formKey: formKey,
+      body: BlocListener<AuthBloc, AuthState>(
+        bloc: authBloc,
+        listener: blocListener,
+        listenWhen: listenWhen,
+        child: Column(
+          children: [
+            //! Alternative Sing up methods
+            const AlternativeAuthMethods(),
+            48.ph,
 
-          /// Input Fields
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //! Email field
-              EmailField(
-                context,
-                controller: emailController,
-                textInputAction: TextInputAction.next,
-              ),
-              32.ph,
+            /// Input Fields
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //! Email field
+                EmailField(
+                  context,
+                  controller: emailController,
+                  textInputAction: TextInputAction.next,
+                  validator: (val) => emailValidator(val ?? ""),
+                ),
+                32.ph,
 
-              //! Password field
-              PasswordTextField(
-                context,
-                controller: passwordController,
-              ),
-              //! login button
-              32.ph,
-              Row(
-                children: [
-                  ResponsiveElevatedButton(
-                    label: loginButtonLabel,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              16.ph,
+                //! Password field
+                PasswordTextField(
+                  context,
+                  controller: passwordController,
+                  validator: (value) => passwordValidator(value ?? ""),
+                ),
+                //! login button
+                32.ph,
+                Row(
+                  children: [
+                    ResponsiveElevatedButton(
+                      label: loginButtonLabel,
+                      onPressed: onTapSignIn,
+                    ),
+                  ],
+                ),
+                16.ph,
 
-              /// you don't have an account text
-              ClickableText(
-                text: youDontHaveAccountText,
-              ),
-              16.ph,
-              //! Forget password button
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  forgotPasswordButtonLabel,
-                  style: context.textTheme.labelMedium?.copyWith(
-                    color: AppColors().elevatedButtonColor,
+                /// you don't have an account text
+                ClickableText(
+                  text: youDontHaveAccountText,
+                  onTap: () => onTapDontHaveAnAccount(context),
+                ),
+                16.ph,
+                //! Forget password button
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    forgotPasswordButtonLabel,
+                    style: context.textTheme.labelMedium?.copyWith(
+                      color: AppColors().elevatedButtonColor,
+                    ),
                   ),
                 ),
-              ),
-              16.ph,
-              //! Terms and Services and Privacy policy Text
-              termsAndServicesText(context),
-            ],
-          ),
-        ],
+                16.ph,
+                //! Terms and Services and Privacy policy Text
+                termsAndServicesText(context),
+              ],
+            ),
+          ],
+        ),
       ),
-      title: "Sign In",
+      title: pageTitle,
     );
   }
 }

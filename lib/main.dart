@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       themeAnimationDuration: const Duration(seconds: 1),
       themeAnimationCurve: Curves.easeOutCirc,
-      home: const SignUpPage(),
     );
   }
 }
