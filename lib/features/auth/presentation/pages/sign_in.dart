@@ -40,7 +40,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin {
                 controller: emailController,
                 textInputAction: TextInputAction.next,
               ),
-              64.ph,
+              32.ph,
 
               //! Password field
               PasswordTextField(

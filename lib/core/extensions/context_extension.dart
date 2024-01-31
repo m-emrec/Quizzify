@@ -13,3 +13,7 @@ extension MediaQueryExtension on BuildContext {
   double dynamicWidth(double val) => screenSize.width * val;
   double dynamicHeight(double val) => screenSize.height * val;
 }
+
+extension ScaffoldMessengerExtension on BuildContext {
+  showSnack(snackBar) => ScaffoldMessenger.of(this).showSnackBar(snackBar);
+}

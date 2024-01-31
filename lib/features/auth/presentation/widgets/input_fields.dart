@@ -92,6 +92,7 @@ class EmailField extends BaseTextFormField {
     super.controller,
     super.validator,
     super.textInputAction,
+    super.focusNode,
   });
   @override
   TextInputType? get keyboardType => TextInputType.emailAddress;

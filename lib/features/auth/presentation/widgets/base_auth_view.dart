@@ -5,7 +5,9 @@ import '../../../../core/constants/app_paddings.dart';
 class BaseAuthView extends StatelessWidget {
   final Widget body;
   final String title;
-  const BaseAuthView({super.key, required this.body, required this.title});
+  final GlobalKey<FormState>? formKey;
+  const BaseAuthView(
+      {super.key, required this.body, required this.title, this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,10 @@ class BaseAuthView extends StatelessWidget {
           padding: AppPaddings().pageHPadding,
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
-            child: body,
+            child: Form(
+              key: formKey,
+              child: body,
+            ),
           ),
         ),
       ),

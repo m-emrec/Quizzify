@@ -48,6 +48,8 @@ dependencies:
   #/ Google sign in
   google_sign_in: ^6.2.1
   font_awesome_flutter: ^10.6.0
+  logger: ^2.0.2+1
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
