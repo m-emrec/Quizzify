@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trivia/config/routes/routes.dart';
 import 'package:trivia/config/theme/theme.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
@@ -25,19 +26,6 @@ class MyApp extends StatelessWidget {
       themeAnimationDuration: const Duration(seconds: 1),
       themeAnimationCurve: Curves.easeOutCirc,
       home: const SignUpPage(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("asd"),
-      ),
     );
   }
 }

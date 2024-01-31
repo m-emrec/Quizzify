@@ -1,5 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:trivia/core/constants/app_color.dart';
+import 'package:trivia/core/constants/app_paddings.dart';
+import 'package:trivia/core/extensions/context_extension.dart';
+import 'package:trivia/core/extensions/empty_padding_extension.dart';
+import 'package:trivia/core/shared/widgets/buttons/responsive_elevated_button.dart';
+import 'package:trivia/features/auth/presentation/pages/sign_up_mixin.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
+
+import '../widgets/alternative_auth_methods.dart';
+import '../widgets/input_fields.dart';
 
 class SignUpPage extends StatefulWidget {
   static const route = "sign-up";
@@ -9,11 +20,89 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with SignUpMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
-      title: "Sign Up",
+      title: pageTitle,
+      body: Padding(
+        padding: AppPaddings().pageHPadding,
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              //! Alternative Sing up methods
+              const AlternativeAuthMethods(),
+              48.ph,
+
+              /// Input Fields
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //! Email field
+                  EmailField(
+                    context,
+                    controller: emailController,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  64.ph,
+
+                  //! Password field
+                  PasswordTextField(
+                    context,
+                    controller: passwordController,
+                  ),
+                  //! login button
+                  32.ph,
+                  Row(
+                    children: [
+                      ResponsiveElevatedButton(
+                        label: loginButtonLabel,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  16.ph,
+                  //! Forget password button
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot Password?",
+                      style: context.textTheme.labelMedium?.copyWith(
+                        color: AppColors().elevatedButtonColor,
+                      ),
+                    ),
+                  ),
+                  16.ph,
+                  //! Terms and Services and Privacy policy Text
+                  termsAndServicesText(context),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PopupDialog extends StatelessWidget {
+  final String? title;
+  final Widget? content;
+  final List<Widget>? actions;
+  const PopupDialog({
+    Key? key,
+    this.title,
+    this.content,
+    this.actions,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      title: Text(title ?? ""),
+      content: content,
+      actions: actions,
     );
   }
 }
