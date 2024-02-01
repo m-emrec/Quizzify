@@ -10,6 +10,7 @@ mixin ForgotPasswordMixin on State<ForgotPassword> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final String bodyText =
       "Enter your email and we will send you a link to reset your password.";
+  final String resetPasswordButtonLabel = "Reset Password";
 
   /// get it
   final GetIt sl = GetIt.instance;

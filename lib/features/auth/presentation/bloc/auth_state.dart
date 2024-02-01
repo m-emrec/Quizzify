@@ -15,6 +15,8 @@ class AuthLoadingState extends AuthActionState {}
 
 class AuthSuccessState extends AuthActionState {
   final String? successMessage;
+
+  /// If there will be some task to execute after a successful task use this param.
   final void Function(dynamic val)? afterSuccess;
 
   AuthSuccessState({

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
 
 import '../../../../core/constants/app_paddings.dart';
 

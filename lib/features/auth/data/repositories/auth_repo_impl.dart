@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/auth/data/datasources/auth_firebase_connection.dart';
 import 'package:trivia/features/auth/data/datasources/google_sign_in_connection.dart';
 import 'package:trivia/features/auth/domain/repositories/auth_repo.dart';
-import 'package:trivia/logger.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final AuthFirebaseConnection _firebaseConnection;

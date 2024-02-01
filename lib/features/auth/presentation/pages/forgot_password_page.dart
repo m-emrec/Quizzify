@@ -23,14 +23,14 @@ class _ForgotPasswordState extends State<ForgotPassword>
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
-      formKey: formKey,
+      // reset password button.
       floatingActionButton: Padding(
         padding: AppPaddings().pageHPadding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ResponsiveElevatedButton(
-              label: "Reset Password",
+              label: resetPasswordButtonLabel,
               onPressed: resetPassword,
             ),
           ],

@@ -1,17 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:trivia/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
-import 'package:trivia/logger.dart';
-
-import '../../../../core/constants/strings.dart';
-import '../../../../core/shared/widgets/pop_up_dialog.dart';
-import '../../data/datasources/auth_injection_container.dart';
 
 mixin SignInMixin on State<SignInPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -29,7 +22,6 @@ mixin SignInMixin on State<SignInPage> {
   String get loginButtonLabel => _loginButtonLabel;
   final String _forgotPasswordButtonLabel = 'Forgot Password?';
   String get forgotPasswordButtonLabel => _forgotPasswordButtonLabel;
-
   final String _youDontHaveAccountText = "Don't have an account?";
   String get youDontHaveAccountText => _youDontHaveAccountText;
 
@@ -50,7 +42,6 @@ mixin SignInMixin on State<SignInPage> {
   @override
   void initState() {
     super.initState();
-
     authBloc = sl<AuthBloc>();
   }
 

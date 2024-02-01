@@ -2,29 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:trivia/features/auth/presentation/mixins/alternative_auth_methods_mixin.dart';
 
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
 
-class AlternativeAuthMethods extends StatelessWidget {
+class AlternativeAuthMethods extends StatelessWidget
+    with AlternativeAuthMethodsMixin {
   final AuthBloc authBloc;
 
   /// This widget contains Sign up with google and facebook button and a divider.
-  const AlternativeAuthMethods({
+  AlternativeAuthMethods({
     super.key,
     required this.authBloc,
   });
-
-  final String _googleButtonLabel = "Sign in with Google";
-  final String _facebookButtonLabel = "Sign in with Facebook";
-  final String _or = "OR";
-
-  void signInWithGoogle() {
-    authBloc.add(AuthSignInWithGoogleEvent());
-  }
-
-  void signInWithFacebook() {
-    authBloc.add(AuthSignInWithFacebookEvent());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +25,8 @@ class AlternativeAuthMethods extends StatelessWidget {
         Row(
           children: [
             ResponsiveGoogleSignInButton(
-              label: _googleButtonLabel,
-              onPressed: signInWithGoogle,
+              label: googleButtonLabel,
+              onPressed: () => signInWithGoogle(authBloc),
             ),
           ],
         ),
@@ -59,7 +49,7 @@ class AlternativeAuthMethods extends StatelessWidget {
               ),
             ),
             Text(
-              _or,
+              or,
               style: context.textTheme.labelSmall,
             ),
             const Expanded(

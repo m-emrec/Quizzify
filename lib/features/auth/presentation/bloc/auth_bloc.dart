@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -22,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInWithEmailUsecase _signInWithEmailUsecase;
   final SignUpUserWithEmailUsecase _signUpUserWithEmailUsecase;
   final SignInUserWithGoogleUsecase _signInUserWithGoogleUsecase;
+  // ignore: unused_field
   final SignInUserWithFacebook _signInUserWithFacebook;
   AuthBloc(
       this._forgotPasswordUsecase,

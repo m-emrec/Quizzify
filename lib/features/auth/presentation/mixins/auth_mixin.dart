@@ -7,13 +7,14 @@ import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:trivia/features/auth/presentation/widgets/input_fields.dart';
-import 'package:trivia/logger.dart';
 
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../../../../core/shared/widgets/pop_up_dialog.dart';
 import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
 
+/// This mixin made for using on SignIn and SignUp pages.
 mixin AuthMixin {
+  //* [Strings]
   final String _termsOfServicesText = AppStrings().termsOfServicesText;
   final String _privacyPolicyText = AppStrings().privacyPolicyText;
 
@@ -23,13 +24,15 @@ mixin AuthMixin {
 
   String get byContinuingText => "By continuing, you agree to the ";
 
-  /// get it
+  //* define [GetIt]
   final GetIt sl = GetIt.instance;
 
-  /// bloc
+  //* define [Bloc]
   late AuthBloc authBloc;
 
+  //* [Bloc] Functions
   bool listenWhen(previous, current) => current is AuthActionState;
+
   void blocListener(BuildContext context, state) {
     switch (state.runtimeType) {
       case AuthFailedState:
@@ -56,7 +59,8 @@ mixin AuthMixin {
     }
   }
 
-  // ? Validator functions
+  //* Validator functions
+
   String? emailValidator(String email) {
     bool isValid = EmailValidator.validate(email);
     if (isValid == false) {
@@ -71,6 +75,8 @@ mixin AuthMixin {
     }
     return null;
   }
+
+  //* Functions
 
   void openTermsOfServices(BuildContext context) {
     showDialog(
@@ -100,6 +106,7 @@ mixin AuthMixin {
     );
   }
 
+  //* Widget Functions
   Text termsAndServicesText(BuildContext context) {
     return Text.rich(
       textAlign: TextAlign.center,
@@ -107,6 +114,7 @@ mixin AuthMixin {
         text: byContinuingText,
         style: context.textTheme.labelSmall,
         children: [
+          // Clickable Text
           TextSpan(
             text: termsOfServicesString,
             recognizer: TapGestureRecognizer()
@@ -116,6 +124,7 @@ mixin AuthMixin {
           const TextSpan(
             text: " & ",
           ),
+          // Clickable Text
           TextSpan(
             text: privacyPolicyString,
             recognizer: TapGestureRecognizer()

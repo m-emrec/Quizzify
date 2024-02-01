@@ -8,12 +8,8 @@ import 'package:trivia/features/auth/presentation/mixins/sign_in_mixin.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 
 import '../../../../core/constants/app_color.dart';
-// ignore: unused_import
-import '../../../../core/constants/app_paddings.dart';
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../../../../core/shared/widgets/clickable_text.dart';
 import '../widgets/alternative_auth_methods.dart';
-import '../widgets/input_fields.dart';
 
 class SignInPage extends StatefulWidget {
   static const route = "sign-in";
@@ -33,13 +29,12 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
         listenWhen: listenWhen,
         child: Column(
           children: [
-            //! Alternative Sing up methods
+            //* Alternative Sing up methods
             AlternativeAuthMethods(
               authBloc: authBloc,
             ),
             48.ph,
-
-            /// Input Fields
+            //* Form Field
             authForm(
               context,
               formKey: formKey,
@@ -49,17 +44,16 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
               onPressed: onTapSignIn,
             ),
             16.ph,
-
-            /// you dont have an account button ,Forgot password button, terms and services
+            //* you dont have an account button ,Forgot password button, terms and services
             Column(
               children: [
-                /// you don't have an account text
+                // you don't have an account text
                 ClickableText(
                   text: youDontHaveAccountText,
                   onTap: () => onTapDontHaveAnAccount(context),
                 ),
                 16.ph,
-                //! Forget password button
+                // Forget password button
                 TextButton(
                   onPressed: () => onTapForgotPassword(context),
                   child: Text(
@@ -70,7 +64,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
                   ),
                 ),
                 16.ph,
-                //! Terms and Services and Privacy policy Text
+                // Terms and Services and Privacy policy Text
                 termsAndServicesText(context),
               ],
             )

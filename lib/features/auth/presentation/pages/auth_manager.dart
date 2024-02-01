@@ -15,6 +15,7 @@ class _AuthManagerState extends State<AuthManager> {
   @override
   void initState() {
     super.initState();
+    // initialize GetIt .
     AuthInjectionContainer().initialize();
   }
 
@@ -23,6 +24,7 @@ class _AuthManagerState extends State<AuthManager> {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+        // if the user [Authenticated] return HomePage.
         if (snapshot.hasData) {
           return Scaffold(
             body: Center(
@@ -34,6 +36,7 @@ class _AuthManagerState extends State<AuthManager> {
               ),
             ),
           );
+          // if user not  [Authenticated] return SignInPage
         } else {
           return const SignInPage();
         }
