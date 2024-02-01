@@ -31,10 +31,7 @@ class BaseAuthView extends StatelessWidget {
           padding: AppPaddings().pageHPadding + AppPaddings().pageTopPadding,
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
-            child: Form(
-              key: formKey,
-              child: body,
-            ),
+            child: body,
           ),
         ),
       ),

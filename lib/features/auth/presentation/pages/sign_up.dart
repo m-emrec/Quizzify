@@ -43,36 +43,19 @@ class _SignUpPageState extends State<SignUpPage>
             ),
             48.ph,
 
-            /// Input Fields
+            /// Form Field
+            authForm(
+              context,
+              buttonLabel: loginButtonLabel,
+              emailController: emailController,
+              formKey: formKey,
+              onPressed: onTapSignUp,
+              passwordController: passwordController,
+            ),
+
+            16.ph,
             Column(
               children: [
-                //! Email field
-                EmailField(
-                  context,
-                  controller: emailController,
-                  textInputAction: TextInputAction.next,
-                  validator: (val) => emailValidator(val ?? ""),
-                ),
-                32.ph,
-
-                //! Password field
-                PasswordTextField(
-                  context,
-                  controller: passwordController,
-                  validator: (value) => passwordValidator(value ?? ""),
-                ),
-                //! sign up button
-                32.ph,
-                Row(
-                  children: [
-                    ResponsiveElevatedButton(
-                      label: loginButtonLabel,
-                      onPressed: onTapSignUp,
-                    ),
-                  ],
-                ),
-                16.ph,
-
                 /// already have an account text
                 ClickableText(
                   onTap: onTapAlreadyHaveAccount,
@@ -83,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage>
                 //! Terms and Services and Privacy policy Text
                 termsAndServicesText(context),
               ],
-            ),
+            )
           ],
         ),
       ),

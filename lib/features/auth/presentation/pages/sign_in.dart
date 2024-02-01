@@ -41,35 +41,20 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
             48.ph,
 
             /// Input Fields
+            authForm(
+              context,
+              formKey: formKey,
+              emailController: emailController,
+              passwordController: passwordController,
+              buttonLabel: loginButtonLabel,
+              onPressed: onTapSignIn,
+            ),
+            16.ph,
+
+            /// you dont have an account button ,Forgot password button, terms and services
+
             Column(
               children: [
-                //! Email field
-                EmailField(
-                  context,
-                  controller: emailController,
-                  textInputAction: TextInputAction.next,
-                  validator: (val) => emailValidator(val ?? ""),
-                ),
-                32.ph,
-
-                //! Password field
-                PasswordTextField(
-                  context,
-                  controller: passwordController,
-                  validator: (value) => passwordValidator(value ?? ""),
-                ),
-                //! login button
-                32.ph,
-                Row(
-                  children: [
-                    ResponsiveElevatedButton(
-                      label: loginButtonLabel,
-                      onPressed: onTapSignIn,
-                    ),
-                  ],
-                ),
-                16.ph,
-
                 /// you don't have an account text
                 ClickableText(
                   text: youDontHaveAccountText,
@@ -90,7 +75,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
                 //! Terms and Services and Privacy policy Text
                 termsAndServicesText(context),
               ],
-            ),
+            )
           ],
         ),
       ),
