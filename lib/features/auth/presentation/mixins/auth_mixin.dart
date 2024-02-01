@@ -5,10 +5,10 @@ import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/strings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:trivia/logger.dart';
 
 import '../../../../core/shared/widgets/pop_up_dialog.dart';
 import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
-import '../../../../logger.dart';
 
 mixin AuthMixin {
   final String _termsOfServicesText = AppStrings().termsOfServicesText;
@@ -30,14 +30,23 @@ mixin AuthMixin {
   void blocListener(BuildContext context, state) {
     switch (state.runtimeType) {
       case AuthFailedState:
-        state as AuthFailedState;
-        logger.e(state.exception);
         context.showSnack(
           ErrorSnack(
             context,
             text: state.exception,
           ),
         );
+        break;
+      case AuthSuccessState:
+        state as AuthSuccessState;
+        // logger.i(state.afterSuccess);
+        context.showSnack(
+          SuccessSnack(
+            context,
+            text: state.successMessage,
+          ),
+        );
+        if (state.afterSuccess != null) state.afterSuccess!(context);
         break;
 
       default:

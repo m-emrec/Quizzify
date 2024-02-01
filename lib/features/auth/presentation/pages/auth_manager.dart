@@ -4,6 +4,7 @@ import 'package:trivia/features/auth/data/datasources/auth_injection_container.d
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 
 class AuthManager extends StatefulWidget {
+  static const route = "/";
   const AuthManager({super.key});
 
   @override
@@ -11,8 +12,6 @@ class AuthManager extends StatefulWidget {
 }
 
 class _AuthManagerState extends State<AuthManager> {
-  // ignore: unused_field
-  static const route = "/";
   @override
   void initState() {
     super.initState();

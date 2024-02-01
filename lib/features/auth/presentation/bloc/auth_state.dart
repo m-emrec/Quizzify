@@ -13,7 +13,15 @@ abstract class AuthActionState extends AuthState {}
 
 class AuthLoadingState extends AuthActionState {}
 
-class AuthSuccessState extends AuthActionState {}
+class AuthSuccessState extends AuthActionState {
+  final String? successMessage;
+  final void Function(dynamic val)? afterSuccess;
+
+  AuthSuccessState({
+    this.successMessage,
+    this.afterSuccess,
+  });
+}
 
 class AuthFailedState extends AuthActionState {
   final String exception;

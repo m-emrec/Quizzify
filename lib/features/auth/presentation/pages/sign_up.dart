@@ -38,12 +38,13 @@ class _SignUpPageState extends State<SignUpPage>
         child: Column(
           children: [
             //! Alternative Sing up methods
-            const AlternativeAuthMethods(),
+            AlternativeAuthMethods(
+              authBloc: authBloc,
+            ),
             48.ph,
 
             /// Input Fields
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //! Email field
                 EmailField(

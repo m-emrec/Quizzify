@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:trivia/features/auth/presentation/mixins/auth_mixin.dart';
 import 'package:trivia/features/auth/presentation/mixins/sign_in_mixin.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 
 import '../../../../core/constants/app_color.dart';
@@ -37,12 +35,13 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
         child: Column(
           children: [
             //! Alternative Sing up methods
-            const AlternativeAuthMethods(),
+            AlternativeAuthMethods(
+              authBloc: authBloc,
+            ),
             48.ph,
 
             /// Input Fields
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //! Email field
                 EmailField(
@@ -79,7 +78,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
                 16.ph,
                 //! Forget password button
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => onTapForgotPassword(context),
                   child: Text(
                     forgotPasswordButtonLabel,
                     style: context.textTheme.labelMedium?.copyWith(

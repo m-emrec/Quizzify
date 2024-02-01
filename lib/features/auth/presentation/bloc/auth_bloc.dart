@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/auth/domain/usecases/forgotPassword_usecase.dart';
 import 'package:trivia/features/auth/domain/usecases/signInUserWithEmail_usecase.dart';
@@ -32,6 +34,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) {});
     on<AuthSignUpWithEmailEvent>(onAuthSignUpWithEmail);
     on<AuthSignInWithEmailEvent>(onAuthSignInWithEmailEvent);
+    on<AuthForgotPasswordEvent>(onAuthForgotPasswordEvent);
+    on<AuthSignInWithGoogleEvent>(onAuthSignInWithGoogleEvent);
   }
 
   FutureOr<void> onAuthSignUpWithEmail(
@@ -43,7 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         "password": event.password,
       });
       if (dataState is DataSuccess) {
-        emit(AuthSuccessState());
+        emit(AuthSuccessState(successMessage: "Successfully signed up."));
       } else {
         emit(AuthFailedState(dataState.exception ?? ""));
       }
@@ -66,12 +70,51 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
 
       if (dataState is DataSuccess) {
-        emit(AuthSuccessState());
+        emit(AuthSuccessState(successMessage: "Successfully signed in."));
       } else {
         emit(AuthFailedState(dataState.exception ?? ""));
       }
     } catch (e) {
       logger.e(e);
+      emit(AuthFailedState(e.toString()));
+    }
+  }
+
+  FutureOr<void> onAuthForgotPasswordEvent(
+      AuthForgotPasswordEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
+    try {
+      final DataState dataState = await _forgotPasswordUsecase(event.email);
+
+      if (dataState is DataSuccess) {
+        emit(AuthSuccessState(
+          successMessage: "Password reset email sent.",
+          afterSuccess: (context) {
+            context as BuildContext;
+            context.navigator.pop();
+          },
+        ));
+      } else {
+        emit(AuthFailedState(dataState.exception ?? ""));
+      }
+    } catch (e) {
+      logger.e(e);
+      emit(AuthFailedState(e.toString()));
+    }
+  }
+
+  FutureOr<void> onAuthSignInWithGoogleEvent(
+      AuthSignInWithGoogleEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
+
+    try {
+      final DataState dataState = await _signInUserWithGoogleUsecase(null);
+      if (dataState is DataSuccess) {
+        emit(AuthSuccessState(successMessage: "Signed in"));
+      } else {
+        emit(AuthFailedState(dataState.exception.toString()));
+      }
+    } catch (e) {
       emit(AuthFailedState(e.toString()));
     }
   }

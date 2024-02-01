@@ -7,48 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:235134348511:android:935e35ebac64b8727b4d6a",
-        "android_client_info": {
-          "package_name": "com.example.quiz_battle"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "235134348511-mptkptt551t4k14f5taraba5vjthmarf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDOi0BNGc05clfy1Mgl8xIIwASXwhBHZ4Y"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "235134348511-mptkptt551t4k14f5taraba5vjthmarf.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "235134348511-3s4imn16a88e1djt8er3qe1chti8vrjt.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.quizBattle.RunnerTests"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:235134348511:android:9c18b8a5b17b0cfc7b4d6a",
+        "mobilesdk_app_id": "1:235134348511:android:a02670ff984f4b2d7b4d6a",
         "android_client_info": {
           "package_name": "com.example.trivia"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "235134348511-bf1mln09fhaqrnkfdjf3ehinmveq31bs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trivia",
+            "certificate_hash": "272a7bcc1c18aa59d138131e70dd6027d7c76956"
+          }
+        },
         {
           "client_id": "235134348511-mptkptt551t4k14f5taraba5vjthmarf.apps.googleusercontent.com",
           "client_type": 3

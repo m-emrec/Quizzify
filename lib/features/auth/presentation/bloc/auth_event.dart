@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'auth_bloc.dart';
 
 abstract class AuthEvent extends Equatable {
@@ -26,3 +27,14 @@ class AuthSignInWithEmailEvent extends AuthEvent {
     required this.password,
   });
 }
+
+class AuthForgotPasswordEvent extends AuthEvent {
+  final String email;
+  const AuthForgotPasswordEvent({
+    required this.email,
+  });
+}
+
+class AuthSignInWithGoogleEvent extends AuthEvent {}
+
+class AuthSignInWithFacebookEvent extends AuthEvent {}

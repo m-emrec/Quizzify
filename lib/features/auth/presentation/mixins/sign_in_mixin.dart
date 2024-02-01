@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:trivia/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
 import 'package:trivia/logger.dart';
@@ -52,6 +53,9 @@ mixin SignInMixin on State<SignInPage> {
 
     authBloc = sl<AuthBloc>();
   }
+
+  onTapForgotPassword(BuildContext context) =>
+      context.pushNamed(ForgotPassword.route);
 
   void onTapSignIn() {
     if (formKey.currentState != null) {

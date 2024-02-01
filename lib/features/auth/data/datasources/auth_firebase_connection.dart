@@ -51,4 +51,28 @@ class AuthFirebaseConnection extends FireStoreConnection {
   Future<DataState> updateData(Map? param) {
     throw UnimplementedError();
   }
+
+  Future<DataState> forgotPassword(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+
+      return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
+    } catch (e) {
+      return DataFailed(e.toString());
+    }
+  }
+
+  Future<DataState> signInWithGoogle(AuthCredential credential) async {
+    try {
+      await firebaseAuth.signInWithCredential(credential);
+
+      return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
+    } catch (e) {
+      return DataFailed(e.toString());
+    }
+  }
 }
