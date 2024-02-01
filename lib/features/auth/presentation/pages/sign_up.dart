@@ -29,7 +29,6 @@ class _SignUpPageState extends State<SignUpPage>
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
-      formKey: formKey,
       title: pageTitle,
       body: BlocListener<AuthBloc, AuthState>(
         bloc: authBloc,
@@ -54,6 +53,8 @@ class _SignUpPageState extends State<SignUpPage>
             ),
 
             16.ph,
+
+            /// already have an account button and terms and services
             Column(
               children: [
                 /// already have an account text

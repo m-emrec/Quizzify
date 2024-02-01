@@ -27,7 +27,6 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
-      formKey: formKey,
       body: BlocListener<AuthBloc, AuthState>(
         bloc: authBloc,
         listener: blocListener,
@@ -52,7 +51,6 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
             16.ph,
 
             /// you dont have an account button ,Forgot password button, terms and services
-
             Column(
               children: [
                 /// you don't have an account text

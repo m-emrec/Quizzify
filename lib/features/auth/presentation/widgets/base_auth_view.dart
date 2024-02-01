@@ -6,13 +6,12 @@ import '../../../../core/constants/app_paddings.dart';
 class BaseAuthView extends StatelessWidget {
   final Widget body;
   final String title;
-  final GlobalKey<FormState>? formKey;
+
   final Widget? floatingActionButton;
   const BaseAuthView({
     super.key,
     required this.body,
     required this.title,
-    this.formKey,
     this.floatingActionButton,
   });
 
