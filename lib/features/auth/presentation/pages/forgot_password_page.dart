@@ -23,6 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword>
   @override
   Widget build(BuildContext context) {
     return BaseAuthView(
+      canPop: true,
       // reset password button.
       floatingActionButton: Padding(
         padding: AppPaddings().pageHPadding,
@@ -36,20 +37,23 @@ class _ForgotPasswordState extends State<ForgotPassword>
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Text(
-            bodyText,
-            style: context.textTheme.labelSmall,
-          ),
-          48.ph,
-          EmailField(
-            context,
-            controller: emailController,
-            textInputAction: TextInputAction.done,
-            validator: (val) => emailValidator(val ?? ""),
-          ),
-        ],
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            Text(
+              bodyText,
+              style: context.textTheme.labelSmall,
+            ),
+            48.ph,
+            EmailField(
+              context,
+              controller: emailController,
+              textInputAction: TextInputAction.done,
+              validator: (val) => emailValidator(val ?? ""),
+            ),
+          ],
+        ),
       ),
       title: pageTitle,
     );

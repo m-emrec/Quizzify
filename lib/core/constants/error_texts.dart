@@ -7,6 +7,9 @@ class AppErrorText {
 
   final Map _errorText = {
     //Firebase Auth
+    "The email address is badly formatted.":
+        "Please provide a valid email address. Ex:}\nxxx@xx.com",
+    "INVALID_LOGIN_CREDENTIALS": "Please check your email or password.",
     "invalid-api-key": "The provided API key is invalid.",
     "user-disabled": "The user account has been disabled by an administrator.",
     "user-not-found":

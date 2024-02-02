@@ -10,8 +10,8 @@ extension ContextExtension on BuildContext {
 extension MediaQueryExtension on BuildContext {
   Size get screenSize => mediaQuery.size;
 
-  double dynamicWidth(double val) => screenSize.width * val;
-  double dynamicHeight(double val) => screenSize.height * val;
+  double dynamicWidth(double? val) => screenSize.width * (val ?? 1);
+  double dynamicHeight(double? val) => screenSize.height * (val ?? 1);
 }
 
 extension ScaffoldMessengerExtension on BuildContext {

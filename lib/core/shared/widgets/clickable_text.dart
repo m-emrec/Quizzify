@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 
 class ClickableText extends StatelessWidget {
@@ -15,7 +16,10 @@ class ClickableText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      overlayColor: MaterialStatePropertyAll<Color>(
+        AppColors().elevatedButtonColor.withOpacity(0.1),
+      ),
       onTap: onTap,
       child: Text(
         text,

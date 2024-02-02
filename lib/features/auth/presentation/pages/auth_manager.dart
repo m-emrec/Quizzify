@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
+import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:trivia/logger.dart';
 
 import '../../domain/repositories/auth_repo.dart';
 
@@ -24,6 +27,18 @@ class _AuthManagerState extends State<AuthManager> {
     if (!isAlreadyRegistered) AuthInjectionContainer().initialize();
   }
 
+  /// Check the [Users] collection to see if the user is new or not.
+  Future<bool> _isNewUSer(String uid) async {
+    var b = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(uid)
+        .get()
+        .then((doc) => doc.data());
+
+    if (b != null) return true;
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -31,18 +46,31 @@ class _AuthManagerState extends State<AuthManager> {
       builder: (context, snapshot) {
         // if the user [Authenticated] return HomePage.
         if (snapshot.hasData) {
-          return Scaffold(
-            body: Center(
-              child: ElevatedButton(
-                onPressed: () => FirebaseAuth.instance.signOut(),
-                child: const Text(
-                  ("Sign Out"),
-                ),
-              ),
-            ),
-          );
-          // if user not  [Authenticated] return SignInPage
+          /// if  the user is new then navigate to Onboarding if not navigate to Home
+          return FutureBuilder(
+              future: _isNewUSer(snapshot.data!.uid),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.data == false) {
+                    return const Onboarding();
+                  } else {
+                    //Home page
+                    return Scaffold(
+                      body: Center(
+                        child: ElevatedButton(
+                          onPressed: () => FirebaseAuth.instance.signOut(),
+                          child: const Text(
+                            ("Sign Out"),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                }
+                return const Scaffold();
+              });
         } else {
+          // if user not  [Authenticated] return SignInPage
           return const SignInPage();
         }
       },

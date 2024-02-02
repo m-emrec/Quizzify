@@ -12,14 +12,15 @@ class BaseAuthView extends StatelessWidget {
     required this.body,
     required this.title,
     this.floatingActionButton,
+    this.canPop = false,
   });
 
-  final bool _canPop = false;
+  final bool canPop;
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: _canPop,
+      canPop: canPop,
       child: Scaffold(
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
