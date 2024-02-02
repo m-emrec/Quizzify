@@ -11,7 +11,6 @@ import 'package:trivia/features/auth/domain/usecases/signInUserWithEmail_usecase
 import 'package:trivia/features/auth/domain/usecases/signInUserWithFacebook_usecase.dart';
 import 'package:trivia/features/auth/domain/usecases/signInUserWithGoogle_usecase.dart';
 import 'package:trivia/features/auth/domain/usecases/signup_user_with_email_usecase.dart';
-import 'package:trivia/logger.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

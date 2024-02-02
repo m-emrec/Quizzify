@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
+
+import '../../domain/repositories/auth_repo.dart';
 
 class AuthManager extends StatefulWidget {
   static const route = "/";
@@ -17,7 +20,8 @@ class _AuthManagerState extends State<AuthManager> {
   void initState() {
     super.initState();
     // initialize GetIt .
-    AuthInjectionContainer().initialize();
+    bool isAlreadyRegistered = GetIt.instance.isRegistered(instance: AuthRepo);
+    if (!isAlreadyRegistered) AuthInjectionContainer().initialize();
   }
 
   @override

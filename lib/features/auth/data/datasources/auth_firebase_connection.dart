@@ -1,22 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trivia/core/constants/error_texts.dart';
+import 'package:trivia/core/constants/strings.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/core/resources/firestore_connection.dart';
 
 class AuthFirebaseConnection extends FireStoreConnection {
   /// This class makes the connection between FireBase and AuthRepo.
   AuthFirebaseConnection();
+  final AppStrings _appStrings = AppStrings();
   @override
   Future<DataState> createData(Map? param) async {
     try {
+      /// if the received @parameter is not null try to create user.
       if (param != null) {
         await firebaseAuth.createUserWithEmailAndPassword(
           email: param["email"],
           password: param["password"],
         );
       } else {
-        throw Exception("Unknown error occurred!").toString();
+        throw Exception(_appStrings.unknownErrorText).toString();
       }
-      return DataSuccess("data");
+      return DataSuccess(null);
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.message);
     } catch (e) {
@@ -38,7 +42,7 @@ class AuthFirebaseConnection extends FireStoreConnection {
           password: param["password"],
         );
       } else {
-        throw Exception("Unknown error occurred!").toString();
+        throw Exception(_appStrings.unknownErrorText).toString();
       }
       return DataSuccess(null);
     } on FirebaseAuthException catch (e) {
