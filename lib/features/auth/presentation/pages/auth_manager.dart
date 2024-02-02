@@ -34,10 +34,9 @@ class _AuthManagerState extends State<AuthManager> {
           return Scaffold(
             body: Center(
               child: ElevatedButton(
-                onPressed: () => AppErrorText().errorMessage(
-                    "daasdasdasd"), //FirebaseAuth.instance.signOut(),
+                onPressed: () => FirebaseAuth.instance.signOut(),
                 child: const Text(
-                  ("Fuck Off"),
+                  ("Sign Out"),
                 ),
               ),
             ),
