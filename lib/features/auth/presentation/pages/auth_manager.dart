@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 
@@ -29,7 +30,8 @@ class _AuthManagerState extends State<AuthManager> {
           return Scaffold(
             body: Center(
               child: ElevatedButton(
-                onPressed: () => FirebaseAuth.instance.signOut(),
+                onPressed: () => AppErrorText().errorMessage(
+                    "daasdasdasd"), //FirebaseAuth.instance.signOut(),
                 child: const Text(
                   ("Fuck Off"),
                 ),

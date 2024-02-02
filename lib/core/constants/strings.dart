@@ -1,4 +1,7 @@
 class AppStrings {
+  final String _unknownErrorText = "Unknown error! Please try again.";
+  String get unknownErrorText => _unknownErrorText;
+
   final String _termOfServicesText = """
 Welcome to Quiz Battle! Before you start using our online quiz app, please take a moment to review the following terms and conditions:
 

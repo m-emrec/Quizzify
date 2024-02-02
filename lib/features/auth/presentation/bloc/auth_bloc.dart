@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
+import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/auth/domain/usecases/forgotPassword_usecase.dart';
@@ -35,6 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthForgotPasswordEvent>(onAuthForgotPasswordEvent);
     on<AuthSignInWithGoogleEvent>(onAuthSignInWithGoogleEvent);
   }
+  final AppErrorText _appErrorText = AppErrorText();
 
   FutureOr<void> onAuthSignUpWithEmail(
       AuthSignUpWithEmailEvent event, Emitter<AuthState> emit) async {
@@ -55,14 +57,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       } else {
-        emit(AuthFailedState(dataState.exception ?? ""));
+        emit(AuthFailedState(_appErrorText.errorMessage(dataState.exception)));
       }
     } catch (e) {
-      emit(
-        AuthFailedState(
-          e.toString(),
-        ),
-      );
+      emit(AuthFailedState(_appErrorText.errorMessage(e.toString())));
     }
   }
 
@@ -86,11 +84,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       } else {
-        emit(AuthFailedState(dataState.exception ?? ""));
+        emit(AuthFailedState(_appErrorText.errorMessage(dataState.exception)));
       }
     } catch (e) {
-      logger.e(e);
-      emit(AuthFailedState(e.toString()));
+      emit(AuthFailedState(_appErrorText.errorMessage(e.toString())));
     }
   }
 
@@ -109,11 +106,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         ));
       } else {
-        emit(AuthFailedState(dataState.exception ?? ""));
+        emit(AuthFailedState(_appErrorText.errorMessage(dataState.exception)));
       }
     } catch (e) {
-      logger.e(e);
-      emit(AuthFailedState(e.toString()));
+      emit(AuthFailedState(_appErrorText.errorMessage(e.toString())));
     }
   }
 
@@ -126,10 +122,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (dataState is DataSuccess) {
         emit(AuthSuccessState(successMessage: "Signed in"));
       } else {
-        emit(AuthFailedState(dataState.exception.toString()));
+        emit(AuthFailedState(_appErrorText.errorMessage(dataState.exception)));
       }
     } catch (e) {
-      emit(AuthFailedState(e.toString()));
+      emit(AuthFailedState(_appErrorText.errorMessage(e.toString())));
     }
   }
 }
