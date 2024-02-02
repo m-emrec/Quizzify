@@ -45,6 +45,13 @@ mixin SignInMixin on State<SignInPage> {
     authBloc = sl<AuthBloc>();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   onTapForgotPassword(BuildContext context) =>
       context.pushNamed(ForgotPassword.route);
 

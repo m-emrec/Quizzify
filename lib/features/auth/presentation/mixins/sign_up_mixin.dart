@@ -40,6 +40,13 @@ mixin SignUpPageMixin on State<SignUpPage> {
     authBloc = sl<AuthBloc>();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   // button function
   void onTapSignUp() {
     if (formKey.currentState != null) {
