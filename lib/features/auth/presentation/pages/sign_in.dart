@@ -10,6 +10,7 @@ import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 import '../../../../core/constants/app_color.dart';
 import '../../../../core/shared/widgets/clickable_text.dart';
 import '../widgets/alternative_auth_methods.dart';
+import '../widgets/auth_form.dart';
 
 class SignInPage extends StatefulWidget {
   static const route = "sign-in";
@@ -34,8 +35,9 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
               authBloc: authBloc,
             ),
             48.ph,
+
             //* Form Field
-            authForm(
+            AuthForm(
               context,
               formKey: formKey,
               emailController: emailController,
@@ -67,7 +69,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
                 // Terms and Services and Privacy policy Text
                 termsAndServicesText(context),
               ],
-            )
+            ),
           ],
         ),
       ),

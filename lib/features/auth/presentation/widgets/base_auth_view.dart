@@ -14,22 +14,25 @@ class BaseAuthView extends StatelessWidget {
     this.floatingActionButton,
   });
 
+  final bool _canPop = false;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      top: false,
+    return PopScope(
+      canPop: _canPop,
       child: Scaffold(
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Padding(
-          padding: AppPaddings().pageHPadding + AppPaddings().pageTopPadding,
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: body,
+        body: SafeArea(
+          child: Padding(
+            padding: AppPaddings().pageHPadding + AppPaddings().pageTopPadding,
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: body,
+            ),
           ),
         ),
       ),

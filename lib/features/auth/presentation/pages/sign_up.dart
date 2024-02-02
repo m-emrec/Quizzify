@@ -10,6 +10,7 @@ import 'package:trivia/features/auth/presentation/mixins/sign_up_mixin.dart';
 import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
 
 import '../widgets/alternative_auth_methods.dart';
+import '../widgets/auth_form.dart';
 
 class SignUpPage extends StatefulWidget {
   static const route = "sign-up";
@@ -37,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage>
             ),
             48.ph,
             // Form Field
-            authForm(
+            AuthForm(
               context,
               buttonLabel: loginButtonLabel,
               emailController: emailController,

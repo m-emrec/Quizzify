@@ -28,7 +28,7 @@ mixin AuthMixin {
   final GetIt sl = GetIt.instance;
 
   //* define [Bloc]
-  late AuthBloc authBloc;
+  late final AuthBloc authBloc;
 
   //* [Bloc] Functions
   bool listenWhen(previous, current) => current is AuthActionState;
@@ -130,48 +130,6 @@ mixin AuthMixin {
             recognizer: TapGestureRecognizer()
               ..onTap = () => openPrivacyPolicy(context),
             style: context.textTheme.labelMedium,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Form authForm(
-    BuildContext context, {
-    required GlobalKey<FormState> formKey,
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
-    required String buttonLabel,
-    required void Function()? onPressed,
-  }) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          //! Email field
-          EmailField(
-            context,
-            controller: emailController,
-            textInputAction: TextInputAction.next,
-            validator: (val) => emailValidator(val ?? ""),
-          ),
-          32.ph,
-
-          //! Password field
-          PasswordTextField(
-            context,
-            controller: passwordController,
-            validator: (value) => passwordValidator(value ?? ""),
-          ),
-          //! sign up button
-          32.ph,
-          Row(
-            children: [
-              ResponsiveElevatedButton(
-                label: buttonLabel,
-                onPressed: onPressed,
-              ),
-            ],
           ),
         ],
       ),

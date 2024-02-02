@@ -45,7 +45,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         "password": event.password,
       });
       if (dataState is DataSuccess) {
-        emit(AuthSuccessState(successMessage: "Successfully signed up."));
+        emit(
+          AuthSuccessState(
+            successMessage: "Successfully signed up.",
+            afterSuccess: (context) {
+              context as BuildContext;
+              context.navigator.pushReplacementNamed("/");
+            },
+          ),
+        );
       } else {
         emit(AuthFailedState(dataState.exception ?? ""));
       }
@@ -68,7 +76,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
 
       if (dataState is DataSuccess) {
-        emit(AuthSuccessState(successMessage: "Successfully signed in."));
+        emit(
+          AuthSuccessState(
+            successMessage: "Successfully signed in.",
+            afterSuccess: (context) {
+              context as BuildContext;
+              context.navigator.pushReplacementNamed("/");
+            },
+          ),
+        );
       } else {
         emit(AuthFailedState(dataState.exception ?? ""));
       }
