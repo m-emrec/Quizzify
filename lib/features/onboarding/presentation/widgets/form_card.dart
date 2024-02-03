@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
+import 'package:trivia/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:trivia/features/onboarding/presentation/mixins/form_card_mixin.dart';
 import 'package:trivia/features/onboarding/presentation/widgets/name_field.dart';
 
@@ -12,12 +13,14 @@ class FormCard extends StatelessWidget with FormCardMixin {
   final int index;
   final TextEditingController controller;
   final GlobalKey<FormState> formKey;
+  final OnboardingBloc bloc;
   FormCard({
     super.key,
     required this.title,
     required this.index,
     required this.formKey,
     required this.controller,
+    required this.bloc,
   });
 
   @override
@@ -56,6 +59,7 @@ class FormCard extends StatelessWidget with FormCardMixin {
                     onPressed: () => onPressed(
                       formKey,
                       controller.text,
+                      bloc,
                     ),
                   ),
                 ],

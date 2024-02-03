@@ -38,6 +38,12 @@ class _AuthManagerState extends State<AuthManager> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    AuthInjectionContainer().unregister();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),

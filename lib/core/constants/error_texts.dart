@@ -7,6 +7,8 @@ class AppErrorText {
 
   final Map _errorText = {
     //Firebase Auth
+    "The email address is already in use by another account.":
+        "The email address is already in use by another account.Try to login.",
     "The email address is badly formatted.":
         "Please provide a valid email address. Ex:}\nxxx@xx.com",
     "INVALID_LOGIN_CREDENTIALS": "Please check your email or password.",

@@ -71,13 +71,13 @@ class _OnboardingState extends State<Onboarding> with OnboardingMixin {
                     controller: pageController,
                     onPageChanged: onPageChanged,
                   ),
-                  // 32.ph,
                   //Card
                   FormCard(
                     title: titles[pageIndex],
                     index: pageIndex,
                     formKey: formKey,
                     controller: controller,
+                    bloc: bloc,
                   ),
                   32.ph,
                 ],

@@ -27,4 +27,15 @@ class AuthInjectionContainer extends InjectionContainer {
     /// bloc
     sl.registerSingleton<AuthBloc>(AuthBloc(sl(), sl(), sl(), sl(), sl()));
   }
+
+  @override
+  Future<void> unregister() async {
+    sl.unregister(instance: AuthRepo);
+    sl.unregister(instance: ForgotPasswordUsecase);
+    sl.unregister(instance: SignInWithEmailUsecase);
+    sl.unregister(instance: SignInUserWithFacebook);
+    sl.unregister(instance: SignInUserWithGoogleUsecase);
+    sl.unregister(instance: SignUpUserWithEmailUsecase);
+    sl.unregister(instance: AuthBloc);
+  }
 }

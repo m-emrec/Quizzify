@@ -31,8 +31,6 @@ class OnboardingSlider extends StatelessWidget {
             children: _pages,
           ),
         ),
-
-        /// Indicator
       ],
     );
   }

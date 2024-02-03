@@ -22,8 +22,19 @@ abstract class FireStoreConnection {
     return userDoc;
   }
 
-  Future<DataState> readData(Map? param);
-  Future<DataState> deleteData(Map? param);
-  Future<DataState> updateData(Map? param);
-  Future<DataState> createData(Map? param);
+  Future<DataState> readData(Map? param) {
+    throw UnimplementedError();
+  }
+
+  Future<DataState> deleteData(Map? param) {
+    throw UnimplementedError();
+  }
+
+  Future<DataState> updateData(Map? param) {
+    throw UnimplementedError();
+  }
+
+  Future<DataState> createData(Map? param) {
+    throw UnimplementedError();
+  }
 }

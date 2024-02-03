@@ -8,20 +8,24 @@ import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.da
 import '../bloc/onboarding_bloc.dart';
 
 mixin OnboardingMixin on State<Onboarding> {
+  // Variables
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController controller;
   final PageController pageController = PageController();
   late OnboardingBloc bloc;
+  final OnboardingInjectionContainer _onboardingInjectionContainer =
+      OnboardingInjectionContainer();
 
+  /// life cycle functions
   @override
   void initState() {
-    super.initState();
     final GetIt sl = GetIt.instance;
+    super.initState();
 
     bool isAlreadyRegistered =
         GetIt.instance.isRegistered(instance: OnboardingRepo);
 
-    if (!isAlreadyRegistered) OnboardingInjectionContainer().initialize();
+    if (!isAlreadyRegistered) _onboardingInjectionContainer.initialize();
 
     bloc = sl<OnboardingBloc>();
     controller = TextEditingController(text: widget.displayName ?? "");
@@ -32,9 +36,10 @@ mixin OnboardingMixin on State<Onboarding> {
     super.dispose();
     pageController.dispose();
     controller.dispose();
+    _onboardingInjectionContainer.unregister();
   }
 
-  final List titles = [
+  final List titles = const [
     "Create,share and play quizzes whenever and wherever you want",
     "Find fun and interesting quizzes to boost up your knowledge",
     "Play and take quiz challenges together with your friends.",

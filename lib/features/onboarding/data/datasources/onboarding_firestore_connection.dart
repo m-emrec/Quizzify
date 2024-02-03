@@ -9,6 +9,8 @@ import 'package:trivia/core/resources/firestore_connection.dart';
 class OnboardingFirestoreConnection extends FireStoreConnection {
   @override
   String? get uid => super.uid;
+
+  /// Update user's display name
   @override
   Future<DataState> createData(Map? param) async {
     try {
@@ -27,20 +29,5 @@ class OnboardingFirestoreConnection extends FireStoreConnection {
     } catch (e) {
       return DataFailed(e.toString());
     }
-  }
-
-  @override
-  Future<DataState> deleteData(Map? param) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<DataState> readData(Map? param) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<DataState> updateData(Map? param) {
-    throw UnimplementedError();
   }
 }

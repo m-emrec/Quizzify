@@ -16,4 +16,12 @@ class OnboardingInjectionContainer extends InjectionContainer {
     sl.registerSingleton<SetNameUseCase>(SetNameUseCase(sl()));
     sl.registerSingleton<OnboardingBloc>(OnboardingBloc(sl()));
   }
+
+  @override
+  Future<void> unregister() async {
+    sl.unregister(instance: OnboardingFirestoreConnection);
+    sl.unregister(instance: OnboardingRepo);
+    sl.unregister(instance: SetNameUseCase);
+    sl.unregister(instance: OnboardingBloc);
+  }
 }
