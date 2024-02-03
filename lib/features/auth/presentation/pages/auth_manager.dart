@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
-import 'package:trivia/logger.dart';
 
 import '../../domain/repositories/auth_repo.dart';
 
@@ -49,10 +47,14 @@ class _AuthManagerState extends State<AuthManager> {
           /// if  the user is new then navigate to Onboarding if not navigate to Home
           return FutureBuilder(
               future: _isNewUSer(snapshot.data!.uid),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.data == false) {
-                    return const Onboarding();
+              builder: (BuildContext context, AsyncSnapshot<bool> collection) {
+                if (collection.connectionState == ConnectionState.done) {
+                  if (collection.data == false) {
+                    final String? displayName = snapshot.data?.displayName;
+
+                    return Onboarding(
+                      displayName: displayName,
+                    );
                   } else {
                     //Home page
                     return Scaffold(

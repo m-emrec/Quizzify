@@ -6,3 +6,9 @@ abstract class OnboardingEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class OnboardingSetNameEvent extends OnboardingEvent {
+  final String name;
+
+  const OnboardingSetNameEvent({required this.name});
+}

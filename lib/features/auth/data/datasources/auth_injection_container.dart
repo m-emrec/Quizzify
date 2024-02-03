@@ -1,4 +1,4 @@
-import 'package:get_it/get_it.dart';
+import 'package:trivia/core/resources/injection_container.dart';
 import 'package:trivia/features/auth/data/datasources/auth_firebase_connection.dart';
 import 'package:trivia/features/auth/data/repositories/auth_repo_impl.dart';
 import 'package:trivia/features/auth/domain/repositories/auth_repo.dart';
@@ -9,9 +9,8 @@ import 'package:trivia/features/auth/domain/usecases/signInUserWithGoogle_usecas
 import 'package:trivia/features/auth/domain/usecases/signup_user_with_email_usecase.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
 
-class AuthInjectionContainer {
-  final GetIt sl = GetIt.instance;
-
+class AuthInjectionContainer extends InjectionContainer {
+  @override
   Future<void> initialize() async {
     // repo
     sl.registerSingleton<AuthRepo>(AuthRepoImpl(AuthFirebaseConnection()));
