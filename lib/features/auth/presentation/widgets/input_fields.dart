@@ -94,6 +94,8 @@ class EmailField extends BaseTextFormField {
     super.focusNode,
   });
   @override
+  String? get label => _label;
+  @override
   TextInputType? get keyboardType => TextInputType.emailAddress;
   @override
   Iterable<String>? get autofillHints => [AutofillHints.email];

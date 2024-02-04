@@ -8,6 +8,7 @@ import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/snackbars/custom_snackbar.dart';
 import 'package:trivia/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:trivia/features/onboarding/presentation/mixins/onboarding_mixin.dart';
+import 'package:trivia/logger.dart';
 
 import '../widgets/form_card.dart';
 import '../widgets/onboarding_slider.dart';
@@ -31,8 +32,10 @@ class _OnboardingState extends State<Onboarding> with OnboardingMixin {
       bloc: bloc,
       listenWhen: (previous, current) => current is OnboardingActionState,
       listener: (context, state) {
+        logger.i(state);
         switch (state.runtimeType) {
           case OnboardingSuccessState:
+            logger.i("Success");
             state as OnboardingSuccessState;
             state.afterSuccess!(context);
             break;

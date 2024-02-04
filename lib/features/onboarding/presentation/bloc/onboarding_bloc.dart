@@ -20,15 +20,19 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   FutureOr<void> onOnboardingSetNameEvent(
       OnboardingSetNameEvent event, Emitter<OnboardingState> emit) async {
     final DataState dataState = await _setNameUseCase(event.name);
-
+    logger.d("Bloc");
+    logger.d(dataState);
     if (dataState is DataSuccess) {
+      logger.i("inside if");
       emit(OnboardingSuccessState(
         afterSuccess: (ctx) {
+          logger.e("inside state");
           ctx as BuildContext;
           ctx.navigator.pushReplacementNamed("/");
         },
       ));
     } else {
+      ///TODO : Remove this.
       logger.e(dataState.exception);
       emit(OnboardingFailedState(exception: dataState.exception));
     }

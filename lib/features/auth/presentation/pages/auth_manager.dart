@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:trivia/logger.dart';
 
 import '../../domain/repositories/auth_repo.dart';
 
@@ -45,6 +46,7 @@ class _AuthManagerState extends State<AuthManager> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d("Auth manager");
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
@@ -55,6 +57,7 @@ class _AuthManagerState extends State<AuthManager> {
               future: _isNewUSer(snapshot.data!.uid),
               builder: (BuildContext context, AsyncSnapshot<bool> collection) {
                 if (collection.connectionState == ConnectionState.done) {
+                  logger.e(collection.data);
                   if (collection.data == false) {
                     final String? displayName = snapshot.data?.displayName;
 

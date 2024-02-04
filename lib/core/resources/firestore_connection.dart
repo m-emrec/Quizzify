@@ -8,16 +8,17 @@ abstract class FireStoreConnection {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String? get uid => firebaseAuth.currentUser?.uid;
 
-  /// This function returns Users collection
-  Future<CollectionReference<Map<String, dynamic>>> getUsersCollection() async {
-    return firestore.collection(FireStoreEnum.Users.name);
+  /// This function returns given collection
+  Future<CollectionReference<Map<String, dynamic>>> getCollection(
+      String collectionName) async {
+    return firestore.collection(collectionName);
   }
 
   /// This function return the given user's document.
   Future<DocumentReference<Map<String, dynamic>>> getUserDoc(
       String? uid) async {
     final CollectionReference<Map<String, dynamic>> collection =
-        await getUsersCollection();
+        await getCollection(FireStoreEnum.Users.name);
     final DocumentReference<Map<String, dynamic>> userDoc = collection.doc(uid);
     return userDoc;
   }
