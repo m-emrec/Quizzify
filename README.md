@@ -1,16 +1,25 @@
-# trivia
+# Quizzy Flutter App
 
-A new Flutter project.
+Quizzy is an online quiz game built with Flutter. It offers several categories for users to test their knowledge, enables multiplayer functionality for users to play with their friends, and allows users to create and publish their own quizzes. The app is built following clean architecture principles to ensure scalability and maintainability.
+## Features
+* Multiple categories to test knowledge in various subjects.
 
-## Getting Started
+* Multiplayer mode to play with friends in real-time.
 
-This project is a starting point for a Flutter application.
+* User-generated quizzes: Users can create and publish their own quizzes.
 
-A few resources to get you started if this is your first Flutter project:
+* Clean architecture for better code organization and maintainability.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Responsive and adaptive design.
+## Technologies Used
+###### Language
+* Flutter
+###### Authentication
+* FirebaseAuth
+* Google sign in
+###### Database
+* Firebase Firestore
+###### State Management
+* Bloc
+###### Architecture
+* Clean Architecture
