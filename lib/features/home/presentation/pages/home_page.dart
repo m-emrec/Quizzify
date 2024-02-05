@@ -14,9 +14,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: Make a base home view
     return Scaffold(
-      floatingActionButton: const CircleAvatar(child: Icon(Icons.add)),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
+      // floatingActionButton: const CircleAvatar(child: Icon(Icons.add)),
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterDocked,
       extendBody: true,
       body: Center(
         child: ElevatedButton(
@@ -24,13 +24,13 @@ class _HomePageState extends State<HomePage> {
           child: Text("Home Page"),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
-          BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
-          BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const [
+      //     BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
+      //     BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
+      //     BottomNavigationBarItem(label: "s", icon: Icon(Icons.abc)),
+      //   ],
+      // ),
     );
   }
 }
