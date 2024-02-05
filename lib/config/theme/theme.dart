@@ -19,6 +19,7 @@ class AppTheme {
       surfaceTintColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: _appColors.scaffoldColor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(),
 
     /// TextTheme
     textTheme: _appTextTheme.textTheme,

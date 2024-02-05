@@ -9,19 +9,18 @@ import '../repositories/onboarding_repo_impl.dart';
 class OnboardingInjectionContainer extends InjectionContainer {
   @override
   Future<void> initialize() async {
-    sl.registerSingleton<OnboardingFirestoreConnection>(
-        OnboardingFirestoreConnection());
-    sl.registerSingleton<OnboardingRepo>(
-        OnboardingRepoImpl(firestoreConnection: sl()));
-    sl.registerSingleton<SetNameUseCase>(SetNameUseCase(sl()));
-    sl.registerSingleton<OnboardingBloc>(OnboardingBloc(sl()));
+    register<OnboardingFirestoreConnection>(OnboardingFirestoreConnection());
+
+    register<OnboardingRepo>(OnboardingRepoImpl(firestoreConnection: sl()));
+    register<SetNameUseCase>(SetNameUseCase(sl()));
+    register<OnboardingBloc>(OnboardingBloc(sl()));
   }
 
   @override
-  Future<void> unregister() async {
-    sl.unregister(instance: OnboardingFirestoreConnection);
-    sl.unregister(instance: OnboardingRepo);
-    sl.unregister(instance: SetNameUseCase);
-    sl.unregister(instance: OnboardingBloc);
+  Future<void> dispose() async {
+    unRegister<OnboardingFirestoreConnection>(OnboardingFirestoreConnection);
+    unRegister<OnboardingRepo>(OnboardingRepo);
+    unRegister<SetNameUseCase>(SetNameUseCase);
+    unRegister<OnboardingBloc>(OnboardingBloc);
   }
 }
