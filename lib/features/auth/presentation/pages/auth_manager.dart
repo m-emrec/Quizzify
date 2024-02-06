@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
-import 'package:trivia/features/home/presentation/pages/home_base_view.dart';
-import 'package:trivia/features/home/presentation/pages/home_view.dart';
-import 'package:trivia/features/home/presentation/view%20manager/home_view_manager.dart';
 import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
-import 'package:trivia/logger.dart';
 
+import '../../../home-view-manager/presentation/view manager/home_view_manager.dart';
 import '../../domain/repositories/auth_repo.dart';
 
 class AuthManager extends StatefulWidget {

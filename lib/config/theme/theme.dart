@@ -29,6 +29,13 @@ class AppTheme {
       unselectedItemColor: Colors.black54,
     ),
 
+    /// [FloatingActionButton] theme
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.elevatedButtonColor,
+      foregroundColor: Colors.white,
+      elevation: 3,
+    ),
+
     /// TextTheme
     textTheme: _appTextTheme.textTheme,
   );
