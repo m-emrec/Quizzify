@@ -67,7 +67,7 @@ class BaseTextFormField extends TextFormField {
                   EdgeInsets.zero),
           labelStyle: context.textTheme.labelLarge,
           hintStyle: context.textTheme.labelSmall,
-          prefixIconColor: AppColors().iconColor,
+          prefixIconColor: AppColors.iconColor,
           suffixIconColor: const Color(0xffcccccc),
           border: OutlineInputBorder(
             borderRadius: AppBorderRadius().inputBorderRadius,

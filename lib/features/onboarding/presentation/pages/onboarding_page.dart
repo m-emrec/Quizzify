@@ -55,7 +55,7 @@ class _OnboardingState extends State<Onboarding> with OnboardingMixin {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
-            systemNavigationBarColor: AppColors().elevatedButtonColor,
+            systemNavigationBarColor: AppColors.elevatedButtonColor,
           ),
         ),
         body: SingleChildScrollView(

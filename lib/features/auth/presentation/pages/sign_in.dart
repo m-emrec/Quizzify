@@ -61,7 +61,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin, AuthMixin {
                   child: Text(
                     forgotPasswordButtonLabel,
                     style: context.textTheme.labelMedium?.copyWith(
-                      color: AppColors().elevatedButtonColor,
+                      color: AppColors.elevatedButtonColor,
                     ),
                   ),
                 ),

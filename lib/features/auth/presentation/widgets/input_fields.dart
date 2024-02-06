@@ -65,7 +65,7 @@ class PasswordTextField extends BaseTextFormField {
             contentPadding: AppPaddings().textFieldContentPadding,
             labelStyle: context.textTheme.labelLarge,
             hintStyle: context.textTheme.labelSmall,
-            prefixIconColor: AppColors().iconColor,
+            prefixIconColor: AppColors.iconColor,
             suffixIconColor: const Color(0xffcccccc),
             suffixIcon: GestureDetector(
               onTap: () => _onTap(setState),

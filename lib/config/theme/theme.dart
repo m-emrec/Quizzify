@@ -11,15 +11,23 @@ class AppTheme {
     brightness: Brightness.light,
 
     /// widget themes
-    appBarTheme: AppBarTheme(
-      backgroundColor: _appColors.scaffoldColor,
+    /// App bar theme
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.scaffoldColor,
       systemOverlayStyle: SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors().scaffoldColor,
+        systemNavigationBarColor: AppColors.scaffoldColor,
       ),
       surfaceTintColor: Colors.transparent,
     ),
-    scaffoldBackgroundColor: _appColors.scaffoldColor,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(),
+    scaffoldBackgroundColor: AppColors.scaffoldColor,
+
+    /// Bottom navigation bar theme
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.bottomNavBarColor,
+      elevation: 0,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.black54,
+    ),
 
     /// TextTheme
     textTheme: _appTextTheme.textTheme,
@@ -29,24 +37,24 @@ class AppTheme {
 }
 
 class AppTextThemes {
-  final TextTheme _textTheme = TextTheme(
+  final TextTheme _textTheme = const TextTheme(
     titleLarge: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: AppColors().textColor,
+      color: AppColors.textColor,
     ),
-    labelLarge: const TextStyle(
+    labelLarge: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 18,
     ),
     labelMedium: TextStyle(
       fontSize: 14,
-      color: AppColors().labelSmallColor,
+      color: AppColors.labelSmallColor,
       fontWeight: FontWeight.bold,
     ),
     labelSmall: TextStyle(
       fontSize: 14,
-      color: AppColors().labelSmallColor,
+      color: AppColors.labelSmallColor,
       fontWeight: FontWeight.w400,
     ),
   );
