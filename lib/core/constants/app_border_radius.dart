@@ -6,4 +6,6 @@ class AppBorderRadius {
 
   final _buttonBorderRadius = BorderRadius.circular(24);
   BorderRadius get buttonBorderRadius => _buttonBorderRadius;
+
+  static const double bottomNavBarCornerRadius = 16;
 }

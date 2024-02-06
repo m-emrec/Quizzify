@@ -36,7 +36,7 @@ mixin OnboardingMixin on State<Onboarding> {
     super.dispose();
     pageController.dispose();
     controller.dispose();
-    _onboardingInjectionContainer.unregister();
+    _onboardingInjectionContainer.dispose();
   }
 
   final List titles = const [

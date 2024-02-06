@@ -18,7 +18,7 @@ class ClickableText extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       overlayColor: MaterialStatePropertyAll<Color>(
-        AppColors().elevatedButtonColor.withOpacity(0.1),
+        AppColors.elevatedButtonColor.withOpacity(0.1),
       ),
       onTap: onTap,
       child: Text(

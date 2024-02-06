@@ -13,8 +13,8 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: AppColors().scaffoldColor,
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: AppColors.scaffoldColor,
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Quiz Game",
       theme: AppTheme().lightTheme,
       routes: AppRoutes().routes,

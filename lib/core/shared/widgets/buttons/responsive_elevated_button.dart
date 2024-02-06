@@ -19,7 +19,7 @@ class ResponsiveElevatedButton extends ResponsiveButton {
     return Expanded(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors().elevatedButtonColor,
+          backgroundColor: AppColors.elevatedButtonColor,
           foregroundColor: Colors.white,
           textStyle: const TextStyle(
             fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class ResponsiveOutlineButton extends ResponsiveButton {
           padding: AppPaddings().elevatedButtonPadding,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: AppColors().outlinedButtonBorderColor,
+              color: AppColors.outlinedButtonBorderColor,
             ),
             borderRadius: AppBorderRadius().buttonBorderRadius,
           ),
@@ -84,7 +84,7 @@ class ResponsiveGoogleSignInButton extends ResponsiveButton {
             borderRadius: AppBorderRadius().buttonBorderRadius,
           ),
           side: BorderSide(
-            color: AppColors().outlinedButtonBorderColor,
+            color: AppColors.outlinedButtonBorderColor,
           ),
         ),
         onPressed: onPressed,

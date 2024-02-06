@@ -6,6 +6,7 @@ import 'package:trivia/features/auth/data/datasources/auth_injection_container.d
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
 
+import '../../../home-view-manager/presentation/view manager/home_view_manager.dart';
 import '../../domain/repositories/auth_repo.dart';
 
 class AuthManager extends StatefulWidget {
@@ -40,7 +41,7 @@ class _AuthManagerState extends State<AuthManager> {
   @override
   void dispose() {
     super.dispose();
-    AuthInjectionContainer().unregister();
+    AuthInjectionContainer().dispose();
   }
 
   @override
@@ -63,16 +64,7 @@ class _AuthManagerState extends State<AuthManager> {
                     );
                   } else {
                     //Home page
-                    return Scaffold(
-                      body: Center(
-                        child: ElevatedButton(
-                          onPressed: () => FirebaseAuth.instance.signOut(),
-                          child: const Text(
-                            ("Sign Out"),
-                          ),
-                        ),
-                      ),
-                    );
+                    return const HomeViewManager();
                   }
                 }
                 return const Scaffold();

@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/onboarding/domain/usecases/set_name_use_case.dart';
-import 'package:trivia/logger.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
@@ -29,7 +28,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         },
       ));
     } else {
-      logger.e(dataState.exception);
       emit(OnboardingFailedState(exception: dataState.exception));
     }
   }

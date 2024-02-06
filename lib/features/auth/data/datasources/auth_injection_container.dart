@@ -13,29 +13,36 @@ class AuthInjectionContainer extends InjectionContainer {
   @override
   Future<void> initialize() async {
     // repo
-    sl.registerSingleton<AuthRepo>(AuthRepoImpl(AuthFirebaseConnection()));
+    // sl.registerSingleton<AuthRepo>(AuthRepoImpl(AuthFirebaseConnection()));
+    register<AuthRepo>(AuthRepoImpl(AuthFirebaseConnection()));
 
     /// use cases
-    sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
-    sl.registerSingleton<SignInWithEmailUsecase>(SignInWithEmailUsecase(sl()));
-    sl.registerSingleton<SignInUserWithFacebook>(SignInUserWithFacebook(sl()));
-    sl.registerSingleton<SignInUserWithGoogleUsecase>(
-        SignInUserWithGoogleUsecase(sl()));
-    sl.registerSingleton<SignUpUserWithEmailUsecase>(
-        SignUpUserWithEmailUsecase(sl()));
+    // sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
+    register<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
+    // sl.registerSingleton<SignInWithEmailUsecase>(SignInWithEmailUsecase(sl()));
+    register<SignInWithEmailUsecase>(SignInWithEmailUsecase(sl()));
+    // sl.registerSingleton<SignInUserWithFacebook>(SignInUserWithFacebook(sl()));
+    register<SignInUserWithFacebook>(SignInUserWithFacebook(sl()));
+    // sl.registerSingleton<SignInUserWithGoogleUsecase>(
+    //     SignInUserWithGoogleUsecase(sl()));
+    register<SignInUserWithGoogleUsecase>(SignInUserWithGoogleUsecase(sl()));
+    // sl.registerSingleton<SignUpUserWithEmailUsecase>(
+    //     SignUpUserWithEmailUsecase(sl()));
+    register<SignUpUserWithEmailUsecase>(SignUpUserWithEmailUsecase(sl()));
 
     /// bloc
-    sl.registerSingleton<AuthBloc>(AuthBloc(sl(), sl(), sl(), sl(), sl()));
+    // sl.registerSingleton<AuthBloc>(AuthBloc(sl(), sl(), sl(), sl(), sl()));
+    register<AuthBloc>(AuthBloc(sl(), sl(), sl(), sl(), sl()));
   }
 
   @override
-  Future<void> unregister() async {
-    sl.unregister(instance: AuthRepo);
-    sl.unregister(instance: ForgotPasswordUsecase);
-    sl.unregister(instance: SignInWithEmailUsecase);
-    sl.unregister(instance: SignInUserWithFacebook);
-    sl.unregister(instance: SignInUserWithGoogleUsecase);
-    sl.unregister(instance: SignUpUserWithEmailUsecase);
-    sl.unregister(instance: AuthBloc);
+  Future<void> dispose() async {
+    unRegister(AuthRepo);
+    unRegister(ForgotPasswordUsecase);
+    unRegister(SignInWithEmailUsecase);
+    unRegister(SignInUserWithFacebook);
+    unRegister(SignInUserWithGoogleUsecase);
+    unRegister(SignUpUserWithEmailUsecase);
+    unRegister(AuthBloc);
   }
 }
