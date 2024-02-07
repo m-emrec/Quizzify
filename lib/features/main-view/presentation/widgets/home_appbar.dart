@@ -1,13 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/custom_appbar.dart';
+import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 
-class HomeAppBar extends CustomAppBar {
-  HomeAppBar(
+import '../../../../core/constants/app_color.dart';
+
+class HomeAppBar extends StatefulWidget {
+  const HomeAppBar({super.key});
+
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  bool _isLoaded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return _isLoaded
+        ? _LoadedHomeAppBar(
+            context,
+            userName: "Mustafa",
+            dayTimeText: "Good Morning",
+          )
+        : _LoadingHomeAppBar(context);
+  }
+}
+
+class _LoadedHomeAppBar extends CustomAppBar {
+  _LoadedHomeAppBar(
     this.ctx, {
-    super.key,
+    this.userName,
+    this.dayTimeText,
   });
   final BuildContext ctx;
+  final String? userName;
+  final String? dayTimeText;
+
   @override
   bool? get centerTitle => false;
   @override
@@ -15,7 +44,7 @@ class HomeAppBar extends CustomAppBar {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// good morning text
-          /// TODO: get this from DayTime
+
           Row(
             children: [
               const Icon(
@@ -24,8 +53,8 @@ class HomeAppBar extends CustomAppBar {
                 size: 16,
               ),
               4.pw,
-              const Text(
-                "GOOD MORNING",
+              Text(
+                dayTimeText ?? "",
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
@@ -36,9 +65,9 @@ class HomeAppBar extends CustomAppBar {
           ),
 
           /// User name
-          /// TODO: Get this from outside
-          const Text(
-            "Mustafa",
+
+          Text(
+            userName ?? "",
           ),
         ],
       );
@@ -49,5 +78,32 @@ class HomeAppBar extends CustomAppBar {
           radius: 32,
           child: Icon(Icons.person),
         ),
+      ];
+}
+
+class _LoadingHomeAppBar extends _LoadedHomeAppBar {
+  _LoadingHomeAppBar(super.ctx);
+
+  @override
+  Widget? get title => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ShimmerWidget(
+            width: 100,
+          ),
+          8.ph,
+          ShimmerWidget(
+            width: 200,
+          ),
+        ],
+      );
+
+  @override
+  List<Widget>? get actions => [
+        ShimmerWidget(
+          shape: BoxShape.circle,
+          height: 64,
+          width: 64,
+        )
       ];
 }

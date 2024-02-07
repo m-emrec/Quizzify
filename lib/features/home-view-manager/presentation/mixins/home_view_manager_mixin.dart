@@ -17,7 +17,7 @@ mixin HomeViewManagerMixin on State<HomeViewManager> {
     /// return [HomeView]
     if (index == HomeViewEnum.home.index) {
       return HomeViewManagerModel(
-        appBar: HomeAppBar(context),
+        appBar: HomeAppBar(),
         body: const HomeView(),
       );
 

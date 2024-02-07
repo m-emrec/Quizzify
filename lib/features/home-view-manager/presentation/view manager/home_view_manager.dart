@@ -39,7 +39,10 @@ class _HomeViewManagerState extends State<HomeViewManager>
         scaffoldBackgroundColor: AppColors.homeScaffoldColor,
       ),
       child: HomeBaseView(
-        appBar: viewManagerFunc(bottomNavIndex).appBar,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: viewManagerFunc(bottomNavIndex).appBar ?? SizedBox(),
+        ),
         body: AnimatedSwitcher(
             duration: animationDuration,
             child: viewManagerFunc(bottomNavIndex).body),
