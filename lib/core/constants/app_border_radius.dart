@@ -8,4 +8,6 @@ class AppBorderRadius {
   BorderRadius get buttonBorderRadius => _buttonBorderRadius;
 
   static const double bottomNavBarCornerRadius = 16;
+
+  static const double smallBorderRadius = 8;
 }

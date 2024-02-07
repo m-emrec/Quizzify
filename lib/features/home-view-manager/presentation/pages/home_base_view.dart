@@ -26,7 +26,6 @@ class _HomeBaseViewState extends State<HomeBaseView> {
     return Scaffold(
       appBar: widget.appBar,
       backgroundColor: AppColors.homeScaffoldColor,
-      extendBodyBehindAppBar: true,
       extendBody: true,
       floatingActionButton: const _FloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

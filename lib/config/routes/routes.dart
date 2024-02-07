@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:trivia/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
 import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
-import 'package:trivia/features/home/presentation/pages/home_base_view.dart';
-import 'package:trivia/features/home/presentation/view%20manager/home_view_manager.dart';
 import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
 
 import '../../features/auth/presentation/pages/auth_manager.dart';
+import '../../features/home-view-manager/presentation/view manager/home_view_manager.dart';
 
 class AppRoutes {
   final Map<String, Widget Function(BuildContext)> _routes = {

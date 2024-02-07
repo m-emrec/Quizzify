@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/custom_appbar.dart';
 
-abstract class BaseHomeAppBar extends CustomAppBar {
-  BaseHomeAppBar({
+class HomeAppBar extends CustomAppBar {
+  HomeAppBar(
+    this.ctx, {
     super.key,
   });
-}
-
-class HomeAppBar extends BaseHomeAppBar {
-  HomeAppBar({
-    super.key,
-  });
-
+  final BuildContext ctx;
   @override
   bool? get centerTitle => false;
   @override
@@ -25,7 +20,7 @@ class HomeAppBar extends BaseHomeAppBar {
             children: [
               const Icon(
                 Icons.wb_sunny_outlined,
-                color: Colors.deepOrange,
+                color: Color(0xffECC7DD),
                 size: 16,
               ),
               4.pw,
@@ -34,7 +29,7 @@ class HomeAppBar extends BaseHomeAppBar {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
-                  color: Colors.deepOrange,
+                  color: Color(0xffECC7DD),
                 ),
               ),
             ],
@@ -44,7 +39,6 @@ class HomeAppBar extends BaseHomeAppBar {
           /// TODO: Get this from outside
           const Text(
             "Mustafa",
-            style: TextStyle(color: Colors.white),
           ),
         ],
       );

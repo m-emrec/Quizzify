@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/features/discover/presentation/pages/discover_view.dart';
+import 'package:trivia/features/leaderboard/presentation/pages/leaderboard_view.dart';
+import 'package:trivia/features/profile/presentation/pages/profile_view.dart';
 
 import '../../../main-view/presentation/pages/home_view.dart';
 import '../../data/models/home_view_manager_model.dart';
 import '../view manager/home_view_manager.dart';
-import '../widgets/base_home_appbar.dart';
+import '../../../main-view/presentation/widgets/home_appbar.dart';
 
 mixin HomeViewManagerMixin on State<HomeViewManager> {
   /// This function returns a [HomeViewManagerModel] .
@@ -14,7 +17,7 @@ mixin HomeViewManagerMixin on State<HomeViewManager> {
     /// return [HomeView]
     if (index == HomeViewEnum.home.index) {
       return HomeViewManagerModel(
-        appBar: HomeAppBar(),
+        appBar: HomeAppBar(context),
         body: const HomeView(),
       );
 
@@ -24,7 +27,21 @@ mixin HomeViewManagerMixin on State<HomeViewManager> {
         appBar: AppBar(
           title: const Text("Discover"),
         ),
-        body: const Center(child: Text("discover")),
+        body: const DiscoverView(),
+      );
+    } else if (index == HomeViewEnum.leaderboard.index) {
+      return HomeViewManagerModel(
+        appBar: AppBar(
+          title: const Text("LeaderBoard"),
+        ),
+        body: const LeaderboardView(),
+      );
+    } else if (index == HomeViewEnum.profile.index) {
+      return HomeViewManagerModel(
+        appBar: AppBar(
+          title: const Text("Profile"),
+        ),
+        body: const ProfileView(),
       );
     }
     return HomeViewManagerModel(
@@ -40,4 +57,5 @@ mixin HomeViewManagerMixin on State<HomeViewManager> {
 
   int _bottomNavIndex = 0;
   int get bottomNavIndex => _bottomNavIndex;
+  final Duration animationDuration = const Duration(milliseconds: 300);
 }

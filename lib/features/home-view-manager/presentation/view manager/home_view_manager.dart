@@ -27,17 +27,22 @@ class _HomeViewManagerState extends State<HomeViewManager>
     return Theme(
       data: context.theme.copyWith(
         appBarTheme: context.theme.appBarTheme.copyWith(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.homeScaffoldColor,
           systemOverlayStyle: const SystemUiOverlayStyle(
             systemNavigationBarColor: AppColors.bottomNavBarColor,
             statusBarIconBrightness: Brightness.light,
+          ),
+          titleTextStyle: context.theme.appBarTheme.titleTextStyle?.copyWith(
+            color: Colors.white,
           ),
         ),
         scaffoldBackgroundColor: AppColors.homeScaffoldColor,
       ),
       child: HomeBaseView(
         appBar: viewManagerFunc(bottomNavIndex).appBar,
-        body: viewManagerFunc(bottomNavIndex).body,
+        body: AnimatedSwitcher(
+            duration: animationDuration,
+            child: viewManagerFunc(bottomNavIndex).body),
         bottomNavBarOnTap: bottomNavBarOnTap,
         bottomNavBarIndex: bottomNavIndex,
       ),
