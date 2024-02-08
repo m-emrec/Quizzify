@@ -27,4 +27,8 @@ class AppColors {
   static Color shimmerWidgetHighlightColor = Colors.grey.shade400;
   // loading item background color
   static Color shimmerWidgetBackgroundColor = Colors.grey.shade300;
+
+  /// [FriendsCard] colors
+  static const Color friendsCardTitleColor = Color(0xffE0DDF8);
+  static const Color friendsCardBodyTextColor = Colors.white;
 }

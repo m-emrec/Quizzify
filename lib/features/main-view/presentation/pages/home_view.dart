@@ -48,7 +48,10 @@ class _HomeViewState extends State<HomeView> {
                           RecentQuizCard(),
 
                           /// Friends card
-                          FriendsCard(),
+                          AspectRatio(
+                            aspectRatio: 16 / 13,
+                            child: FriendsCard(),
+                          ),
                         ],
                       ),
                     ),

@@ -9,5 +9,12 @@ class AppBorderRadius {
 
   static const double bottomNavBarCornerRadius = 16;
 
+  /// 8
   static const double smallBorderRadius = 8;
+
+  /// 16
+  static const double mediumBorderRadius = 16;
+
+  /// 32
+  static const double bigBorderRadius = 32;
 }
