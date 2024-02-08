@@ -6,7 +6,6 @@ import 'package:trivia/features/profile/presentation/pages/profile_view.dart';
 import '../../../main-view/presentation/pages/home_view.dart';
 import '../../data/models/home_view_manager_model.dart';
 import '../view manager/home_view_manager.dart';
-import '../../../main-view/presentation/widgets/home_appbar.dart';
 
 mixin HomeViewManagerMixin on State<HomeViewManager> {
   /// This function returns a [HomeViewManagerModel] .
@@ -17,30 +16,20 @@ mixin HomeViewManagerMixin on State<HomeViewManager> {
     /// return [HomeView]
     if (index == HomeViewEnum.home.index) {
       return HomeViewManagerModel(
-        appBar: HomeAppBar(),
         body: const HomeView(),
       );
 
       /// return [DiscoverView]
     } else if (index == HomeViewEnum.discover.index) {
       return HomeViewManagerModel(
-        appBar: AppBar(
-          title: const Text("Discover"),
-        ),
         body: const DiscoverView(),
       );
     } else if (index == HomeViewEnum.leaderboard.index) {
       return HomeViewManagerModel(
-        appBar: AppBar(
-          title: const Text("LeaderBoard"),
-        ),
         body: const LeaderboardView(),
       );
     } else if (index == HomeViewEnum.profile.index) {
       return HomeViewManagerModel(
-        appBar: AppBar(
-          title: const Text("Profile"),
-        ),
         body: const ProfileView(),
       );
     }

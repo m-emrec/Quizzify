@@ -20,12 +20,12 @@ class ShimmerWidget extends StatelessWidget {
     return Stack(
       children: [
         Shimmer.fromColors(
-          baseColor: AppColors.shimmerWidgetColor,
+          baseColor: AppColors.shimmerWidgetBaseColor,
           highlightColor: AppColors.shimmerWidgetHighlightColor,
           child: Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              color: AppColors.shimmerWidgetColor,
+              color: AppColors.shimmerWidgetBaseColor,
               shape: shape,
               borderRadius: shape == BoxShape.circle
                   ? null

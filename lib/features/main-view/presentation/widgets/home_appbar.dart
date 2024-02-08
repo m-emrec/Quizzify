@@ -3,8 +3,6 @@ import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/custom_appbar.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 
-import '../../../../core/constants/app_color.dart';
-
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
 
@@ -39,12 +37,12 @@ class _LoadedHomeAppBar extends CustomAppBar {
 
   @override
   bool? get centerTitle => false;
+
   @override
   Widget? get title => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// good morning text
-
           Row(
             children: [
               const Icon(

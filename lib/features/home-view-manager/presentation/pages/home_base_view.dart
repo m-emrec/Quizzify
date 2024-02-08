@@ -24,7 +24,6 @@ class _HomeBaseViewState extends State<HomeBaseView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.appBar,
       backgroundColor: AppColors.homeScaffoldColor,
       extendBody: true,
       floatingActionButton: const _FloatingActionButton(),
