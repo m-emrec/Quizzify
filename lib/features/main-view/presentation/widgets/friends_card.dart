@@ -5,7 +5,6 @@ import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/constants/image_path.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/shared/widgets/buttons/responsive_elevated_button.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 
 class FriendsCard extends StatefulWidget {
@@ -30,22 +29,11 @@ class _LoadingFriendsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BaseFriendsCard(
-      children: [
-        ShimmerWidget(
-          width: 150,
-        ),
-        ShimmerWidget(
-          width: 300,
-        ),
-        ShimmerWidget(
-          width: 300,
-        ),
-        ShimmerWidget(
-          width: 150,
-          height: 45,
-        ),
-      ],
+    return ShimmerWidget(
+      // width: double.maxFinite,
+      child: _BaseFriendsCard(
+        children: [],
+      ),
     );
   }
 }
@@ -116,19 +104,22 @@ class _BaseFriendsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Container(
-        decoration: BoxDecoration(
-          image: image,
-          color: AppColors.shimmerWidgetBackgroundColor,
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPaddings.bigPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: children,
+    return AspectRatio(
+      aspectRatio: 16 / 13,
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          decoration: BoxDecoration(
+            image: image,
+            color: AppColors.shimmerWidgetBackgroundColor,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPaddings.bigPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: children,
+            ),
           ),
         ),
       ),

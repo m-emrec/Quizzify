@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/core/constants/strings.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/core/resources/firestore_connection.dart';

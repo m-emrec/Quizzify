@@ -129,9 +129,9 @@ class _LoadingRecentQuizCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BaseRecentQuizCard(
       title: ShimmerWidget(
-        width: 100,
+        width: 150,
       ),
-      tileColor: AppColors.shimmerWidgetBackgroundColor,
+      tileColor: AppColors.recentQuizCardTileColor,
       subtitle: [
         Expanded(
           child: ShimmerWidget(),

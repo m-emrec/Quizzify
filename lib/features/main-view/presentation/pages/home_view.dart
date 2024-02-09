@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
+import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/main-view/presentation/widgets/home_appbar.dart';
+import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
 
 import '../../../../core/constants/app_paddings.dart';
 import '../../../../logger.dart';
@@ -34,6 +36,7 @@ class _HomeViewState extends State<HomeView> {
             height: constraints.maxHeight,
             width: constraints.maxWidth,
             child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Padding(
                 padding: AppPaddings().pageTopPadding,
                 child: Column(
@@ -46,25 +49,17 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           /// Recent quiz card
                           RecentQuizCard(),
+                          AppPaddings.bigPadding.ph,
 
                           /// Friends card
-                          AspectRatio(
-                            aspectRatio: 16 / 13,
-                            child: FriendsCard(),
-                          ),
+                          FriendsCard(),
                         ],
                       ),
                     ),
+                    AppPaddings.bigPadding.ph,
 
                     /// Quizzes sheet
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        color: Colors.red,
-                        width: context.dynamicWidth(1),
-                        height: context.dynamicHeight(0.5),
-                      ),
-                    ),
+                    QuizzesSheet(),
                   ],
                 ),
               ),
