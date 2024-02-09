@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
@@ -17,7 +16,7 @@ class FriendsCard extends StatefulWidget {
 }
 
 class _FriendsCardState extends State<FriendsCard> {
-  bool _isLoaded = false;
+  bool _isLoaded = true;
   @override
   Widget build(BuildContext context) {
     return _isLoaded ? _LoadedFriendsCard() : _LoadingFriendsCard();
@@ -30,7 +29,6 @@ class _LoadingFriendsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShimmerWidget(
-      // width: double.maxFinite,
       child: _BaseFriendsCard(
         children: [],
       ),
@@ -41,9 +39,36 @@ class _LoadingFriendsCard extends StatelessWidget {
 class _LoadedFriendsCard extends StatelessWidget {
   const _LoadedFriendsCard();
 
+  @override
+  Widget build(BuildContext context) {
+    return _BaseFriendsCard(
+      image: DecorationImage(
+        image: AssetImage(ImgPath.friendsCardBgImg),
+        fit: BoxFit.fill,
+      ),
+      children: [
+        Card(
+            child: ListTile(
+          title: Text("Friend"),
+        )),
+        Card(
+            child: ListTile(
+          title: Text("Friend"),
+        )),
+        Card(
+            child: ListTile(
+          title: Text("Friend"),
+        )),
+      ],
+    );
+  }
+}
+
+class _NoFriendsCard extends StatelessWidget {
   final String _title = "FEATURED";
   final String _bodyText =
       "Take part in challenges with friends or other players";
+  @override
   @override
   Widget build(BuildContext context) {
     return _BaseFriendsCard(

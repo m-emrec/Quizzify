@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
+import 'package:trivia/features/main-view/presentation/mixins/recent_quiz_card_mixin.dart';
 
 import '../../../../core/shared/widgets/shimmer_widget.dart';
 
@@ -15,11 +17,21 @@ class RecentQuizCard extends StatefulWidget {
   State<RecentQuizCard> createState() => _RecentQuizCardState();
 }
 
-class _RecentQuizCardState extends State<RecentQuizCard> {
-  bool _isLoaded = false;
+class _RecentQuizCardState extends State<RecentQuizCard>
+    with RecentQuizCardMixin {
+  bool _isLoaded = true;
+
+  void onTap() {}
+
   @override
   Widget build(BuildContext context) {
-    return _isLoaded ? _LoadedRecentQuizCard() : _LoadingRecentQuizCard();
+    return _isLoaded
+        ? _LoadedRecentQuizCard(
+            onTap: onTap,
+            recentQuizCategoryIcon: Icons.headphones,
+            recentQuizName: "Quiz Name",
+          )
+        : _LoadingRecentQuizCard();
   }
 }
 
@@ -48,7 +60,8 @@ class _BaseRecentQuizCard extends StatelessWidget {
       child: Card(
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius:
+              BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
         ),
         child: ListTile(
           title: title,
@@ -73,30 +86,41 @@ class _BaseRecentQuizCard extends StatelessWidget {
 }
 
 class _LoadedRecentQuizCard extends StatelessWidget {
-  const _LoadedRecentQuizCard();
+  const _LoadedRecentQuizCard({
+    this.recentQuizName,
+    this.recentQuizCategoryIcon,
+    this.onTap,
+  });
 
+  final String recentQuizText = "RECENT QUIZ";
+  final String? recentQuizName;
+  final IconData? recentQuizCategoryIcon;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return _BaseRecentQuizCard(
+      onTap: onTap,
       title: Text(
-        "RECENT QUIZ",
+        recentQuizText,
         style: context.textTheme.titleSmall
             ?.copyWith(color: AppColors.recentQuizCardTitleColor),
       ),
       tileColor: AppColors.recentQuizCardTileColor,
       subtitle: [
         Icon(
-          Icons.headphones,
+          recentQuizCategoryIcon,
           color: AppColors.recentQuizCardSubTitleColor,
         ),
         4.pw,
         Text(
-          "A Basic Music Quiz",
+          recentQuizName ?? "",
           style: context.textTheme.titleMedium?.copyWith(
             color: AppColors.recentQuizCardSubTitleColor,
           ),
         ),
       ],
+
+      /// TODO: Change this.
       percent: Container(
         clipBehavior: Clip.antiAlias,
         height: 64,
@@ -128,10 +152,11 @@ class _LoadingRecentQuizCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BaseRecentQuizCard(
+      onTap: null,
       title: ShimmerWidget(
         width: 150,
       ),
-      tileColor: AppColors.recentQuizCardTileColor,
+      tileColor: AppColors.shimmerWidgetBackgroundColor,
       subtitle: [
         Expanded(
           child: ShimmerWidget(),
