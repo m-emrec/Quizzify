@@ -3,4 +3,6 @@ class ImgPath {
   static String scaffoldBackgroundImg = _pngImagePath("onboarding_background");
 
   static String friendsCardBgImg = _pngImagePath("friends_card_bg");
+  static String friendsCardWithFriendsBgImg =
+      _pngImagePath("friends_card_with_friends_bg");
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';

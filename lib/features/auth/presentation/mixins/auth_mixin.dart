@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/strings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:trivia/features/auth/presentation/widgets/input_fields.dart';
 
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../../../../core/shared/widgets/pop_up_dialog.dart';
 import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
 

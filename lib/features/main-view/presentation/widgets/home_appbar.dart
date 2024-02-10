@@ -11,7 +11,7 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-  bool _isLoaded = false;
+  bool _isLoaded = true;
 
   @override
   Widget build(BuildContext context) {

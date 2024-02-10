@@ -17,6 +17,10 @@ class FriendsCard extends StatefulWidget {
 
 class _FriendsCardState extends State<FriendsCard> {
   bool _isLoaded = true;
+  // bool _noFriends = true;
+
+  /// TODO: Change the background image of the Card
+  ///  it there is friends remove human avatar pics from the background.
   @override
   Widget build(BuildContext context) {
     return _isLoaded ? _LoadedFriendsCard() : _LoadingFriendsCard();
@@ -41,25 +45,46 @@ class _LoadedFriendsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BaseFriendsCard(
-      image: DecorationImage(
-        image: AssetImage(ImgPath.friendsCardBgImg),
-        fit: BoxFit.fill,
-      ),
+    return Stack(
       children: [
-        Card(
-            child: ListTile(
-          title: Text("Friend"),
-        )),
-        Card(
-            child: ListTile(
-          title: Text("Friend"),
-        )),
-        Card(
-            child: ListTile(
-          title: Text("Friend"),
-        )),
+        _BaseFriendsCard(
+          image: DecorationImage(
+            image: AssetImage(ImgPath.friendsCardWithFriendsBgImg),
+            fit: BoxFit.cover,
+          ),
+          children: [
+            a(),
+            a(),
+            a(),
+            a(),
+          ],
+        ),
+
+        /// add friend button || Navigate to AddFriendPage
+        Positioned(
+          bottom: 8,
+          right: 8,
+          child: IconButton.filled(
+            onPressed: () {},
+            icon: Icon(Icons.add),
+          ),
+        ),
       ],
+    );
+  }
+
+  Card a() {
+    return Card(
+      elevation: 0,
+      color: Colors.transparent,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 32,
+          child: Icon(Icons.person),
+        ),
+        title: Text("Friend"),
+        subtitle: Text("325 Points"),
+      ),
     );
   }
 }
@@ -68,7 +93,7 @@ class _NoFriendsCard extends StatelessWidget {
   final String _title = "FEATURED";
   final String _bodyText =
       "Take part in challenges with friends or other players";
-  @override
+
   @override
   Widget build(BuildContext context) {
     return _BaseFriendsCard(
@@ -77,19 +102,30 @@ class _NoFriendsCard extends StatelessWidget {
         fit: BoxFit.fill,
       ),
       children: [
-        Text(
-          _title,
-          style: context.textTheme.titleMedium?.copyWith(
-            color: AppColors.friendsCardTitleColor,
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPaddings.bigPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  _title,
+                  style: context.textTheme.titleMedium?.copyWith(
+                    color: AppColors.friendsCardTitleColor,
+                  ),
+                ),
+                Text(
+                  _bodyText,
+                  style: context.textTheme.labelLarge
+                      ?.copyWith(color: AppColors.friendsCardBodyTextColor),
+                  textAlign: TextAlign.center,
+                ),
+                _FindFriendsButton(),
+              ],
+            ),
           ),
-        ),
-        Text(
-          _bodyText,
-          style: context.textTheme.labelLarge
-              ?.copyWith(color: AppColors.friendsCardBodyTextColor),
-          textAlign: TextAlign.center,
-        ),
-        _FindFriendsButton()
+        )
       ],
     );
   }
@@ -136,12 +172,10 @@ class _BaseFriendsCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: image,
-            color: AppColors.shimmerWidgetBackgroundColor,
+            // color: AppColors.scaffoldColor,
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPaddings.bigPadding),
+          child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: children,
             ),

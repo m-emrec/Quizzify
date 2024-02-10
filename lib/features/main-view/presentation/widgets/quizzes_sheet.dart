@@ -6,7 +6,7 @@ import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 
-import '../../../../core/shared/widgets/quiz_list_tile.dart';
+import '../../../../core/shared/widgets/list_tiles/quiz_list_tile.dart';
 
 class QuizzesSheet extends StatefulWidget {
   const QuizzesSheet({super.key});
@@ -16,7 +16,7 @@ class QuizzesSheet extends StatefulWidget {
 }
 
 class _QuizzesSheetState extends State<QuizzesSheet> {
-  bool _isLoaded = false;
+  bool _isLoaded = true;
   @override
   Widget build(BuildContext context) {
     return _isLoaded ? _LoadedQuizzesSheet() : _LoadingQuizzesSheet();
@@ -46,7 +46,7 @@ class _BaseQuizzesSheet extends StatelessWidget {
         ),
       ),
       width: context.dynamicWidth(1),
-      height: context.dynamicHeight(0.5),
+      height: context.dynamicHeight(0.9),
       child: Padding(
         padding: AppPaddings().pageHPadding +
             EdgeInsets.only(top: AppPaddings.bigPadding),
@@ -92,6 +92,30 @@ class _LoadedQuizzesSheet extends StatelessWidget {
           title: "Q1",
           category: "Music",
           numberOfQuestions: "20",
+          image: AssetImage(ImgPath.friendsCardBgImg),
+        ),
+        QuizListTile(
+          title: "Q2",
+          category: "Math",
+          numberOfQuestions: "12",
+          image: AssetImage(ImgPath.friendsCardBgImg),
+        ),
+        QuizListTile(
+          title: "Q2",
+          category: "Math",
+          numberOfQuestions: "12",
+          image: AssetImage(ImgPath.friendsCardBgImg),
+        ),
+        QuizListTile(
+          title: "Q2",
+          category: "Math",
+          numberOfQuestions: "12",
+          image: AssetImage(ImgPath.friendsCardBgImg),
+        ),
+        QuizListTile(
+          title: "Q2",
+          category: "Math",
+          numberOfQuestions: "12",
           image: AssetImage(ImgPath.friendsCardBgImg),
         ),
         QuizListTile(

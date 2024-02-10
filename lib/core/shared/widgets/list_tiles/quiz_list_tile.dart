@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 
-import '../../constants/app_border_radius.dart';
-import '../../constants/app_paddings.dart';
+import '../../../constants/app_border_radius.dart';
+import '../../../constants/app_paddings.dart';
 
 class QuizListTile extends StatelessWidget {
   const QuizListTile({
