@@ -19,8 +19,6 @@ class _FriendsCardState extends State<FriendsCard> {
   bool _isLoaded = true;
   // bool _noFriends = true;
 
-  /// TODO: Change the background image of the Card
-  ///  it there is friends remove human avatar pics from the background.
   @override
   Widget build(BuildContext context) {
     return _isLoaded ? _LoadedFriendsCard() : _LoadingFriendsCard();
@@ -34,7 +32,7 @@ class _LoadingFriendsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShimmerWidget(
       child: _BaseFriendsCard(
-        children: [],
+        child: SizedBox(),
       ),
     );
   }
@@ -52,12 +50,12 @@ class _LoadedFriendsCard extends StatelessWidget {
             image: AssetImage(ImgPath.friendsCardWithFriendsBgImg),
             fit: BoxFit.cover,
           ),
-          children: [
-            a(),
-            a(),
-            a(),
-            a(),
-          ],
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return a();
+            },
+          ),
         ),
 
         /// add friend button || Navigate to AddFriendPage
@@ -89,6 +87,7 @@ class _LoadedFriendsCard extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _NoFriendsCard extends StatelessWidget {
   final String _title = "FEATURED";
   final String _bodyText =
@@ -101,7 +100,8 @@ class _NoFriendsCard extends StatelessWidget {
         image: AssetImage(ImgPath.friendsCardBgImg),
         fit: BoxFit.fill,
       ),
-      children: [
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPaddings.bigPadding),
@@ -126,7 +126,7 @@ class _NoFriendsCard extends StatelessWidget {
             ),
           ),
         )
-      ],
+      ]),
     );
   }
 }
@@ -159,8 +159,8 @@ class _FindFriendsButton extends StatelessWidget {
 }
 
 class _BaseFriendsCard extends StatelessWidget {
-  const _BaseFriendsCard({required this.children, this.image});
-  final List<Widget> children;
+  const _BaseFriendsCard({required this.child, this.image});
+  final Widget child;
   final DecorationImage? image;
 
   @override
@@ -174,12 +174,7 @@ class _BaseFriendsCard extends StatelessWidget {
             image: image,
             // color: AppColors.scaffoldColor,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: children,
-            ),
-          ),
+          child: child,
         ),
       ),
     );

@@ -27,15 +27,17 @@ class _BaseQuizzesSheet extends StatelessWidget {
   const _BaseQuizzesSheet({
     // ignore: unused_element
     this.color = Colors.white,
-    required this.children,
+    required this.child,
     required this.isLoaded,
   });
   final Color color;
-  final List<Widget> children;
+  final Widget child;
   final bool isLoaded;
 
   void onPressed() {}
 
+  final String liveQuizzesTitleText = "Live Quizzes";
+  final String seeAllButtonText = "See all";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,23 +58,17 @@ class _BaseQuizzesSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Live Quizzes",
+                  liveQuizzesTitleText,
                   style: context.textTheme.titleLarge,
                 ),
                 TextButton(
                   onPressed: isLoaded ? onPressed : null,
-                  child: Text("See all"),
+                  child: Text(seeAllButtonText),
                 ),
               ],
             ),
             AppPaddings.smallPadding.ph,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                ...children,
-              ],
-            ),
+            Expanded(child: child),
           ],
         ),
       ),
@@ -87,44 +83,17 @@ class _LoadedQuizzesSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BaseQuizzesSheet(
       isLoaded: true,
-      children: [
-        QuizListTile(
-          title: "Q1",
-          category: "Music",
-          numberOfQuestions: "20",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-        QuizListTile(
-          title: "Q2",
-          category: "Math",
-          numberOfQuestions: "12",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-        QuizListTile(
-          title: "Q2",
-          category: "Math",
-          numberOfQuestions: "12",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-        QuizListTile(
-          title: "Q2",
-          category: "Math",
-          numberOfQuestions: "12",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-        QuizListTile(
-          title: "Q2",
-          category: "Math",
-          numberOfQuestions: "12",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-        QuizListTile(
-          title: "Q2",
-          category: "Math",
-          numberOfQuestions: "12",
-          image: AssetImage(ImgPath.friendsCardBgImg),
-        ),
-      ],
+      child: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return QuizListTile(
+            title: "Q $index",
+            category: "Music",
+            numberOfQuestions: "20",
+            image: AssetImage(ImgPath.friendsCardBgImg),
+          );
+        },
+      ),
     );
   }
 }
@@ -136,15 +105,15 @@ class _LoadingQuizzesSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BaseQuizzesSheet(
       isLoaded: false,
-      children: [
-        ShimmerWidget(
-          height: 80,
+      child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.only(bottom: AppPaddings.mediumPadding),
+          child: ShimmerWidget(
+            height: 80,
+          ),
         ),
-        AppPaddings.mediumPadding.ph,
-        ShimmerWidget(
-          height: 80,
-        ),
-      ],
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/custom_appbar.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
@@ -47,17 +48,18 @@ class _LoadedHomeAppBar extends CustomAppBar {
             children: [
               const Icon(
                 Icons.wb_sunny_outlined,
-                color: Color(0xffECC7DD),
+                color: AppColors.recentQuizCardTileColor,
                 size: 16,
               ),
               4.pw,
               Text(
                 dayTimeText ?? "",
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xffECC7DD),
-                ),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color:
+                        AppColors.recentQuizCardTileColor //Color(0xffECC7DD),
+                    ),
               ),
             ],
           ),
