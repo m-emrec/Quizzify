@@ -67,6 +67,7 @@ class _HomeBottomNavigationBar extends StatelessWidget {
         Icons.person_outline_outlined,
       ],
       activeIndex: widget.bottomNavBarIndex,
+      elevation: 5,
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.softEdge,
       leftCornerRadius: AppBorderRadius.bottomNavBarCornerRadius,

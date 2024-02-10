@@ -6,6 +6,8 @@ import 'package:trivia/core/constants/image_path.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 
+import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
+
 class FriendsCard extends StatefulWidget {
   const FriendsCard({
     super.key,
@@ -51,9 +53,9 @@ class _LoadedFriendsCard extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: 5,
             itemBuilder: (context, index) {
-              return a();
+              return FriendsTile();
             },
           ),
         ),
@@ -68,21 +70,6 @@ class _LoadedFriendsCard extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Card a() {
-    return Card(
-      elevation: 0,
-      color: Colors.transparent,
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 32,
-          child: Icon(Icons.person),
-        ),
-        title: Text("Friend"),
-        subtitle: Text("325 Points"),
-      ),
     );
   }
 }
