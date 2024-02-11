@@ -8,10 +8,10 @@ abstract class DataState<T> {
   });
 }
 
-class DataSuccess extends DataState {
+class DataSuccess<T> extends DataState<T> {
   DataSuccess(data) : super(data: data);
 }
 
-class DataFailed extends DataState {
+class DataFailed<T> extends DataState<T> {
   DataFailed(exception) : super(exception: exception);
 }

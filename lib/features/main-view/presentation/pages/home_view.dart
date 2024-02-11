@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/main-view/presentation/widgets/home_appbar.dart';
 import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
+import 'package:trivia/logger.dart';
 
 import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
 import '../widgets/friends_card.dart';
 import '../widgets/recent_quiz_card.dart';
 
