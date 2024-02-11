@@ -37,12 +37,12 @@ class AuthInjectionContainer extends InjectionContainer {
 
   @override
   Future<void> dispose() async {
-    unRegister(AuthRepo);
-    unRegister(ForgotPasswordUsecase);
-    unRegister(SignInWithEmailUsecase);
-    unRegister(SignInUserWithFacebook);
-    unRegister(SignInUserWithGoogleUsecase);
-    unRegister(SignUpUserWithEmailUsecase);
-    unRegister(AuthBloc);
+    unRegister<AuthRepo>(AuthRepo);
+    unRegister<ForgotPasswordUsecase>(ForgotPasswordUsecase);
+    unRegister<SignInWithEmailUsecase>(SignInWithEmailUsecase);
+    unRegister<SignInUserWithFacebook>(SignInUserWithFacebook);
+    unRegister<SignInUserWithGoogleUsecase>(SignInUserWithGoogleUsecase);
+    unRegister<SignUpUserWithEmailUsecase>(SignUpUserWithEmailUsecase);
+    unRegister<AuthBloc>(AuthBloc);
   }
 }

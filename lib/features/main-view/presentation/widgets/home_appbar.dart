@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/custom_appbar.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
+import 'package:trivia/features/main-view/data/models/app_bar_model.dart';
+import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
@@ -12,17 +17,31 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-  bool _isLoaded = true;
+  late MainViewBloc _bloc;
+  @override
+  void initState() {
+    super.initState();
+    _bloc = GetIt.I<MainViewBloc>();
+    _bloc.add(GetAppBarInfoEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoaded
-        ? _LoadedHomeAppBar(
-            context,
-            userName: "Mustafa",
-            dayTimeText: "Good Morning",
-          )
-        : _LoadingHomeAppBar(context);
+    return BlocConsumer<MainViewBloc, MainViewState>(
+        bloc: _bloc,
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state.runtimeType == MainViewLoadingState) {
+            return _LoadingHomeAppBar(context);
+          } else if (state.runtimeType == MainViewSuccessState<AppBarModel>) {
+            return _LoadedHomeAppBar(
+              context,
+              userName: "Mustafa",
+              dayTimeText: "Good Morning",
+            );
+          }
+          return SizedBox();
+        });
   }
 }
 
@@ -74,9 +93,12 @@ class _LoadedHomeAppBar extends CustomAppBar {
 
   @override
   List<Widget>? get actions => [
-        const CircleAvatar(
-          radius: 32,
-          child: Icon(Icons.person),
+        GestureDetector(
+          onTap: () => FirebaseAuth.instance.signOut(),
+          child: const CircleAvatar(
+            radius: 32,
+            child: Icon(Icons.person),
+          ),
         ),
       ];
 }

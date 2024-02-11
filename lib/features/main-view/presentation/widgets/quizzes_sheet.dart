@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/constants/image_path.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
+import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
+import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 
 import '../../../../core/shared/widgets/list_tiles/quiz_list_tile.dart';
 
@@ -16,10 +20,29 @@ class QuizzesSheet extends StatefulWidget {
 }
 
 class _QuizzesSheetState extends State<QuizzesSheet> {
-  bool _isLoaded = true;
+  late MainViewBloc _bloc;
+  @override
+  void initState() {
+    super.initState();
+    _bloc = GetIt.instance.get<MainViewBloc>();
+    _bloc.add(GetLiveQuizzesEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _isLoaded ? _LoadedQuizzesSheet() : _LoadingQuizzesSheet();
+    return BlocConsumer<MainViewBloc, MainViewState>(
+      bloc: _bloc,
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state.runtimeType == MainViewLoadingState) {
+          return _LoadingQuizzesSheet();
+        } else if (state.runtimeType ==
+            MainViewSuccessState<LiveQuizzesModel>) {
+          return _LoadedQuizzesSheet();
+        }
+        return SizedBox();
+      },
+    );
   }
 }
 

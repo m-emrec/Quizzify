@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
+import 'package:trivia/features/main-view/data/datasources/home_injection_container.dart';
+import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/widgets/home_appbar.dart';
 import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
-import 'package:trivia/logger.dart';
 
 import '../../../../core/constants/app_paddings.dart';
-import '../../../../core/constants/enums/firestore_enums.dart';
 import '../widgets/friends_card.dart';
 import '../widgets/recent_quiz_card.dart';
 
@@ -21,6 +22,18 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    await HomeInjectionContainer().initialize();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    HomeInjectionContainer().dispose();
   }
 
   @override

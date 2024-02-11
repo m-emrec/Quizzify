@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
+import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
+import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/mixins/recent_quiz_card_mixin.dart';
 
 import '../../../../core/shared/widgets/shimmer_widget.dart';
@@ -20,19 +23,36 @@ class RecentQuizCard extends StatefulWidget {
 
 class _RecentQuizCardState extends State<RecentQuizCard>
     with RecentQuizCardMixin {
-  bool _isLoaded = true;
+  late MainViewBloc _bloc;
+  @override
+  void initState() {
+    super.initState();
+    _bloc = GetIt.I<MainViewBloc>();
+    _bloc.add(GetRecentQuizzesEvent());
+  }
 
   void onTap() {}
 
   @override
   Widget build(BuildContext context) {
-    return _isLoaded
-        ? _LoadedRecentQuizCard(
-            onTap: onTap,
-            recentQuizCategoryIcon: Icons.headphones,
-            recentQuizName: "Quiz Name",
-          )
-        : _LoadingRecentQuizCard();
+    return BlocConsumer<MainViewBloc, MainViewState>(
+      bloc: _bloc,
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case MainViewLoadingState:
+            return _LoadingRecentQuizCard();
+          case const (MainViewSuccessState<RecentQuizModel>):
+            return _LoadedRecentQuizCard(
+              onTap: onTap,
+              recentQuizCategoryIcon: Icons.headphones,
+              recentQuizName: "Quiz Name",
+            );
+          default:
+            return SizedBox();
+        }
+      },
+    );
   }
 }
 

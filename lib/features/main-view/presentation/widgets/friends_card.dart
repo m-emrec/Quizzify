@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/constants/image_path.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
+import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
+import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 
 import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
 
@@ -18,12 +22,30 @@ class FriendsCard extends StatefulWidget {
 }
 
 class _FriendsCardState extends State<FriendsCard> {
-  bool _isLoaded = true;
-  // bool _noFriends = true;
+  late MainViewBloc _bloc;
+  @override
+  void initState() {
+    super.initState();
+    _bloc = GetIt.I<MainViewBloc>();
+    _bloc.add(GetFriendsInfoEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoaded ? _LoadedFriendsCard() : _LoadingFriendsCard();
+    return BlocConsumer<MainViewBloc, MainViewState>(
+      bloc: _bloc,
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case MainViewLoadingState:
+            return _LoadingFriendsCard();
+          case const (MainViewSuccessState<FriendsCardModel>):
+            return _LoadedFriendsCard();
+          default:
+            return SizedBox();
+        }
+      },
+    );
   }
 }
 
