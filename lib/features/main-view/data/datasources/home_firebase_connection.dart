@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trivia/core/constants/enums/firestore_enums.dart';
@@ -11,6 +9,7 @@ import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
 import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
 
 class HomeFirebaseConnection extends FireStoreConnection {
+  /// This function used for getting the info that will be shown on AppBar
   AppBarModel getAppBarInfo() {
     User? user = currentUser;
 
@@ -19,11 +18,19 @@ class HomeFirebaseConnection extends FireStoreConnection {
     return model;
   }
 
+  /// This function gets the list of friends
+  /// TODO: Finish implementing getFriendsInfoFromFirebase .
   Future<List<FriendsCardModel>> getFriendsInfoFromFirebase() async {
-    DocumentSnapshot userDoc = await getUserDoc(uid).then((doc) => doc.get());
+    /// First I get documentation of the currentUser
+    DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await getUserDoc(uid).then((doc) => doc.get());
     List<FriendsCardModel> listOfFriends = [];
 
-    for (var userId in userDoc[UserEnum.friends]) {
+    /// [userDoc[UserEnum.friends.name]] this returns a List of uid.
+    List<String> friendsUidList = userDoc[UserEnum.friends.name];
+
+    ///
+    for (var userId in friendsUidList) {
       DocumentSnapshot? friendDoc =
           await getUserDoc(userId).then((doc) => doc.get());
       listOfFriends.add(
@@ -31,12 +38,6 @@ class HomeFirebaseConnection extends FireStoreConnection {
       );
     }
     return listOfFriends;
-  }
-
-  String returnRandomCategory() {
-    int randomIndex = Random().nextInt(Categories.values.length);
-    String randomCategory = Categories.values[randomIndex].name;
-    return randomCategory;
   }
 
   Future<List<LiveQuizzesModel>> getLiveQuizzesFromFirebase() async {
@@ -53,6 +54,7 @@ class HomeFirebaseConnection extends FireStoreConnection {
     return listOfFirstTenQuizzes;
   }
 
+  /// TODO: Finish implementing getRecentQuizInfoFromFirebase .
   Future<RecentQuizModel> getRecentQuizInfoFromFirebase() async {
     DocumentReference<Map<String, dynamic>> userDoc = await getUserDoc(uid);
 

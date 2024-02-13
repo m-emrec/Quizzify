@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
@@ -9,6 +8,7 @@ import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
 import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
+import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
 import '../../../../core/shared/widgets/list_tiles/quiz_list_tile.dart';
 
@@ -30,19 +30,10 @@ class _QuizzesSheetState extends State<QuizzesSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MainViewBloc, MainViewState>(
+    return BlocWidgetManager<List<LiveQuizzesModel>>(
       bloc: _bloc,
-      listener: (context, state) {},
-      builder: (context, state) {
-        if (state.runtimeType == MainViewLoadingState) {
-          return _LoadingQuizzesSheet();
-        } else if (state.runtimeType ==
-            MainViewSuccessState<List<LiveQuizzesModel>>) {
-          state as MainViewSuccessState<List<LiveQuizzesModel>>;
-          return _LoadedQuizzesSheet(state.data);
-        }
-        return SizedBox();
-      },
+      loadingWidget: _LoadingQuizzesSheet(),
+      loadedWidget: (List<LiveQuizzesModel>? data) => _LoadedQuizzesSheet(data),
     );
   }
 }
@@ -58,6 +49,7 @@ class _BaseQuizzesSheet extends StatelessWidget {
   final Widget child;
   final bool isLoaded;
 
+  /// TODO: implement navigate to quiz.
   void onPressed() {}
 
   final String liveQuizzesTitleText = "Live Quizzes";

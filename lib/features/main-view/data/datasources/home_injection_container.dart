@@ -17,6 +17,7 @@ class HomeInjectionContainer extends InjectionContainer {
     /// repo
     unRegister<HomeRepo>(HomeRepoImpl(sl()));
 
+    /// Usecases
     unRegister<GetAppBarInfoUseCase>(GetAppBarInfoUseCase(sl()));
     unRegister<GetFriendsInfoUseCase>(GetFriendsInfoUseCase(sl()));
     unRegister<GetLiveQuizzesInfoUseCase>(GetLiveQuizzesInfoUseCase(sl()));
@@ -47,6 +48,8 @@ class HomeInjectionContainer extends InjectionContainer {
     register<GetRecentQuizInfoUseCase>(GetRecentQuizInfoUseCase(sl()));
 
     /// Bloc
+    /// I use registerFactory because I want to create new instance of [MainViewBloc]
+    /// every time I call GetIt.
     sl.registerFactory<MainViewBloc>(
       () => MainViewBloc(
         sl(),

@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void dispose() async {
     super.dispose();
-    HomeInjectionContainer().dispose();
+    await HomeInjectionContainer().dispose();
   }
 
   @override
@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /// Recent quizzes and Friends
+                    /// Recent quizzes and Friends column
                     Padding(
                       padding: AppPaddings().pageHPadding,
                       child: Column(

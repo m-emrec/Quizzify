@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
@@ -9,6 +8,7 @@ import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
 import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
+import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
 import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
 
@@ -32,19 +32,10 @@ class _FriendsCardState extends State<FriendsCard> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MainViewBloc, MainViewState>(
+    return BlocWidgetManager<FriendsCardModel>(
       bloc: _bloc,
-      listener: (context, state) {},
-      builder: (context, state) {
-        switch (state.runtimeType) {
-          case MainViewLoadingState:
-            return _LoadingFriendsCard();
-          case const (MainViewSuccessState<FriendsCardModel>):
-            return _LoadedFriendsCard();
-          default:
-            return SizedBox();
-        }
-      },
+      loadingWidget: _LoadingFriendsCard(),
+      loadedWidget: (_) => _LoadedFriendsCard(),
     );
   }
 }

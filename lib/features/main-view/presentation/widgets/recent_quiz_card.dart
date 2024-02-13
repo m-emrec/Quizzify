@@ -9,6 +9,7 @@ import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
 import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/mixins/recent_quiz_card_mixin.dart';
+import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
 import '../../../../core/shared/widgets/shimmer_widget.dart';
 
@@ -31,27 +32,19 @@ class _RecentQuizCardState extends State<RecentQuizCard>
     _bloc.add(GetRecentQuizzesEvent());
   }
 
+  /// TODO: implement navigate to recent quiz.
   void onTap() {}
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MainViewBloc, MainViewState>(
+    return BlocWidgetManager<RecentQuizModel>(
       bloc: _bloc,
-      listener: (context, state) {},
-      builder: (context, state) {
-        switch (state.runtimeType) {
-          case MainViewLoadingState:
-            return _LoadingRecentQuizCard();
-          case const (MainViewSuccessState<RecentQuizModel>):
-            return _LoadedRecentQuizCard(
-              onTap: onTap,
-              recentQuizCategoryIcon: Icons.headphones,
-              recentQuizName: "Quiz Name",
-            );
-          default:
-            return SizedBox();
-        }
-      },
+      loadingWidget: _LoadingRecentQuizCard(),
+      loadedWidget: (_) => _LoadedRecentQuizCard(
+        onTap: onTap,
+        recentQuizCategoryIcon: Icons.headphones,
+        recentQuizName: "Quiz Name",
+      ),
     );
   }
 }

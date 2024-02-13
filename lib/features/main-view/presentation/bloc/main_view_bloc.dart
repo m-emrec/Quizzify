@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/core/resources/data_state.dart';
+import 'package:trivia/core/resources/use_case.dart';
 import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
 import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
 import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
@@ -34,14 +35,13 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
   }
   final AppErrorText _appErrorText = AppErrorText();
 
-  FutureOr<void> onGetAppBarInfoEvent(
-      GetAppBarInfoEvent event, Emitter<MainViewState> emit) async {
-    // logger.d("GetAppBar");
-    emit(MainViewLoadingState());
-    final DataState dataState = await _getAppBarInfoUseCase(null);
-
-    if (dataState.runtimeType == DataSuccess<AppBarModel>) {
-      emit(MainViewSuccessState<AppBarModel>(dataState.data));
+  Future<void> _emitStateFunc<T>({
+    required UseCase useCase,
+    required Emitter<MainViewState> emit,
+  }) async {
+    final DataState dataState = await useCase(null);
+    if (dataState.runtimeType == DataSuccess<T>) {
+      emit(MainViewSuccessState<T>(dataState.data));
     } else if (dataState.runtimeType == DataFailed) {
       logger.e(dataState.exception);
       emit(
@@ -49,18 +49,20 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     }
   }
 
+  FutureOr<void> onGetAppBarInfoEvent(
+      GetAppBarInfoEvent event, Emitter<MainViewState> emit) async {
+    emit(MainViewLoadingState());
+
+    await _emitStateFunc<AppBarModel>(
+        useCase: _getAppBarInfoUseCase, emit: emit);
+  }
+
   FutureOr<void> onGetLiveQuizzesEvent(
       GetLiveQuizzesEvent event, Emitter<MainViewState> emit) async {
     emit(MainViewLoadingState());
-    final DataState dataState = await _getLiveQuizzesInfoUseCase(null);
 
-    if (dataState.runtimeType == DataSuccess<List<LiveQuizzesModel>>) {
-      emit(MainViewSuccessState<List<LiveQuizzesModel>>(dataState.data));
-    } else if (dataState.runtimeType == DataFailed) {
-      logger.e(dataState.exception);
-      emit(
-          MainViewFailedState(_appErrorText.errorMessage(dataState.exception)));
-    }
+    await _emitStateFunc<List<LiveQuizzesModel>>(
+        useCase: _getLiveQuizzesInfoUseCase, emit: emit);
   }
 
   /// TODO : Implement this after [Discover] feature done.

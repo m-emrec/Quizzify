@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trivia/core/constants/enums/firestore_enums.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/core/shared/models/quiz_model.dart';
-import 'package:trivia/logger.dart';
 
 abstract class FireStoreConnection {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   User? get currentUser => firebaseAuth.currentUser;
+
+  /// UID of current user
   String? get uid => firebaseAuth.currentUser?.uid;
 
   /// This function returns given collection
@@ -62,13 +63,9 @@ abstract class FireStoreConnection {
         /// get Quiz dat
         Map<String, dynamic> quizData = quiz.data();
 
-        /// get the questions of the quiz
-        CollectionReference<Map<String, dynamic>> questionsOfQuiz =
-            getQuestions(quizCollectionByCategory, quizData[QuizEnum.qid.name]);
-
         /// Get number of questions
-        int numberOfQuestions =
-            await questionsOfQuiz.get().then((value) => value.docs.length);
+        int numberOfQuestions = await getNumberOfQuestions(
+            quizCollectionByCategory, quizData[QuizEnum.qid.name]);
 
         /// Category name and number of questions are not exits in quizData
         /// so I add them here
@@ -86,8 +83,21 @@ abstract class FireStoreConnection {
     listOfAllQuizzes.sort((a, b) {
       return a.createdDate.compareTo(b.createdDate);
     });
-    listOfAllQuizzes = listOfAllQuizzes.reversed.toList();
+    listOfAllQuizzes = listOfAllQuizzes.reversed.toList(); //
     return listOfAllQuizzes;
+  }
+
+  Future<int> getNumberOfQuestions(
+      CollectionReference<Map<String, dynamic>> quizzesCollection,
+      String qid) async {
+    /// get the questions of the quiz
+    CollectionReference<Map<String, dynamic>> questionsOfQuiz =
+        getQuestions(quizzesCollection, qid);
+
+    /// Get number of questions
+    int numberOfQuestions =
+        await questionsOfQuiz.get().then((value) => value.docs.length);
+    return numberOfQuestions;
   }
 
   /// This function returns QuizzesCollection for given category
