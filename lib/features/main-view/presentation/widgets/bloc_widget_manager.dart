@@ -26,6 +26,7 @@ class BlocWidgetManager<T> extends StatelessWidget {
           return loadedWidget(state.data);
         }
         return SizedBox();
+        //
       },
     );
   }
