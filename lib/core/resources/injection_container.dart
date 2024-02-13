@@ -15,10 +15,9 @@ abstract class InjectionContainer {
   bool isRegistered(instance) => sl.isRegistered(instance: instance);
 
   /// Unregister the singleton if it is registered.
-  void unRegister<T extends Object>(Object? object) {
+  Future<void> unRegister<T extends Object>(Object? object) async {
     final bool registered = isRegistered(object);
-
-    if (registered) sl.unregister<T>(instance: object);
+    if (registered) await sl.unregister<T>(instance: object);
   }
 
   /// register Singleton if it is not registered.
@@ -26,5 +25,11 @@ abstract class InjectionContainer {
     final bool registered = isRegistered(object);
 
     if (registered == false) sl.registerSingleton<T>(object);
+  }
+
+  /// register Factory if it is not registered.
+  void registerF<T extends Object>(T object) {
+    final bool registered = isRegistered(object);
+    if (registered == false) sl.registerFactory<T>(() => object);
   }
 }

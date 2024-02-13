@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:trivia/core/constants/app_color.dart';
 
-final AppColors _appColors = AppColors();
 final AppTextThemes _appTextTheme = AppTextThemes();
 
 class AppTheme {
@@ -12,11 +11,12 @@ class AppTheme {
 
     /// widget themes
     /// App bar theme
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.scaffoldColor,
       systemOverlayStyle: SystemUiOverlayStyle(
         systemNavigationBarColor: AppColors.scaffoldColor,
       ),
+      titleTextStyle: _appTextTheme.textTheme.titleLarge,
       surfaceTintColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: AppColors.scaffoldColor,

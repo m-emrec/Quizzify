@@ -17,4 +17,13 @@ class AppPaddings {
   /// EdgeInsets.symmetric(horizontal: 16,vertical: 24)
   final EdgeInsets elevatedButtonPadding =
       const EdgeInsets.symmetric(horizontal: 16, vertical: 24);
+
+  /// 8
+  static const double smallPadding = 8;
+
+  /// 16
+  static const double mediumPadding = 16;
+
+  /// 32
+  static const double bigPadding = 32;
 }

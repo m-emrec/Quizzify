@@ -22,7 +22,7 @@ class OnboardingFirestoreConnection extends FireStoreConnection {
         /// update display name
         user?.updateDisplayName(name);
         final CollectionReference<Map<String, dynamic>> collection =
-            await getCollection(FireStoreEnum.Users.name);
+            await getCollection(CollectionEnum.Users.name);
 
         /// create user doc
         collection.doc(uid).set({});
