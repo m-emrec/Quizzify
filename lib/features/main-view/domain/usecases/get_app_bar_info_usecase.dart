@@ -9,7 +9,7 @@ class GetAppBarInfoUseCase implements UseCase<DataState<AppBarEntity>, void> {
 
   GetAppBarInfoUseCase(this._homeRepo);
   @override
-  Future<DataState<AppBarEntity>> call(void params) async {
+  Future<DataState<AppBarEntity>> call(void param) async {
     return _homeRepo.getAppBarInfo();
   }
 }

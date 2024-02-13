@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trivia/core/constants/enums/firestore_enums.dart';
 import 'package:trivia/core/resources/data_state.dart';
+import 'package:trivia/core/shared/models/quiz_model.dart';
+import 'package:trivia/logger.dart';
 
 abstract class FireStoreConnection {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -22,6 +24,70 @@ abstract class FireStoreConnection {
         await getCollection(CollectionEnum.Users.name);
     final DocumentReference<Map<String, dynamic>> userDoc = collection.doc(uid);
     return userDoc;
+  }
+
+  /// This function gives all of the quizzes in Firestore
+  Future<List<QuizModel>> getAllQuizzes() async {
+    List<QuizModel> listOfAllQuizzes = [];
+
+    /// get categoryCollection
+    CollectionReference<Map<String, dynamic>> categoryCollection =
+        await getCollection(CollectionEnum.Categories.name);
+
+    /// get documents from collection
+    QuerySnapshot<Map<String, dynamic>> docsOfCategoryCollection =
+        await categoryCollection.get();
+
+    /// get List of document data
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> listOfCategories =
+        docsOfCategoryCollection.docs;
+
+    for (var category in listOfCategories) {
+      String categoryName = category.id;
+
+      /// here get the quizCollection for given category
+      CollectionReference<Map<String, dynamic>> quizCollectionByCategory =
+          await getQuizzesCollection(category: categoryName);
+
+      /// get docs of quizCollection
+      QuerySnapshot<Map<String, dynamic>> docsOfQuizzes =
+          await quizCollectionByCategory.get();
+
+      /// get List of quiz documents data
+      List<QueryDocumentSnapshot<Map<String, dynamic>>>
+          listOfQuizzesByCategory = docsOfQuizzes.docs;
+
+      /// inside the list of quizzes
+      for (var quiz in listOfQuizzesByCategory) {
+        /// get Quiz dat
+        Map<String, dynamic> quizData = quiz.data();
+
+        /// get the questions of the quiz
+        CollectionReference<Map<String, dynamic>> questionsOfQuiz =
+            getQuestions(quizCollectionByCategory, quizData[QuizEnum.qid.name]);
+
+        /// Get number of questions
+        int numberOfQuestions =
+            await questionsOfQuiz.get().then((value) => value.docs.length);
+
+        /// Category name and number of questions are not exits in quizData
+        /// so I add them here
+        quizData.putIfAbsent(QuizEnum.category.name, () => categoryName);
+        quizData.putIfAbsent(
+            QuizEnum.numberOfQuestions.name, () => numberOfQuestions);
+
+        /// create QuizModel and add it to listOfAllQuizzes
+        QuizModel model = QuizModel.fromFirebase(quizData);
+        listOfAllQuizzes.add(model);
+      }
+    }
+
+    /// Sort quizzes by their createdDate
+    listOfAllQuizzes.sort((a, b) {
+      return a.createdDate.compareTo(b.createdDate);
+    });
+    listOfAllQuizzes = listOfAllQuizzes.reversed.toList();
+    return listOfAllQuizzes;
   }
 
   /// This function returns QuizzesCollection for given category

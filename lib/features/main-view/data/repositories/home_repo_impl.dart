@@ -1,9 +1,5 @@
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/main-view/data/datasources/home_firebase_connection.dart';
-import 'package:trivia/features/main-view/domain/entities/app_bar_entitiy.dart';
-import 'package:trivia/features/main-view/domain/entities/friends_card_entity.dart';
-import 'package:trivia/features/main-view/domain/entities/live_quizzes_entity.dart';
-import 'package:trivia/features/main-view/domain/entities/recent_quiz_entity.dart';
 import 'package:trivia/features/main-view/domain/repositories/home_repo.dart';
 
 import '../models/app_bar_model.dart';
@@ -19,6 +15,7 @@ class HomeRepoImpl implements HomeRepo {
   DataState<AppBarModel> getAppBarInfo() {
     try {
       AppBarModel model = _firebaseConnection.getAppBarInfo();
+
       return DataSuccess(model);
     } catch (e) {
       return DataFailed(e.toString());
@@ -37,7 +34,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<DataState<LiveQuizzesModel>> getLiveQuizzes() async {
+  Future<DataState<List<LiveQuizzesModel>>> getLiveQuizzes() async {
     try {
       List<LiveQuizzesModel> model =
           await _firebaseConnection.getLiveQuizzesFromFirebase();

@@ -11,5 +11,5 @@ abstract class HomeRepo {
 
   Future<DataState<FriendsCardEntity>> getFriendsInfo();
 
-  Future<DataState<LiveQuizzesEntity>> getLiveQuizzes();
+  Future<DataState<List<LiveQuizzesEntity>>> getLiveQuizzes();
 }

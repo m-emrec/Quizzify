@@ -26,7 +26,7 @@ enum QuizEnum {
   qid,
   numberOfQuestions,
   description,
-  picture,
+  photo,
   createdDate,
   createdBy,
   playedCount,

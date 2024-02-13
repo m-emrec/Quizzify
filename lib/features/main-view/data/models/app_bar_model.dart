@@ -14,9 +14,28 @@ class AppBarModel extends AppBarEntity {
         );
 
   factory AppBarModel.fromFirebase(User? data) {
+    /// this function used to return a text depending on time interval.
+    String dayTimeText() {
+      final int nowHour = DateTime.now().hour;
+
+      switch (nowHour) {
+        case <= 12:
+          return "Good Morning";
+        case > 12 && < 18:
+          return "Good Afternoon";
+        case >= 18 && <= 21:
+          return "Good Evening";
+        case >= 22:
+          return "Good Night";
+        default:
+      }
+
+      return "";
+    }
+
     return AppBarModel(
       picUrl: data?.photoURL,
-      timeText: "timeText",
+      timeText: dayTimeText(),
       userName: data?.displayName,
     );
   }

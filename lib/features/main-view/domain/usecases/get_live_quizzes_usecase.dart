@@ -4,12 +4,12 @@ import 'package:trivia/features/main-view/domain/entities/live_quizzes_entity.da
 import 'package:trivia/features/main-view/domain/repositories/home_repo.dart';
 
 class GetLiveQuizzesInfoUseCase
-    implements UseCase<DataState<LiveQuizzesEntity>, void> {
+    implements UseCase<DataState<List<LiveQuizzesEntity>>, void> {
   final HomeRepo _homeRepo;
 
   GetLiveQuizzesInfoUseCase(this._homeRepo);
   @override
-  Future<DataState<LiveQuizzesEntity>> call(void params) {
+  Future<DataState<List<LiveQuizzesEntity>>> call(void params) {
     return _homeRepo.getLiveQuizzes();
   }
 }

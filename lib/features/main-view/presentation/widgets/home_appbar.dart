@@ -34,10 +34,12 @@ class _HomeAppBarState extends State<HomeAppBar> {
           if (state.runtimeType == MainViewLoadingState) {
             return _LoadingHomeAppBar(context);
           } else if (state.runtimeType == MainViewSuccessState<AppBarModel>) {
+            state as MainViewSuccessState<AppBarModel>;
             return _LoadedHomeAppBar(
               context,
-              userName: "Mustafa",
-              dayTimeText: "Good Morning",
+              userName: state.data?.userName,
+              dayTimeText: state.data?.timeText,
+              picUrl: state.data?.picUrl,
             );
           }
           return SizedBox();
@@ -50,10 +52,12 @@ class _LoadedHomeAppBar extends CustomAppBar {
     this.ctx, {
     this.userName,
     this.dayTimeText,
+    this.picUrl,
   });
   final BuildContext ctx;
   final String? userName;
   final String? dayTimeText;
+  final String? picUrl;
 
   @override
   bool? get centerTitle => false;
@@ -95,9 +99,16 @@ class _LoadedHomeAppBar extends CustomAppBar {
   List<Widget>? get actions => [
         GestureDetector(
           onTap: () => FirebaseAuth.instance.signOut(),
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 32,
-            child: Icon(Icons.person),
+            child: picUrl == null
+
+                /// TODO: Clip image
+                ? Icon(Icons.person_outline_rounded)
+                : Image.network(
+                    picUrl ?? "",
+                    fit: BoxFit.fill,
+                  ),
           ),
         ),
       ];

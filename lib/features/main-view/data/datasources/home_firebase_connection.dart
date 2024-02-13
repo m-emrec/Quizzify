@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trivia/core/constants/enums/firestore_enums.dart';
 import 'package:trivia/core/resources/firestore_connection.dart';
+import 'package:trivia/core/shared/models/quiz_model.dart';
 import 'package:trivia/features/main-view/data/models/app_bar_model.dart';
 import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
 import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
@@ -14,6 +15,7 @@ class HomeFirebaseConnection extends FireStoreConnection {
     User? user = currentUser;
 
     AppBarModel model = AppBarModel.fromFirebase(user);
+
     return model;
   }
 
@@ -38,40 +40,17 @@ class HomeFirebaseConnection extends FireStoreConnection {
   }
 
   Future<List<LiveQuizzesModel>> getLiveQuizzesFromFirebase() async {
-    List<LiveQuizzesModel> listOfQuizzes = [];
+    List<LiveQuizzesModel> listOfFirstTenQuizzes = [];
+    List<QuizModel> listOfAllQuizzes = await getAllQuizzes();
+
+    /// I want take only the first 10 quiz from the list.
     for (var i = 0; i < 10; i++) {
-      // choose random category
-      String category = returnRandomCategory();
-      // get quizzes collection for chosen category
-      CollectionReference<Map<String, dynamic>> quizzesCollection =
-          await getQuizzesCollection(category: category);
-      // first order quizzesCollection by createdDate , then return the documents.
-      QuerySnapshot<Map<String, dynamic>> quizCollectionData =
-          await quizzesCollection.orderBy(QuizEnum.createdDate.name).get();
-
-      /// select the first Document from quizzesCollection.
-      /// this document is the last created document in the collection
-      QueryDocumentSnapshot<Map<String, dynamic>> quizDoc =
-          quizCollectionData.docs.first;
-
-      /// Get the data of the document
-      Map<String, dynamic> quizDocData = quizDoc.data();
-
-      /// get questions collection and return number of questions
-      int numberOfQuestions = await getQuestions(quizzesCollection, quizDoc.id)
-          .get()
-          .then((value) => value.docs.length);
-
-      /// Number of questions and category is not exist inside [quizDocData]
-      /// I put them here
-      quizDocData
-        ..putIfAbsent(QuizEnum.category.name, () => category)
-        ..putIfAbsent(QuizEnum.numberOfQuestions.name, () => numberOfQuestions);
-
-      LiveQuizzesModel model = LiveQuizzesModel.fromFirebase(quizDocData);
-      listOfQuizzes.add(model);
+      LiveQuizzesModel model =
+          LiveQuizzesModel.fromFirebase(listOfAllQuizzes[i]);
+      listOfFirstTenQuizzes.add(model);
     }
-    return listOfQuizzes;
+
+    return listOfFirstTenQuizzes;
   }
 
   Future<RecentQuizModel> getRecentQuizInfoFromFirebase() async {

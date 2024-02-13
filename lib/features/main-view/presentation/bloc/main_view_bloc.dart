@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:trivia/core/constants/error_texts.dart';
+import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
 import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
 import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
@@ -9,6 +11,7 @@ import 'package:trivia/features/main-view/domain/usecases/get_app_bar_info_useca
 import 'package:trivia/features/main-view/domain/usecases/get_friends_info_usecase.dart';
 import 'package:trivia/features/main-view/domain/usecases/get_live_quizzes_usecase.dart';
 import 'package:trivia/features/main-view/domain/usecases/get_recent_quiz_info_usecase.dart';
+import 'package:trivia/logger.dart';
 
 import '../../data/models/app_bar_model.dart';
 
@@ -29,40 +32,63 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     on<GetFriendsInfoEvent>(onGetFriendsInfoEvent);
     on<GetRecentQuizzesEvent>(onGetRecentQuizzesEvent);
   }
+  final AppErrorText _appErrorText = AppErrorText();
 
   FutureOr<void> onGetAppBarInfoEvent(
       GetAppBarInfoEvent event, Emitter<MainViewState> emit) async {
     // logger.d("GetAppBar");
     emit(MainViewLoadingState());
-    await Future.delayed(
-      Duration(seconds: 3),
-    ).then((_) => emit(MainViewSuccessState(AppBarModel())));
+    final DataState dataState = await _getAppBarInfoUseCase(null);
+
+    if (dataState.runtimeType == DataSuccess<AppBarModel>) {
+      emit(MainViewSuccessState<AppBarModel>(dataState.data));
+    } else if (dataState.runtimeType == DataFailed) {
+      logger.e(dataState.exception);
+      emit(
+          MainViewFailedState(_appErrorText.errorMessage(dataState.exception)));
+    }
   }
 
   FutureOr<void> onGetLiveQuizzesEvent(
       GetLiveQuizzesEvent event, Emitter<MainViewState> emit) async {
-    // logger.d("GetLiveQuizzes");
     emit(MainViewLoadingState());
-    await Future.delayed(
-      Duration(seconds: 8),
-    ).then((_) => emit(MainViewSuccessState(LiveQuizzesModel())));
+    final DataState dataState = await _getLiveQuizzesInfoUseCase(null);
+
+    if (dataState.runtimeType == DataSuccess<List<LiveQuizzesModel>>) {
+      emit(MainViewSuccessState<List<LiveQuizzesModel>>(dataState.data));
+    } else if (dataState.runtimeType == DataFailed) {
+      logger.e(dataState.exception);
+      emit(
+          MainViewFailedState(_appErrorText.errorMessage(dataState.exception)));
+    }
   }
 
+  /// TODO : Implement this after [Discover] feature done.
   FutureOr<void> onGetFriendsInfoEvent(
       GetFriendsInfoEvent event, Emitter<MainViewState> emit) async {
-    // logger.d("GetFriendsCard");
     emit(MainViewLoadingState());
     await Future.delayed(
       Duration(seconds: 1),
     ).then((_) => emit(MainViewSuccessState(FriendsCardModel())));
   }
 
+  /// TODO : Implement this after [PlayQuiz] feature done
   FutureOr<void> onGetRecentQuizzesEvent(
       GetRecentQuizzesEvent event, Emitter<MainViewState> emit) async {
-    // logger.d("GetRecentQuiz");
     emit(MainViewLoadingState());
     await Future.delayed(
-      Duration(seconds: 10),
+      Duration(milliseconds: 300),
     ).then((_) => emit(MainViewSuccessState(RecentQuizModel())));
+
+    //  emit(MainViewLoadingState());
+    // final DataState dataState = await _getRecentQuizInfoUseCase(null);
+    // logger.d(dataState.exception);
+    // if (dataState.runtimeType == DataSuccess<List<RecentQuizModel>>) {
+    //   emit(MainViewSuccessState<List<RecentQuizModel>>(dataState.data));
+    // } else if (dataState.runtimeType == DataFailed) {
+    //   logger.e(dataState.exception);
+    //   emit(
+    //       MainViewFailedState(_appErrorText.errorMessage(dataState.exception)));
+    // }
   }
 }

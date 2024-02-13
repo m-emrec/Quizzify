@@ -1,4 +1,4 @@
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
+import 'package:trivia/core/shared/models/quiz_model.dart';
 import 'package:trivia/features/main-view/domain/entities/live_quizzes_entity.dart';
 
 class LiveQuizzesModel extends LiveQuizzesEntity {
@@ -16,13 +16,13 @@ class LiveQuizzesModel extends LiveQuizzesEntity {
           title: title,
         );
 
-  factory LiveQuizzesModel.fromFirebase(Map data) {
+  factory LiveQuizzesModel.fromFirebase(QuizModel data) {
     return LiveQuizzesModel(
-      category: data[QuizEnum.category.name],
-      numberOfQuestions: data[QuizEnum.numberOfQuestions.name],
-      picUrl: data[QuizEnum.picture.name],
-      qid: data[QuizEnum.qid.name],
-      title: data[QuizEnum.title.name],
+      category: data.category,
+      numberOfQuestions: data.numberOfQuestions.toString(),
+      picUrl: data.photo,
+      qid: data.qid,
+      title: data.title,
     );
   }
 }

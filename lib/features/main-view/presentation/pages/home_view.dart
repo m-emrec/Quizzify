@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/main-view/data/datasources/home_injection_container.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/widgets/home_appbar.dart';
 import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
 
@@ -19,11 +17,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();

@@ -24,7 +24,7 @@ class _QuizzesSheetState extends State<QuizzesSheet> {
   @override
   void initState() {
     super.initState();
-    _bloc = GetIt.instance.get<MainViewBloc>();
+    _bloc = _bloc = GetIt.I<MainViewBloc>();
     _bloc.add(GetLiveQuizzesEvent());
   }
 
@@ -37,8 +37,9 @@ class _QuizzesSheetState extends State<QuizzesSheet> {
         if (state.runtimeType == MainViewLoadingState) {
           return _LoadingQuizzesSheet();
         } else if (state.runtimeType ==
-            MainViewSuccessState<LiveQuizzesModel>) {
-          return _LoadedQuizzesSheet();
+            MainViewSuccessState<List<LiveQuizzesModel>>) {
+          state as MainViewSuccessState<List<LiveQuizzesModel>>;
+          return _LoadedQuizzesSheet(state.data);
         }
         return SizedBox();
       },
@@ -100,22 +101,25 @@ class _BaseQuizzesSheet extends StatelessWidget {
 }
 
 class _LoadedQuizzesSheet extends StatelessWidget {
-  const _LoadedQuizzesSheet();
-
+  const _LoadedQuizzesSheet(this.data);
+  final List<LiveQuizzesModel>? data;
   @override
   Widget build(BuildContext context) {
     return _BaseQuizzesSheet(
       isLoaded: true,
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return QuizListTile(
-            title: "Q $index",
-            category: "Music",
-            numberOfQuestions: "20",
-            image: AssetImage(ImgPath.friendsCardBgImg),
-          );
-        },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AppPaddings.bigPadding),
+        child: ListView.builder(
+          itemCount: data?.length,
+          itemBuilder: (context, index) {
+            return QuizListTile(
+              title: data?[index].title ?? "",
+              category: data?[index].category ?? "",
+              numberOfQuestions: data?[index].numberOfQuestions ?? "",
+              image: AssetImage(ImgPath.friendsCardBgImg),
+            );
+          },
+        ),
       ),
     );
   }
