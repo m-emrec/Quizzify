@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
+import 'package:trivia/core/constants/app_paddings.dart';
 
 final AppTextThemes _appTextTheme = AppTextThemes();
 
@@ -20,6 +22,15 @@ class AppTheme {
       surfaceTintColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: AppColors.scaffoldColor,
+
+    /// [Tooltip] theme
+    tooltipTheme: TooltipThemeData(
+      decoration: BoxDecoration(
+        color: AppColors.elevatedButtonColor,
+        borderRadius: BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
+      ),
+      margin: AppPaddings().pageHPadding,
+    ),
 
     /// Bottom navigation bar theme
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

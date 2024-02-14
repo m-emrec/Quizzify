@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/constants/image_path.dart';
@@ -7,7 +6,7 @@ import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
+import 'package:trivia/features/main-view/presentation/mixins/quizzes_sheet_mixin.dart';
 import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
 import '../../../../core/shared/widgets/list_tiles/quiz_list_tile.dart';
@@ -19,21 +18,19 @@ class QuizzesSheet extends StatefulWidget {
   State<QuizzesSheet> createState() => _QuizzesSheetState();
 }
 
-class _QuizzesSheetState extends State<QuizzesSheet> {
-  late MainViewBloc _bloc;
-  @override
-  void initState() {
-    super.initState();
-    _bloc = _bloc = GetIt.I<MainViewBloc>();
-    _bloc.add(GetLiveQuizzesEvent());
-  }
-
+class _QuizzesSheetState extends State<QuizzesSheet> with QuizzesSheetMixin {
   @override
   Widget build(BuildContext context) {
     return BlocWidgetManager<List<LiveQuizzesModel>>(
-      bloc: _bloc,
+      bloc: bloc,
       loadingWidget: _LoadingQuizzesSheet(),
-      loadedWidget: (List<LiveQuizzesModel>? data) => _LoadedQuizzesSheet(data),
+      loadedWidget: (
+        List<LiveQuizzesModel>? data,
+      ) =>
+          RefreshIndicator.adaptive(
+        onRefresh: () => onRefresh(data),
+        child: _LoadedQuizzesSheet(data),
+      ),
     );
   }
 }

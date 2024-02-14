@@ -1,0 +1,3 @@
+enum InjectionEnum {
+  listOfQuizzes,
+}

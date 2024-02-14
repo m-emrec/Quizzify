@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
@@ -7,10 +6,10 @@ import 'package:trivia/core/constants/image_path.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
 import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
 import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
+import '../mixins/friends_card_mixin.dart';
 
 class FriendsCard extends StatefulWidget {
   const FriendsCard({
@@ -21,19 +20,11 @@ class FriendsCard extends StatefulWidget {
   State<FriendsCard> createState() => _FriendsCardState();
 }
 
-class _FriendsCardState extends State<FriendsCard> {
-  late MainViewBloc _bloc;
-  @override
-  void initState() {
-    super.initState();
-    _bloc = GetIt.I<MainViewBloc>();
-    _bloc.add(GetFriendsInfoEvent());
-  }
-
+class _FriendsCardState extends State<FriendsCard> with FriendsCardMixin {
   @override
   Widget build(BuildContext context) {
     return BlocWidgetManager<FriendsCardModel>(
-      bloc: _bloc,
+      bloc: bloc,
       loadingWidget: _LoadingFriendsCard(),
       loadedWidget: (_) => _LoadedFriendsCard(),
     );
