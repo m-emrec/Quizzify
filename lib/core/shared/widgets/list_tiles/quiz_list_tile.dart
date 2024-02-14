@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:overflow_text_animated/overflow_text_animated.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 
@@ -43,9 +44,12 @@ class QuizListTile extends StatelessWidget {
           ),
         ),
         // Title
-        title: Text(
-          title,
-          style: context.textTheme.labelLarge,
+        title: Tooltip(
+          message: title,
+          child: OverflowTextAnimated(
+            text: title,
+            style: context.textTheme.labelLarge,
+          ),
         ),
         // subtitle
         subtitle: Text(

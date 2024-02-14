@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
@@ -35,12 +36,24 @@ class FormCard extends StatelessWidget with FormCardMixin {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
             children: [
-              // Text
-              Text(
-                title,
-                style: context.textTheme.titleLarge,
-                textAlign: TextAlign.center,
+              AnimatedTextKit(
+                animatedTexts: [
+                  TyperAnimatedText(
+                    title,
+                    textStyle: context.textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+                isRepeatingAnimation: false,
+                key: UniqueKey(),
+                // totalRepeatCount: 1,
               ),
+              // Text
+              // Text(
+              //   title,
+              //   style: context.textTheme.titleLarge,
+              //   textAlign: TextAlign.center,
+              // ),
               _PageIndicator(index: index),
               16.ph,
               //   Name field

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/empty_padding_extension.dart';
 import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
 import 'package:trivia/features/main-view/presentation/mixins/recent_quiz_card_mixin.dart';
 import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
@@ -24,21 +21,10 @@ class RecentQuizCard extends StatefulWidget {
 
 class _RecentQuizCardState extends State<RecentQuizCard>
     with RecentQuizCardMixin {
-  late MainViewBloc _bloc;
-  @override
-  void initState() {
-    super.initState();
-    _bloc = GetIt.I<MainViewBloc>();
-    _bloc.add(GetRecentQuizzesEvent());
-  }
-
-  /// TODO: implement navigate to recent quiz.
-  void onTap() {}
-
   @override
   Widget build(BuildContext context) {
     return BlocWidgetManager<RecentQuizModel>(
-      bloc: _bloc,
+      bloc: bloc,
       loadingWidget: _LoadingRecentQuizCard(),
       loadedWidget: (_) => _LoadedRecentQuizCard(
         onTap: onTap,

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get_it/get_it.dart';
+import 'package:trivia/core/constants/enums/injection_enums.dart';
 import 'package:trivia/core/constants/error_texts.dart';
 import 'package:trivia/core/resources/data_state.dart';
 import 'package:trivia/core/resources/use_case.dart';
@@ -34,6 +36,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     on<GetRecentQuizzesEvent>(onGetRecentQuizzesEvent);
   }
   final AppErrorText _appErrorText = AppErrorText();
+  final GetIt sl = GetIt.I;
 
   Future<void> _emitStateFunc<T>({
     required UseCase useCase,
@@ -61,14 +64,46 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
       GetLiveQuizzesEvent event, Emitter<MainViewState> emit) async {
     emit(MainViewLoadingState());
 
-    await _emitStateFunc<List<LiveQuizzesModel>>(
-        useCase: _getLiveQuizzesInfoUseCase, emit: emit);
+    /// check if the LiveQuizzes are already registered to GetIt
+
+    final bool isQuizzesModelRegistered =
+        sl.isRegistered<List<LiveQuizzesModel>>(
+            instanceName: InjectionEnum.listOfQuizzes.name);
+
+    /// If it is  registered then emit success state with GetIt data
+    /// I did this to prevent getting the quizzes data every time the [Home] page
+    /// opened.
+    if (isQuizzesModelRegistered) {
+      emit(
+        MainViewSuccessState<List<LiveQuizzesModel>>(
+          sl<List<LiveQuizzesModel>>(
+              instanceName: InjectionEnum.listOfQuizzes.name),
+        ),
+      );
+    } else {
+      await _emitStateFunc<List<LiveQuizzesModel>>(
+          useCase: _getLiveQuizzesInfoUseCase, emit: emit);
+    }
   }
 
   /// TODO : Implement this after [Discover] feature done.
   FutureOr<void> onGetFriendsInfoEvent(
       GetFriendsInfoEvent event, Emitter<MainViewState> emit) async {
     emit(MainViewLoadingState());
+
+    //  /// check if the LiveQuizzes are already registered to GetIt
+    //   final bool isQuizzesModelRegistered = sl<List<FriendsCardModel>>().isEmpty;
+
+    //   /// If it is  registered then emit success state with GetIt data
+    //   /// I did this to prevent getting the quizzes data every time the [Home] page
+    //   /// opened.
+    //   if (!isQuizzesModelRegistered) {
+    //     emit(MainViewSuccessState<List<FriendsCardModel>>(
+    //         sl<List<FriendsCardModel>>()));
+    //   } else {
+    //     // await _emitStateFunc<List<FriendsCardModel>>(
+    //     //     useCase: _getFriendsInfoUseCase, emit: emit);
+    //   }
     await Future.delayed(
       Duration(seconds: 1),
     ).then((_) => emit(MainViewSuccessState(FriendsCardModel())));
