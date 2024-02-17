@@ -17,7 +17,6 @@ class ChooseCategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
-      showActions: false,
       onFloatingActionButtonPressed: () => context.navigator.pop("asd"),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 64.0),

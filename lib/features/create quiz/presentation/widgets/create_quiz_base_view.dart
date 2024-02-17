@@ -1,14 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
-import 'package:trivia/logger.dart';
+import 'package:trivia/features/create%20quiz/presentation/mixins/create_quiz_base_view_mixin.dart';
 
 class CreateQuizBaseView extends StatefulWidget {
   CreateQuizBaseView({
@@ -19,8 +18,7 @@ class CreateQuizBaseView extends StatefulWidget {
     required this.appBarTitle,
     this.onDuplicateTapped,
     this.onDeleteTapped,
-    this.showDuplicate = true,
-    this.showActions = true,
+    this.actions,
   });
   final Widget body;
   final String floatingActionButtonLabel;
@@ -28,44 +26,18 @@ class CreateQuizBaseView extends StatefulWidget {
   final void Function()? onFloatingActionButtonPressed;
   final void Function()? onDuplicateTapped;
   final void Function()? onDeleteTapped;
-  final bool showDuplicate;
-  final bool showActions;
+  final List<Widget>? actions;
 
   @override
   State<CreateQuizBaseView> createState() => _CreateQuizBaseViewState();
 }
 
-class _CreateQuizBaseViewState extends State<CreateQuizBaseView> {
-  ThemeData _themeData(BuildContext context) => context.theme.copyWith(
-        appBarTheme: context.theme.appBarTheme.copyWith(
-          backgroundColor: AppColors.homeScaffoldColor,
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            systemNavigationBarColor: AppColors.homeScaffoldColor,
-            statusBarIconBrightness: Brightness.light,
-          ),
-          titleTextStyle: context.theme.appBarTheme.titleTextStyle?.copyWith(
-            color: Colors.white,
-          ),
-          iconTheme: IconThemeData(color: Colors.white),
-        ),
-        scaffoldBackgroundColor: AppColors.homeScaffoldColor,
-      );
-
-  final String duplicateButtonLabel = "Duplicate";
-
-  final String deleteButtonLabel = "Delete";
-
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _CreateQuizBaseViewState extends State<CreateQuizBaseView>
+    with CreateQuizBaseViewMixin {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: _themeData(context),
+      data: themeData,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -73,50 +45,17 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView> {
           onPressed: widget.onFloatingActionButtonPressed,
           floatingActionButtonLabel: widget.floatingActionButtonLabel,
         ),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(56),
-          child: _AppBar(
-            appBarTitle: widget.appBarTitle,
-            duplicateButtonLabel: duplicateButtonLabel,
-            deleteButtonLabel: deleteButtonLabel,
-            onDeleteTapped: widget.onDeleteTapped,
-            onDuplicateTapped: widget.onDuplicateTapped,
-            showActions: widget.showActions,
-            showDuplicate: widget.showDuplicate,
-          ),
+        appBar: _CreateQuizAppBar(
+          duplicate: false,
+          title: Text(widget.appBarTitle),
         ),
         body: LayoutBuilder(builder: (context, constraints) {
-          if (context.keyboardSize > 0 && _scrollController.hasClients) {
-            _scrollController.animateTo(
-              context.keyboardSize / 2,
-              duration: Duration(milliseconds: 400),
-              curve: Curves.linear,
-            );
-          }
-          return SingleChildScrollView(
-            controller: _scrollController,
-            physics: ClampingScrollPhysics(),
-            child: SizedBox(
-              height: constraints.maxHeight +
-                  context.mediaQuery.viewInsets.bottom / 2,
-              width: constraints.maxWidth,
-              child: Card(
-                surfaceTintColor: Colors.white,
-                margin: EdgeInsets.all(AppPaddings.smallPadding),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    AppBorderRadius.bigBorderRadius +
-                        AppBorderRadius.smallBorderRadius,
-                  ),
-                ),
-                color: Colors.white,
-                child: Padding(
-                  padding: AppPaddings().pageHPadding +
-                      EdgeInsets.only(top: AppPaddings.mediumPadding),
-                  child: widget.body,
-                ),
-              ),
-            ),
+          resizeScaffold();
+
+          return _BaseBody(
+            scrollController: scrollController,
+            body: widget.body,
+            constraints: constraints,
           );
         }),
       ),
@@ -124,95 +63,129 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView> {
   }
 }
 
-class _AppBar extends StatelessWidget {
-  final String appBarTitle;
+class _BaseBody extends StatelessWidget {
+  const _BaseBody({
+    super.key,
+    required this.scrollController,
+    required this.body,
+    required this.constraints,
+  });
 
-  final void Function()? onDuplicateTapped;
-
-  final String duplicateButtonLabel;
-
-  final void Function()? onDeleteTapped;
-
-  final String deleteButtonLabel;
-  final bool showDuplicate;
-  final bool showActions;
-  const _AppBar({
-    Key? key,
-    required this.appBarTitle,
-    this.onDuplicateTapped,
-    required this.duplicateButtonLabel,
-    this.onDeleteTapped,
-    required this.deleteButtonLabel,
-    this.showDuplicate = true,
-    this.showActions = true,
-  }) : super(key: key);
+  final ScrollController scrollController;
+  final Widget? body;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(appBarTitle),
-      leading: IconButton(
-        onPressed: () => context.pop(),
-        icon: Icon(
-          Icons.arrow_back,
+    return SingleChildScrollView(
+      controller: scrollController,
+      physics: ClampingScrollPhysics(),
+      child: SizedBox(
+        height:
+            constraints.maxHeight + context.mediaQuery.viewInsets.bottom / 2,
+        width: constraints.maxWidth,
+        child: Card(
+          surfaceTintColor: Colors.white,
+          margin: EdgeInsets.all(AppPaddings.smallPadding),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              AppBorderRadius.bigBorderRadius +
+                  AppBorderRadius.smallBorderRadius,
+            ),
+          ),
+          color: Colors.white,
+          child: Padding(
+            padding: AppPaddings().pageHPadding +
+                EdgeInsets.only(top: AppPaddings.mediumPadding),
+            child: body,
+          ),
         ),
       ),
-      actions: showActions
-          ? [
-              PopupMenuButton(
-                position: PopupMenuPosition.under,
-                surfaceTintColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
-                ),
-                color: Colors.white,
-                itemBuilder: (context) {
-                  return [
-                    PopupMenuItem(
-                      height: showDuplicate ? kMinInteractiveDimension : 0,
-                      onTap: onDuplicateTapped,
-                      child: showDuplicate
-                          ? Row(
-                              children: [
-                                Icon(
-                                  Icons.copy_outlined,
-                                  color: context.textTheme.labelSmall?.color,
-                                ),
-                                Gap(8),
-                                Text(
-                                  duplicateButtonLabel,
-                                  style: context.textTheme.labelMedium,
-                                ),
-                              ],
-                            )
-                          : null,
-                    ),
-                    PopupMenuItem(
-                      onTap: onDeleteTapped,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.delete_outlined,
-                            color: AppColors.dangerColor,
-                          ),
-                          Gap(8),
-                          Text(
-                            deleteButtonLabel,
-                            style: context.textTheme.labelMedium?.copyWith(
-                              color: AppColors.dangerColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ];
-                },
-              )
-            ]
-          : null,
     );
   }
+}
+
+class _CreateQuizAppBar extends AppBar {
+  final bool duplicate;
+
+  final bool delete;
+  final bool showAction;
+
+  final Function()? onDeleteTapped;
+
+  final Function()? onDuplicateTapped;
+  _CreateQuizAppBar({
+    super.title,
+    this.duplicate = true,
+    this.delete = true,
+    this.showAction = true,
+    this.onDeleteTapped,
+    this.onDuplicateTapped,
+  });
+  final String duplicateButtonLabel = "Duplicate";
+
+  final String deleteButtonLabel = "Delete";
+
+  @override
+  List<Widget>? get actions => showAction
+      ? [
+          PopupMenuButton(
+            position: PopupMenuPosition.under,
+            surfaceTintColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
+            ),
+            color: Colors.white,
+            itemBuilder: (context) {
+              return [
+                //Duplicate button
+                PopupMenuItem(
+                  height: duplicate ? kMinInteractiveDimension : 0,
+                  onTap: onDuplicateTapped,
+                  child: duplicate
+                      ? Row(
+                          children: [
+                            Icon(
+                              Icons.copy_outlined,
+                              color: context.textTheme.labelSmall?.color,
+                            ),
+                            Gap(8),
+                            Text(
+                              duplicateButtonLabel,
+                              style: context.textTheme.labelMedium,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                ),
+                //Delete button
+                PopupMenuItem(
+                  onTap: onDeleteTapped,
+                  height: delete ? kMinInteractiveDimension : 0,
+                  child: delete
+                      ? Row(
+                          children: [
+                            Icon(
+                              Icons.delete_outlined,
+                              color: AppColors.dangerColor,
+                            ),
+                            Gap(8),
+                            Text(
+                              deleteButtonLabel,
+                              style: context.textTheme.labelMedium?.copyWith(
+                                color: AppColors.dangerColor,
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                ),
+              ];
+            },
+          ),
+        ]
+      : null;
 }
 
 class _FloatingActionButton extends StatelessWidget {

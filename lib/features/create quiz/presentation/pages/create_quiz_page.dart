@@ -29,37 +29,11 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
       appBarTitle: appBarTitle,
-      showActions: true,
-      showDuplicate: false,
       body: Column(
         children: [
           AddCoverImageContainer(),
           MaxGap(AppPaddings.bigPadding),
-          Form(
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    QuizNameField(
-                      context,
-                      hintText: "Enter quiz title",
-                      label: "Title",
-                    ),
-                    Gap(AppPaddings.bigPadding),
-                    _ChooseQuizCategoryButton(),
-                    Gap(AppPaddings.bigPadding),
-                    QuizNameField(
-                      context,
-                      expands: true,
-                      label: "Description",
-                      hintText: "Enter quiz description",
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
+          _QuizForm(),
         ],
       ),
       floatingActionButtonLabel: floatingActionButtonLabel,
@@ -68,9 +42,44 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
   }
 }
 
+class _QuizForm extends StatelessWidget {
+  const _QuizForm();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          /// QuizTitle field
+          QuizNameField(
+            context,
+            hintText: "Enter quiz title",
+            label: "Title",
+          ),
+          Gap(AppPaddings.bigPadding),
+
+          /// Choose category button
+          _ChooseQuizCategoryButton(),
+          Gap(AppPaddings.bigPadding),
+
+          /// Description field
+          QuizNameField(
+            context,
+            expands: true,
+            label: "Description",
+            hintText: "Enter quiz description",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _ChooseQuizCategoryButton extends StatelessWidget {
   const _ChooseQuizCategoryButton();
 
+  final String title = "Quiz Category";
+  final String hintText = "Choose quiz category";
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -79,13 +88,16 @@ class _ChooseQuizCategoryButton extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// Title
               Text(
-                "Quiz Category",
+                title,
                 style: context.textTheme.labelMedium?.copyWith(
                   color: Colors.black,
                 ),
               ),
               Gap(AppPaddings.smallPadding),
+
+              /// Button
               OutlinedButton(
                 onPressed: () =>
                     context.pushNamed(ChooseCategoryPage.route).then(
@@ -94,10 +106,13 @@ class _ChooseQuizCategoryButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    /// Button text
                     Text(
-                      "Choose quiz category",
+                      hintText,
                       style: context.textTheme.labelSmall,
                     ),
+
+                    /// Arrow Icon
                     Icon(Icons.chevron_right_sharp),
                   ],
                 ),

@@ -22,7 +22,6 @@ class AddCoverImageContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppBorderRadius.bigBorderRadius),
         color: AppColors.scaffoldColor,
         child: InkWell(
-          // splashColor: Colors.red,
           onTap: () {},
           child: Container(
             padding: EdgeInsets.all(AppPaddings.bigPadding),
