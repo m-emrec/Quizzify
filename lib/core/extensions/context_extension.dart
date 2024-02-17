@@ -9,6 +9,7 @@ extension ContextExtension on BuildContext {
 
 extension MediaQueryExtension on BuildContext {
   Size get screenSize => mediaQuery.size;
+  double get keyboardSize => mediaQuery.viewInsets.bottom;
 
   double dynamicWidth(double? val) => screenSize.width * (val ?? 1);
   double dynamicHeight(double? val) => screenSize.height * (val ?? 1);

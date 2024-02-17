@@ -8,6 +8,7 @@ import '../../constants/app_paddings.dart';
 class BaseTextFormField extends TextFormField {
   BaseTextFormField(
     this.context, {
+    this.expands = false,
     super.key,
     this.autofillHints,
     this.textInputAction,
@@ -18,7 +19,6 @@ class BaseTextFormField extends TextFormField {
     super.controller,
     super.autofocus,
     super.autovalidateMode,
-    super.expands,
     super.initialValue,
     super.onTapOutside,
     super.focusNode,
@@ -40,7 +40,7 @@ class BaseTextFormField extends TextFormField {
   final Widget? suffixIcon;
   final Color? fillColor;
   final String? label;
-
+  final bool expands;
   final TextCapitalization textCapitalization = TextCapitalization.none;
 
   @override
@@ -53,6 +53,9 @@ class BaseTextFormField extends TextFormField {
         validator: validator,
         obscureText: obscureText ?? false,
         autovalidateMode: autovalidateMode,
+        expands: expands,
+        maxLines: expands ? null : 1,
+        minLines: expands ? null : 1,
         decoration: decoration?.copyWith(
           label: Padding(
             padding: AppPaddings().textFieldLabelPadding,
@@ -69,10 +72,12 @@ class BaseTextFormField extends TextFormField {
           hintStyle: context.textTheme.labelSmall,
           prefixIconColor: AppColors.iconColor,
           suffixIconColor: const Color(0xffcccccc),
-          border: OutlineInputBorder(
-            borderRadius: AppBorderRadius().inputBorderRadius,
-            borderSide: BorderSide.none,
-          ),
+          border: decoration?.border == null
+              ? OutlineInputBorder(
+                  borderRadius: AppBorderRadius().inputBorderRadius,
+                  borderSide: BorderSide.none,
+                )
+              : decoration?.border,
           hintText: hintText,
           suffixIcon: suffixIcon,
           fillColor: fillColor,

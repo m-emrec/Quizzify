@@ -15,7 +15,6 @@ class FriendsCard extends StatefulWidget {
   const FriendsCard({
     super.key,
   });
-
   @override
   State<FriendsCard> createState() => _FriendsCardState();
 }

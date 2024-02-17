@@ -1,28 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:trivia/core/constants/enums/firestore_enums.dart';
-import 'package:trivia/logger.dart';
 
 class QuizModel {
-  String qid;
+  String? qid;
   DateTime createdDate;
-  String title;
-  int playedCount;
-  String createdBy;
-  String description;
-  String photo;
-  String category;
-  int numberOfQuestions;
+  String? title;
+  int? playedCount;
+  String? createdBy;
+  String? description;
+  String? photo;
+  String? category;
+  int? numberOfQuestions;
 
   QuizModel({
-    required this.qid,
+    this.qid,
     required this.createdDate,
-    required this.title,
-    required this.playedCount,
-    required this.createdBy,
-    required this.description,
-    required this.photo,
-    required this.category,
-    required this.numberOfQuestions,
+    this.title,
+    this.playedCount,
+    this.createdBy,
+    this.description,
+    this.photo,
+    this.category,
+    this.numberOfQuestions,
   });
 
   factory QuizModel.fromFirebase(Map<String, dynamic> data) {
@@ -41,5 +40,20 @@ class QuizModel {
       category: data[QuizEnum.category.name],
       numberOfQuestions: data[QuizEnum.numberOfQuestions.name],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> map = {
+      QuizEnum.qid.name: qid,
+      QuizEnum.createdDate.name: createdDate,
+      QuizEnum.title.name: title,
+      QuizEnum.playedCount.name: playedCount,
+      QuizEnum.createdBy.name: createdBy,
+      QuizEnum.description.name: description,
+      QuizEnum.photo.name: photo,
+      QuizEnum.category.name: category,
+      QuizEnum.numberOfQuestions.name: numberOfQuestions,
+    };
+    return map;
   }
 }
