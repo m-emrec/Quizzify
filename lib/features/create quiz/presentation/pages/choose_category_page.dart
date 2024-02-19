@@ -28,6 +28,8 @@ class _ChooseCategoryPageState extends State<ChooseCategoryPage> {
   }
 
   void sendChosenCategory(BuildContext context) {
+    /// If chosenCategory is not null pop the page and send chosenCategory
+    /// to previous page
     if (chosenCategory != null) {
       context.navigator.pop(Categories.values[chosenCategory!]);
     }
@@ -36,6 +38,8 @@ class _ChooseCategoryPageState extends State<ChooseCategoryPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    /// Here check if there is a Category chosen before.
     try {
       final arguments = ModalRoute.of(context)?.settings.arguments;
       final Categories receivedCategory = arguments as Categories;
@@ -79,11 +83,11 @@ class _CategoryCard extends StatelessWidget {
   const _CategoryCard({
     required this.category,
     this.chosenIndex,
-    this.onTap,
+    required this.onTap,
   });
   final Categories category;
   final int? chosenIndex;
-  final void Function(int)? onTap;
+  final void Function(int) onTap;
 
   bool get _isChosen => chosenIndex == category.index;
 
@@ -108,7 +112,7 @@ class _CategoryCard extends StatelessWidget {
         elevation: 1,
         color: _isChosen ? selectedCardColor : unSelectedCardColor,
         child: InkWell(
-          onTap: () => onTap!(category.index),
+          onTap: () => onTap(category.index),
           child: Card(
             color: Colors.transparent,
             elevation: 0,

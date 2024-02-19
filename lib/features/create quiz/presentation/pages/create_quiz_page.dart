@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
@@ -10,7 +9,6 @@ import 'package:trivia/core/extensions/navigation_extension.dart';
 import 'package:trivia/features/create%20quiz/presentation/pages/add_question_page.dart';
 import 'package:trivia/features/create%20quiz/presentation/pages/choose_category_page.dart';
 import 'package:trivia/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
-import 'package:trivia/logger.dart';
 
 import '../widgets/add_cover_image_container.dart';
 import '../widgets/quiz_name_field.dart';
@@ -28,6 +26,7 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
 
   final String floatingActionButtonLabel = "Add Question";
   final TextEditingController quizTitleController = TextEditingController();
+  final TextEditingController quizDescController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +39,7 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
           MaxGap(AppPaddings.bigPadding),
           _QuizForm(
             quizTitleController: quizTitleController,
+            quizDescController: quizDescController,
           ),
         ],
       ),
@@ -51,10 +51,12 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
 }
 
 class _QuizForm extends StatelessWidget {
-  _QuizForm({
+  const _QuizForm({
     required this.quizTitleController,
+    required this.quizDescController,
   });
   final TextEditingController quizTitleController;
+  final TextEditingController quizDescController;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -79,6 +81,7 @@ class _QuizForm extends StatelessWidget {
             expands: true,
             label: "Description",
             hintText: "Enter quiz description",
+            controller: quizDescController,
           ),
         ],
       ),
@@ -99,6 +102,45 @@ class _ChooseQuizCategoryButtonState extends State<_ChooseQuizCategoryButton> {
 
   String hintText = "Choose quiz category";
   Categories? selectedCategory;
+
+  void onPressed() {
+    /// push [ChooseCategoryPage] and send [selectedCategory]
+    context
+        .pushNamed(
+      ChooseCategoryPage.route,
+      arguments: selectedCategory,
+    )
+        .then((category) {
+      /// If category received from [ChooseCategoryPage]
+      /// set the hintText to category name
+      setState(
+        () {
+          /// I used try and cath block because the category may be null.
+          /// if it is null nothing will happen.
+          try {
+            category as Categories;
+            selectedCategory = category;
+            hintText = category.name.toString();
+          } catch (e) {}
+        },
+      );
+    });
+  }
+
+  ButtonStyle get buttonStyle => OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: AppColors.scaffoldColor,
+          width: 2,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            AppBorderRadius.mediumBorderRadius,
+          ),
+        ),
+        padding: EdgeInsets.all(
+          AppPaddings.mediumPadding,
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -118,22 +160,7 @@ class _ChooseQuizCategoryButtonState extends State<_ChooseQuizCategoryButton> {
 
               /// Button
               OutlinedButton(
-                onPressed: () => context
-                    .pushNamed(
-                  ChooseCategoryPage.route,
-                  arguments: selectedCategory,
-                )
-                    .then((category) {
-                  setState(
-                    () {
-                      try {
-                        category as Categories;
-                        selectedCategory = category;
-                        hintText = category.name.toString();
-                      } catch (e) {}
-                    },
-                  );
-                }),
+                onPressed: onPressed,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -147,20 +174,7 @@ class _ChooseQuizCategoryButtonState extends State<_ChooseQuizCategoryButton> {
                     Icon(Icons.chevron_right_sharp),
                   ],
                 ),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                    color: AppColors.scaffoldColor,
-                    width: 2,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      AppBorderRadius.mediumBorderRadius,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(
-                    AppPaddings.mediumPadding,
-                  ),
-                ),
+                style: buttonStyle,
               ),
             ],
           ),
