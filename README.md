@@ -26,12 +26,12 @@ Quizzify is an online quiz game built with Flutter. It offers several categories
 
 ## Getting Started
 
-To get started with Quizzy, follow these steps:
+To get started with Quizzify, follow these steps:
 ##### 1-Clone the repository:
 git clone https://github.com/memrec45/Quizzify.git
 
 ##### 2-Navigate to the project directory:
-cd quizzy-flutter
+cd quizzify-flutter
 
 ##### 3-Install dependencies:
 flutter pub get
