@@ -24,22 +24,29 @@ class AddCoverImageContainer extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           child: Container(
-            padding: EdgeInsets.all(AppPaddings.bigPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.photo_outlined,
-                  size: iconSize,
-                  color: AppColors.elevatedButtonColor,
-                ),
-                Gap(AppPaddings.mediumPadding),
-                Text(
-                  addCoverImageText,
-                  style: context.textTheme.labelLarge
-                      ?.copyWith(color: AppColors.elevatedButtonColor),
-                ),
-              ],
+            child:
+
+                /// TODO: add another widget here which will be shown after
+                /// a Cover image chosen , get images from here:
+                /// https://www.freepik.com/user/collections
+                Padding(
+              padding: EdgeInsets.all(AppPaddings.bigPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.photo_outlined,
+                    size: iconSize,
+                    color: AppColors.elevatedButtonColor,
+                  ),
+                  Gap(AppPaddings.mediumPadding),
+                  Text(
+                    addCoverImageText,
+                    style: context.textTheme.labelLarge
+                        ?.copyWith(color: AppColors.elevatedButtonColor),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

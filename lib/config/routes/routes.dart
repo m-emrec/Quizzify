@@ -20,7 +20,7 @@ class AppRoutes {
     Onboarding.route: (p0) => const Onboarding(),
     HomeViewManager.route: (p0) => const HomeViewManager(),
     CreateQuizPage.route: (p0) => const CreateQuizPage(),
-    ChooseCategoryPage.route: (p0) => const ChooseCategoryPage(),
+    ChooseCategoryPage.route: (p0) => ChooseCategoryPage(),
     AddQuestionPage.route: (p0) => const AddQuestionPage(),
     OverViewPage.route: (p0) => const OverViewPage(),
   };

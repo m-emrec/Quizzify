@@ -19,6 +19,8 @@ class CreateQuizBaseView extends StatefulWidget {
     this.onDuplicateTapped,
     this.onDeleteTapped,
     this.actions,
+    this.delete = true,
+    this.duplicate = true,
   });
   final Widget body;
   final String floatingActionButtonLabel;
@@ -27,6 +29,8 @@ class CreateQuizBaseView extends StatefulWidget {
   final void Function()? onDuplicateTapped;
   final void Function()? onDeleteTapped;
   final List<Widget>? actions;
+  final bool duplicate;
+  final bool delete;
 
   @override
   State<CreateQuizBaseView> createState() => _CreateQuizBaseViewState();
@@ -46,8 +50,10 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView>
           floatingActionButtonLabel: widget.floatingActionButtonLabel,
         ),
         appBar: _CreateQuizAppBar(
-          duplicate: false,
+          delete: widget.delete,
+          duplicate: widget.duplicate,
           title: Text(widget.appBarTitle),
+          showAction: !(widget.delete == false && widget.duplicate == false),
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           resizeScaffold();
@@ -116,9 +122,9 @@ class _CreateQuizAppBar extends AppBar {
   final Function()? onDuplicateTapped;
   _CreateQuizAppBar({
     super.title,
-    this.duplicate = true,
-    this.delete = true,
-    this.showAction = true,
+    required this.duplicate,
+    required this.delete,
+    required this.showAction,
     this.onDeleteTapped,
     this.onDuplicateTapped,
   });

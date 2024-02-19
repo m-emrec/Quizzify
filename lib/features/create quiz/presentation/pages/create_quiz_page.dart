@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:trivia/core/constants/app_border_radius.dart';
 import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
+import 'package:trivia/core/constants/enums/firestore_enums.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/core/extensions/navigation_extension.dart';
+import 'package:trivia/features/create%20quiz/presentation/pages/add_question_page.dart';
 import 'package:trivia/features/create%20quiz/presentation/pages/choose_category_page.dart';
 import 'package:trivia/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
 import 'package:trivia/logger.dart';
@@ -24,27 +27,34 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
   final String appBarTitle = "Create Quiz";
 
   final String floatingActionButtonLabel = "Add Question";
+  final TextEditingController quizTitleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
+      duplicate: false,
       appBarTitle: appBarTitle,
       body: Column(
         children: [
           AddCoverImageContainer(),
           MaxGap(AppPaddings.bigPadding),
-          _QuizForm(),
+          _QuizForm(
+            quizTitleController: quizTitleController,
+          ),
         ],
       ),
       floatingActionButtonLabel: floatingActionButtonLabel,
-      onFloatingActionButtonPressed: () {},
+      onFloatingActionButtonPressed: () =>
+          context.pushNamed(AddQuestionPage.route),
     );
   }
 }
 
 class _QuizForm extends StatelessWidget {
-  const _QuizForm();
-
+  _QuizForm({
+    required this.quizTitleController,
+  });
+  final TextEditingController quizTitleController;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -55,6 +65,7 @@ class _QuizForm extends StatelessWidget {
             context,
             hintText: "Enter quiz title",
             label: "Title",
+            controller: quizTitleController,
           ),
           Gap(AppPaddings.bigPadding),
 
@@ -75,11 +86,19 @@ class _QuizForm extends StatelessWidget {
   }
 }
 
-class _ChooseQuizCategoryButton extends StatelessWidget {
+class _ChooseQuizCategoryButton extends StatefulWidget {
   const _ChooseQuizCategoryButton();
 
+  @override
+  State<_ChooseQuizCategoryButton> createState() =>
+      _ChooseQuizCategoryButtonState();
+}
+
+class _ChooseQuizCategoryButtonState extends State<_ChooseQuizCategoryButton> {
   final String title = "Quiz Category";
-  final String hintText = "Choose quiz category";
+
+  String hintText = "Choose quiz category";
+  Categories? selectedCategory;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -99,10 +118,22 @@ class _ChooseQuizCategoryButton extends StatelessWidget {
 
               /// Button
               OutlinedButton(
-                onPressed: () =>
-                    context.pushNamed(ChooseCategoryPage.route).then(
-                          (_) => logger.i(_),
-                        ),
+                onPressed: () => context
+                    .pushNamed(
+                  ChooseCategoryPage.route,
+                  arguments: selectedCategory,
+                )
+                    .then((category) {
+                  setState(
+                    () {
+                      try {
+                        category as Categories;
+                        selectedCategory = category;
+                        hintText = category.name.toString();
+                      } catch (e) {}
+                    },
+                  );
+                }),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
