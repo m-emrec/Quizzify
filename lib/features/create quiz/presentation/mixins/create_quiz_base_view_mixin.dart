@@ -22,6 +22,7 @@ mixin CreateQuizBaseViewMixin on State<CreateQuizBaseView> {
       );
   ThemeData get themeData => _themeData(context);
 
+  /// I use this widget to resize the scaffold after keyboard opened.
   void resizeScaffold() {
     if (context.keyboardSize > 0 && scrollController.hasClients) {
       scrollController.animateTo(

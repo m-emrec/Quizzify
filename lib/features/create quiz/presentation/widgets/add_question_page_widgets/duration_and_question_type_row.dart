@@ -1,7 +1,7 @@
 part of add_question_page;
 
-class DurationAndQuestionTypeRow extends StatelessWidget {
-  const DurationAndQuestionTypeRow({
+class _DurationAndQuestionTypeRow extends StatelessWidget {
+  const _DurationAndQuestionTypeRow({
     required this.initialDurationValue,
     required this.initialQuestionTypeValue,
   });

@@ -1,19 +1,17 @@
 part of add_question_page;
 
-class _AnswersGrid extends StatelessWidget {
-  const _AnswersGrid();
-
+class _MultipleAnswersGrid extends StatelessWidget {
+  final String _buttonLabel = "Add answer";
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(bottom: AppPaddings.bigPadding),
         child: GridView.builder(
-          // physics: NeverScrollableScrollPhysics(),
           itemCount: 4,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 4 / 3,
+            childAspectRatio: 5 / 3,
             crossAxisSpacing: AppPaddings.smallPadding,
             mainAxisSpacing: AppPaddings.smallPadding,
           ),
@@ -34,8 +32,17 @@ class _AnswersGrid extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.add),
-                        Text("data"),
+                        Icon(
+                          Icons.add,
+                          color: AppColors.elevatedButtonColor,
+                        ),
+                        Gap(AppPaddings.smallPadding / 2), // 4
+                        Text(
+                          _buttonLabel,
+                          style: context.textTheme.labelMedium?.copyWith(
+                            color: AppColors.elevatedButtonColor,
+                          ),
+                        ),
                       ],
                     ),
                   ),

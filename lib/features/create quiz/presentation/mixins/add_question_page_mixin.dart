@@ -12,6 +12,24 @@ mixin AddQuestionPageMixin on State<AddQuestionPage> {
         borderRadius: BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
       );
 
+  ThemeData get _themeData => context.theme.copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          border: border,
+          focusedBorder: border,
+          enabledBorder: border,
+          iconColor: AppColors.elevatedButtonColor,
+          suffixIconColor: AppColors.elevatedButtonColor,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: AppPaddings.mediumPadding,
+          ),
+        ),
+        textTheme: TextTheme(
+          labelMedium: context.textTheme.labelMedium?.copyWith(
+            color: Colors.black,
+          ),
+        ),
+      );
+
   TextEditingController durationValue = TextEditingController(text: "10");
   TextEditingController questionTypeValue =
       TextEditingController(text: _QuestionType.multiple_choice.name);

@@ -1,7 +1,7 @@
 part of add_question_page;
 
-class QuestionNumberRow extends StatelessWidget {
-  const QuestionNumberRow();
+class _QuestionNumberRow extends StatelessWidget {
+  const _QuestionNumberRow();
 
   @override
   Widget build(BuildContext context) {

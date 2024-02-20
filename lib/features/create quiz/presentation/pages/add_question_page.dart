@@ -12,10 +12,10 @@ import '../widgets/add_cover_image_container.dart';
 import '../widgets/create_quiz_base_view.dart';
 import '../widgets/quiz_name_field.dart';
 
-part '../widgets/add_question_page_widgets/answers_grid.dart';
+part '../mixins/add_question_page_mixin.dart';
+part '../widgets/add_question_page_widgets/multiple_answers_grid.dart';
 part '../widgets/add_question_page_widgets/duration_and_question_type_row.dart';
 part '../widgets/add_question_page_widgets/question_number_row.dart';
-part '../mixins/add_question_page_mixin.dart';
 
 enum _QuestionType {
   multiple_choice("Multiple choice"),
@@ -47,54 +47,55 @@ class _AddQuestionPageState extends State<AddQuestionPage>
               // Question number row
               SizedBox(
                 height: constraints.maxHeight * 0.1,
-                child: QuestionNumberRow(),
-              ),
-              // Cover Image
-              AddCoverImageContainer(
-                aspectRatio: 19 / 12,
+                child: _QuestionNumberRow(),
               ),
 
-              Gap(AppPaddings.mediumPadding),
+              Expanded(
+                child: PageView.builder(
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        // Cover Image
+                        AddCoverImageContainer(
+                          aspectRatio: 19 / 12,
+                        ),
 
-              // Duration and question type row
-              Theme(
-                data: context.theme.copyWith(
-                  inputDecorationTheme: InputDecorationTheme(
-                    border: border,
-                    focusedBorder: border,
-                    enabledBorder: border,
-                    iconColor: AppColors.elevatedButtonColor,
-                    suffixIconColor: AppColors.elevatedButtonColor,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: AppPaddings.mediumPadding,
-                    ),
-                  ),
-                  textTheme: TextTheme(
-                    labelMedium: context.textTheme.labelMedium?.copyWith(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                child: DurationAndQuestionTypeRow(
-                  initialDurationValue: durationValue,
-                  initialQuestionTypeValue: questionTypeValue,
-                ),
-              ),
+                        Gap(AppPaddings.mediumPadding),
 
-              // Question Field
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: AppPaddings.bigPadding,
-                  bottom: AppPaddings.mediumPadding,
-                ),
-                child: QuizNameField(
-                  context,
-                  label: "Add Question",
-                ),
-              ),
+                        // Duration and question type row
+                        Theme(
+                          data: _themeData,
+                          child: _DurationAndQuestionTypeRow(
+                            initialDurationValue: durationValue,
+                            initialQuestionTypeValue: questionTypeValue,
+                          ),
+                        ),
 
-              // Answers grid
-              _AnswersGrid(),
+                        // Question Field
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: AppPaddings.bigPadding,
+                            bottom: AppPaddings.mediumPadding,
+                          ),
+                          child: QuizNameField(
+                            context,
+                            label: "Add Question",
+                          ),
+                        ),
+
+                        /// TODO : Burayı Bloc ile yap
+                        // Answers grid
+                        questionTypeValue.text ==
+                                _QuestionType.multiple_choice.name
+                            ? _MultipleAnswersGrid()
+
+                            /// TODO: True false butonu ekle
+                            : SizedBox(),
+                      ],
+                    );
+                  },
+                ),
+              )
             ],
           );
         },

@@ -1,17 +1,23 @@
+library create_quiz_page;
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
-import 'package:trivia/features/create%20quiz/presentation/pages/add_question_page.dart';
-import 'package:trivia/features/create%20quiz/presentation/pages/choose_category_page.dart';
-import 'package:trivia/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
+import 'package:trivia/features/create%20quiz/presentation/mixins/create_quiz_page_mxin.dart';
 
+import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/navigation_extension.dart';
 import '../widgets/add_cover_image_container.dart';
+import '../widgets/create_quiz_base_view.dart';
 import '../widgets/quiz_name_field.dart';
+import 'add_question_page.dart';
+import 'choose_category_page.dart';
+
+part '../widgets/create_quiz_page_widgets/choose_category_button.dart';
+part '../widgets/create_quiz_page_widgets/quiz_form.dart';
 
 class CreateQuizPage extends StatefulWidget {
   static const route = "create-quiz";
@@ -21,13 +27,8 @@ class CreateQuizPage extends StatefulWidget {
   State<CreateQuizPage> createState() => _CreateQuizPageState();
 }
 
-class _CreateQuizPageState extends State<CreateQuizPage> {
-  final String appBarTitle = "Create Quiz";
-
-  final String floatingActionButtonLabel = "Add Question";
-  final TextEditingController quizTitleController = TextEditingController();
-  final TextEditingController quizDescController = TextEditingController();
-
+class _CreateQuizPageState extends State<CreateQuizPage>
+    with CreateQuizPageMixin {
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
@@ -51,140 +52,6 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
       floatingActionButtonLabel: floatingActionButtonLabel,
       onFloatingActionButtonPressed: () =>
           context.pushNamed(AddQuestionPage.route),
-    );
-  }
-}
-
-class _QuizForm extends StatelessWidget {
-  const _QuizForm({
-    required this.quizTitleController,
-    required this.quizDescController,
-  });
-  final TextEditingController quizTitleController;
-  final TextEditingController quizDescController;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          /// QuizTitle field
-          QuizNameField(
-            context,
-            hintText: "Enter quiz title",
-            label: "Title",
-            controller: quizTitleController,
-          ),
-          Gap(AppPaddings.bigPadding),
-
-          /// Choose category button
-          _ChooseQuizCategoryButton(),
-          Gap(AppPaddings.bigPadding),
-
-          /// Description field
-          QuizNameField(
-            context,
-            expands: true,
-            label: "Description",
-            hintText: "Enter quiz description",
-            controller: quizDescController,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ChooseQuizCategoryButton extends StatefulWidget {
-  const _ChooseQuizCategoryButton();
-
-  @override
-  State<_ChooseQuizCategoryButton> createState() =>
-      _ChooseQuizCategoryButtonState();
-}
-
-class _ChooseQuizCategoryButtonState extends State<_ChooseQuizCategoryButton> {
-  final String title = "Quiz Category";
-
-  String hintText = "Choose quiz category";
-  Categories? selectedCategory;
-
-  void onPressed() {
-    /// push [ChooseCategoryPage] and send [selectedCategory]
-    context
-        .pushNamed(
-      ChooseCategoryPage.route,
-      arguments: selectedCategory,
-    )
-        .then((category) {
-      /// If category received from [ChooseCategoryPage]
-      /// set the hintText to category name
-      setState(
-        () {
-          /// I used try and cath block because the category may be null.
-          /// if it is null nothing will happen.
-          try {
-            category as Categories;
-            selectedCategory = category;
-            hintText = category.name.toString();
-          } catch (e) {}
-        },
-      );
-    });
-  }
-
-  ButtonStyle get buttonStyle => OutlinedButton.styleFrom(
-        side: BorderSide(
-          color: AppColors.scaffoldColor,
-          width: 2,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            AppBorderRadius.mediumBorderRadius,
-          ),
-        ),
-        padding: EdgeInsets.all(
-          AppPaddings.mediumPadding,
-        ),
-      );
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Title
-              Text(
-                title,
-                style: context.textTheme.labelMedium?.copyWith(
-                  color: Colors.black,
-                ),
-              ),
-              Gap(AppPaddings.smallPadding),
-
-              /// Button
-              OutlinedButton(
-                onPressed: onPressed,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    /// Button text
-                    Text(
-                      hintText,
-                      style: context.textTheme.labelSmall,
-                    ),
-
-                    /// Arrow Icon
-                    Icon(Icons.chevron_right_sharp),
-                  ],
-                ),
-                style: buttonStyle,
-              ),
-            ],
-          ),
-        )
-      ],
     );
   }
 }
