@@ -55,7 +55,10 @@ class _ChooseCategoryPageState extends State<ChooseCategoryPage> {
       onFloatingActionButtonPressed:
           chosenCategory == null ? null : () => sendChosenCategory(context),
       body: Padding(
-        padding: const EdgeInsets.only(bottom: 64.0),
+        padding: const EdgeInsets.only(bottom: 64.0) +
+            EdgeInsets.only(
+              top: AppPaddings.mediumPadding,
+            ),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

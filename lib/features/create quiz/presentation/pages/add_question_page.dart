@@ -1,148 +1,106 @@
+library add_question_page;
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/features/create%20quiz/presentation/widgets/add_cover_image_container.dart';
-import 'package:trivia/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
-import 'package:trivia/features/create%20quiz/presentation/widgets/quiz_name_field.dart';
-import 'package:trivia/logger.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../logger.dart';
+import '../widgets/add_cover_image_container.dart';
+import '../widgets/create_quiz_base_view.dart';
+import '../widgets/quiz_name_field.dart';
 
-class AddQuestionPage extends StatelessWidget {
+part '../widgets/add_question_page_widgets/answers_grid.dart';
+part '../widgets/add_question_page_widgets/duration_and_question_type_row.dart';
+part '../widgets/add_question_page_widgets/question_number_row.dart';
+part '../mixins/add_question_page_mixin.dart';
+
+enum _QuestionType {
+  multiple_choice("Multiple choice"),
+  true_false("True / False");
+
+  final String text;
+
+  const _QuestionType(this.text);
+}
+
+class AddQuestionPage extends StatefulWidget {
   static const route = "add-question";
   const AddQuestionPage({super.key});
 
-  final String floatingActionButtonLabel = "Add Question";
-  final String appBarTitle = "Create Quiz";
+  @override
+  State<AddQuestionPage> createState() => _AddQuestionPageState();
+}
+
+class _AddQuestionPageState extends State<AddQuestionPage>
+    with AddQuestionPageMixin {
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Column(
-          children: [
-            // Question number row
-            SizedBox(
-              height: constraints.maxHeight * 0.1,
-              child: _QuestionNumberRow(),
-            ),
-            // Cover Image
-            AddCoverImageContainer(),
+      onFloatingActionButtonPressed: () => logger.i(durationValue.text),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            children: [
+              // Question number row
+              SizedBox(
+                height: constraints.maxHeight * 0.1,
+                child: QuestionNumberRow(),
+              ),
+              // Cover Image
+              AddCoverImageContainer(
+                aspectRatio: 19 / 12,
+              ),
 
-            // Duration and question type row
-            Gap(AppPaddings.mediumPadding),
-            _DurationAndQuestionTypeRow(),
-            Gap(AppPaddings.mediumPadding),
-            // Question Field
-            QuizNameField(
-              context,
-              label: "Add Question",
-            ),
-            Gap(AppPaddings.smallPadding),
-            // Answers grid
-            _AnswersGrid(),
-          ],
-        );
-      }),
-      floatingActionButtonLabel: floatingActionButtonLabel,
-      appBarTitle: appBarTitle,
-    );
-  }
-}
+              Gap(AppPaddings.mediumPadding),
 
-class _QuestionNumberRow extends StatelessWidget {
-  const _QuestionNumberRow();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      findChildIndexCallback: (key) {
-        // logger.i(key);
-
-        return 20;
-      },
-      itemCount: 100,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => CircleAvatar(
-        radius: 16,
-        // key: ValueKey(index + 1),
-        // backgroundColor: Colors.transparent,
-        child: Text("${index + 1}"),
-      ),
-    );
-  }
-}
-
-class _DurationAndQuestionTypeRow extends StatelessWidget {
-  const _DurationAndQuestionTypeRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        DropdownButton(
-          icon: Icon(
-            Icons.access_time_rounded,
-            color: AppColors.elevatedButtonColor,
-          ),
-          items: [],
-          onChanged: (_) {},
-        ),
-        DropdownButton(
-          items: [],
-          onChanged: (_) {},
-        ),
-      ],
-    );
-  }
-}
-
-class _AnswersGrid extends StatelessWidget {
-  const _AnswersGrid({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: AppPaddings.bigPadding),
-        child: GridView.builder(
-          itemCount: 4,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 4 / 3,
-            crossAxisSpacing: AppPaddings.smallPadding,
-            mainAxisSpacing: AppPaddings.smallPadding,
-          ),
-          itemBuilder: (context, index) {
-            return ClipRRect(
-              clipBehavior: Clip.antiAlias,
-              borderRadius:
-                  BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
-              child: Material(
-                elevation: 1,
-                color: AppColors.scaffoldColor,
-                child: InkWell(
-                  onTap: () {},
-                  child: Card(
-                    elevation: 0,
-                    margin: EdgeInsets.zero,
-                    color: Colors.transparent,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add),
-                        Text("data"),
-                      ],
+              // Duration and question type row
+              Theme(
+                data: context.theme.copyWith(
+                  inputDecorationTheme: InputDecorationTheme(
+                    border: border,
+                    focusedBorder: border,
+                    enabledBorder: border,
+                    iconColor: AppColors.elevatedButtonColor,
+                    suffixIconColor: AppColors.elevatedButtonColor,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: AppPaddings.mediumPadding,
+                    ),
+                  ),
+                  textTheme: TextTheme(
+                    labelMedium: context.textTheme.labelMedium?.copyWith(
+                      color: Colors.black,
                     ),
                   ),
                 ),
+                child: DurationAndQuestionTypeRow(
+                  initialDurationValue: durationValue,
+                  initialQuestionTypeValue: questionTypeValue,
+                ),
               ),
-            );
-          },
-        ),
+
+              // Question Field
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: AppPaddings.bigPadding,
+                  bottom: AppPaddings.mediumPadding,
+                ),
+                child: QuizNameField(
+                  context,
+                  label: "Add Question",
+                ),
+              ),
+
+              // Answers grid
+              _AnswersGrid(),
+            ],
+          );
+        },
       ),
+      floatingActionButtonLabel: floatingActionButtonLabel,
+      appBarTitle: appBarTitle,
     );
   }
 }

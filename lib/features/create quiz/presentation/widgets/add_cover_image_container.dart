@@ -9,14 +9,16 @@ import '../../../../core/constants/app_paddings.dart';
 class AddCoverImageContainer extends StatelessWidget {
   const AddCoverImageContainer({
     super.key,
+    this.aspectRatio = 19 / 13,
   });
 
   final String addCoverImageText = "Add Cover Image";
   final double iconSize = 64;
+  final double aspectRatio;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 19 / 13,
+      aspectRatio: aspectRatio,
       child: Material(
         clipBehavior: Clip.antiAlias,
         borderRadius: BorderRadius.circular(AppBorderRadius.bigBorderRadius),

@@ -101,8 +101,11 @@ class _BaseBody extends StatelessWidget {
           ),
           color: Colors.white,
           child: Padding(
-            padding: AppPaddings().pageHPadding +
-                EdgeInsets.only(top: AppPaddings.mediumPadding),
+            padding: AppPaddings().pageHPadding,
+            // +
+            //     EdgeInsets.only(
+            //       top: AppPaddings.mediumPadding,
+            //     ),
             child: body,
           ),
         ),

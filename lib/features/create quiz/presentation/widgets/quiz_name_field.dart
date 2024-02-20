@@ -19,6 +19,7 @@ class QuizNameField extends BaseTextFormField {
 
   @override
   TextCapitalization get textCapitalization => TextCapitalization.words;
+
   @override
   InputBorder? get border => OutlineInputBorder(
         borderSide: BorderSide(

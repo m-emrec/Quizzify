@@ -33,15 +33,20 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
     return CreateQuizBaseView(
       duplicate: false,
       appBarTitle: appBarTitle,
-      body: Column(
-        children: [
-          AddCoverImageContainer(),
-          MaxGap(AppPaddings.bigPadding),
-          _QuizForm(
-            quizTitleController: quizTitleController,
-            quizDescController: quizDescController,
-          ),
-        ],
+      body: Padding(
+        padding: EdgeInsets.only(
+          top: AppPaddings.mediumPadding,
+        ),
+        child: Column(
+          children: [
+            AddCoverImageContainer(),
+            MaxGap(AppPaddings.bigPadding),
+            _QuizForm(
+              quizTitleController: quizTitleController,
+              quizDescController: quizDescController,
+            ),
+          ],
+        ),
       ),
       floatingActionButtonLabel: floatingActionButtonLabel,
       onFloatingActionButtonPressed: () =>
