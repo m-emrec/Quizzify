@@ -30,22 +30,19 @@ class _DurationAndQuestionTypeRow extends StatelessWidget {
         ),
 
         /// Question Type
-        dropDownButton(
-          context,
-          size: 0.5,
-          icon: Icons.keyboard_arrow_down_outlined,
-          controller: initialQuestionTypeValue,
-          items: [
-            DropdownMenuItem(
-              child: Text(_QuestionType.multiple_choice.text),
-              value: _QuestionType.multiple_choice.name,
-            ),
-            DropdownMenuItem(
-              child: Text(_QuestionType.true_false.text),
-              value: _QuestionType.true_false.name,
-            ),
-          ],
-        ),
+        dropDownButton(context,
+            size: 0.5,
+            icon: Icons.keyboard_arrow_down_outlined,
+            controller: initialQuestionTypeValue,
+            items: [
+              ...List.generate(
+                QuestionType.values.length,
+                (index) => DropdownMenuItem(
+                  child: Text(QuestionType.values[index].text),
+                  value: QuestionType.values[index].name,
+                ),
+              ),
+            ]),
       ],
     );
   }

@@ -5,7 +5,7 @@ class QuestionModel {
   final Duration? duration;
   final String? correctAnswer;
   final List<String>? wrongAnswers;
-  final bool? isMultiChoice;
+  final QuestionType? questionType;
   final String? questionId;
   final String? coverImage;
   final int? questionIndex;
@@ -15,7 +15,7 @@ class QuestionModel {
     this.duration,
     this.correctAnswer,
     this.wrongAnswers,
-    this.isMultiChoice,
+    this.questionType,
     this.questionId,
     this.coverImage,
     this.questionIndex,
@@ -31,7 +31,7 @@ class QuestionModel {
       QuestionEnum.duration.name: duration,
       QuestionEnum.correctAnswer.name: correctAnswer,
       QuestionEnum.wrongAnswer.name: wrongAnswers,
-      QuestionEnum.isMultiChoice.name: isMultiChoice,
+      QuestionEnum.questionType.name: questionType,
       QuestionEnum.questionId.name: questionId,
       QuestionEnum.coverImage.name: coverImage,
       QuestionEnum.questionIndex.name: questionIndex,

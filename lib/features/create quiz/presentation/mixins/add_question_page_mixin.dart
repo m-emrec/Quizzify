@@ -32,5 +32,5 @@ mixin AddQuestionPageMixin on State<AddQuestionPage> {
 
   TextEditingController durationValue = TextEditingController(text: "10");
   TextEditingController questionTypeValue =
-      TextEditingController(text: _QuestionType.multiple_choice.name);
+      TextEditingController(text: QuestionType.multiChoice.name);
 }

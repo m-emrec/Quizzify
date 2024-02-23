@@ -54,7 +54,7 @@ dependencies:
   either_dart: ^1.0.0
   very_good_analysis: ^5.1.0
   shimmer: ^3.0.0
-  lottie: ^3.0.0
+  lottie: ^3.1.0
   gap: ^3.0.1
   animated_text_kit: ^4.2.2
   overflow_text_animated: ^0.0.6

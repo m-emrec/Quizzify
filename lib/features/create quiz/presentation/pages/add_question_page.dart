@@ -2,11 +2,15 @@ library add_question_page;
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
+import 'package:trivia/core/constants/enums/lottie_enums.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
 import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/shared/widgets/answers_grid.dart';
 import '../../../../logger.dart';
 import '../widgets/add_cover_image_container.dart';
 import '../widgets/create_quiz_base_view.dart';
@@ -16,15 +20,7 @@ part '../mixins/add_question_page_mixin.dart';
 part '../widgets/add_question_page_widgets/multiple_answers_grid.dart';
 part '../widgets/add_question_page_widgets/duration_and_question_type_row.dart';
 part '../widgets/add_question_page_widgets/question_number_row.dart';
-
-enum _QuestionType {
-  multiple_choice("Multiple choice"),
-  true_false("True / False");
-
-  final String text;
-
-  const _QuestionType(this.text);
-}
+part '../widgets/add_question_page_widgets/true_false_answers_grid.dart';
 
 class AddQuestionPage extends StatefulWidget {
   static const route = "add-question";
@@ -83,14 +79,9 @@ class _AddQuestionPageState extends State<AddQuestionPage>
                           ),
                         ),
 
-                        /// TODO : Burayı Bloc ile yap
+                        /// TODO : Here there will be a blocbuilder and swtich case
                         // Answers grid
-                        questionTypeValue.text ==
-                                _QuestionType.multiple_choice.name
-                            ? _MultipleAnswersGrid()
-
-                            /// TODO: True false butonu ekle
-                            : SizedBox(),
+                        _TrueFalseAnswersGrid(),
                       ],
                     );
                   },

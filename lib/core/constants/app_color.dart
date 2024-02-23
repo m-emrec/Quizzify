@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   ///General colors
-  static Color dangerColor = Colors.red.shade700;
+  static Color dangerColor = Color(0xffFF6666);
+  static Color successColor = Color(0xff53DF83);
   static Color pinkColor = Color(0xffFF8FA2);
 
   /// [Scaffold] colors

@@ -35,13 +35,22 @@ enum QuizEnum {
 
 enum QuestionEnum {
   questionId,
-  isMultiChoice,
+  questionType,
   question,
   correctAnswer,
   wrongAnswer,
   duration,
   coverImage,
   questionIndex,
+}
+
+enum QuestionType {
+  // poll("Poll"),
+  multiChoice("Multiple Answer"),
+  trueFalse("True / False");
+
+  final String text;
+  const QuestionType(this.text);
 }
 
 enum PlayedQuizEnum {
