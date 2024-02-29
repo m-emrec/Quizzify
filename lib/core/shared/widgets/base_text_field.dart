@@ -24,6 +24,7 @@ class BaseTextFormField extends TextFormField {
     super.focusNode,
     super.validator,
     this.hintText,
+    this.prefix,
     this.suffixIcon,
     this.fillColor,
     this.label,
@@ -42,7 +43,7 @@ class BaseTextFormField extends TextFormField {
   final String? label;
   final bool expands;
   final TextCapitalization textCapitalization = TextCapitalization.none;
-
+  final Widget? prefix;
   @override
   FormFieldBuilder<String> get builder => (_) => TextFormField(
         textCapitalization: textCapitalization,
@@ -61,6 +62,7 @@ class BaseTextFormField extends TextFormField {
             padding: AppPaddings().textFieldLabelPadding,
             child: Text(label ?? ""),
           ),
+          prefixIcon: prefix,
           alignLabelWithHint: false,
           filled: true,
           floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Quiz Game",
+      title: "Quizzify",
       theme: AppTheme().lightTheme,
       routes: AppRoutes().routes,
       themeMode: ThemeMode.light,

@@ -1,11 +1,16 @@
+library add_cover_image_container;
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
 import '../../../../core/constants/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/navigation_extension.dart';
+import '../mixins/add_cover_image_container_mixin.dart';
+
+part '../mixins/select_cover_image_sheet_mixin.dart';
 
 enum _CoverImages {
   /// TODO : Remove backgrounds
@@ -41,22 +46,8 @@ class AddCoverImageContainer extends StatefulWidget {
   State<AddCoverImageContainer> createState() => _AddCoverImageContainerState();
 }
 
-class _AddCoverImageContainerState extends State<AddCoverImageContainer> {
-  final String addCoverImageText = "Add Cover Image";
-
-  final double iconSize = 64;
-  _CoverImages? bgImage;
-  showImageSheet(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return CustomBottomSheet();
-      },
-    );
-  }
-
+class _AddCoverImageContainerState extends State<AddCoverImageContainer>
+    with AddCoverImageContainerMixin, SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -68,32 +59,38 @@ class _AddCoverImageContainerState extends State<AddCoverImageContainer> {
         child: InkWell(
           onTap: () => showImageSheet(context),
           child: Container(
-            child: AnimatedCrossFade(
-              duration: Duration(milliseconds: 300),
-              crossFadeState: CrossFadeState.showFirst,
-              firstChild: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(AppPaddings.bigPadding),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.photo_outlined,
-                        size: iconSize,
-                        color: AppColors.elevatedButtonColor,
-                      ),
-                      Gap(AppPaddings.mediumPadding),
-                      Text(
-                        addCoverImageText,
-                        style: context.textTheme.labelLarge
-                            ?.copyWith(color: AppColors.elevatedButtonColor),
-                      ),
-                    ],
-                  ),
-                ),
+            /// Change it with bloc
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                _CoverImages.image2.link,
               ),
-              secondChild: Image(
-                image: NetworkImage(_CoverImages.image1.link),
+            )),
+
+            /// Remove child if there is image data  using bloc
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(AppPaddings.bigPadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    /// Icon
+                    Icon(
+                      Icons.photo_outlined,
+                      size: iconSize,
+                      color: AppColors.elevatedButtonColor,
+                    ),
+                    Gap(AppPaddings.mediumPadding),
+
+                    /// Title
+                    Text(
+                      addCoverImageText,
+                      style: context.textTheme.labelLarge
+                          ?.copyWith(color: AppColors.elevatedButtonColor),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -103,71 +100,33 @@ class _AddCoverImageContainerState extends State<AddCoverImageContainer> {
   }
 }
 
-class CustomBottomSheet extends StatefulWidget {
-  const CustomBottomSheet({
-    super.key,
-  });
+class SelectCoverImageBottomSheet extends StatefulWidget {
+  const SelectCoverImageBottomSheet({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<CustomBottomSheet> createState() => _CustomBottomSheetState();
+  State<SelectCoverImageBottomSheet> createState() =>
+      _SelectCoverImageBottomSheetState();
 }
 
-class _CustomBottomSheetState extends State<CustomBottomSheet>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late double containerHeight;
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 300),
-    );
-    _animationController.animateTo(0.6);
-    _animationController.addListener(listener);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    containerHeight = context.dynamicHeight(0.8);
-  }
-
-  @override
-  void dispose() {
-    _animationController.removeListener(listener);
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  listener() {
-    setState(() {});
-  }
-
-  imageContainer(String url) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
-        child: Image.network(url));
-  }
-
-  List<Widget> get images => List.generate(_CoverImages.values.length,
-      (index) => imageContainer(_CoverImages.values[index].link));
-
+class _SelectCoverImageBottomSheetState
+    extends State<SelectCoverImageBottomSheet>
+    with SingleTickerProviderStateMixin, SelectCoverImageSheetMixin {
   @override
   Widget build(BuildContext context) {
     return BottomSheet(
-      // backgroundColor: Colors.transparent,
       dragHandleSize: Size.fromRadius(4),
       dragHandleColor: AppColors.elevatedButtonColor,
       enableDrag: true,
       showDragHandle: true,
-      animationController: _animationController,
-      onClosing: () => context.navigator.pop<_CoverImages>(_CoverImages.image2),
+      animationController: animationController,
+      onClosing: () => context.navigator.pop(),
       builder: (context) {
         return Stack(
           children: [
             Container(
-              height: containerHeight * _animationController.value,
+              height: containerHeight * animationController.value,
               constraints:
                   BoxConstraints(maxHeight: context.dynamicHeight(0.8)),
               width: double.maxFinite,

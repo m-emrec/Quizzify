@@ -22,15 +22,32 @@ mixin CreateQuizBaseViewMixin on State<CreateQuizBaseView> {
       );
   ThemeData get themeData => _themeData(context);
 
+  final Duration openKeyboardAnimationDuration = Duration(milliseconds: 300);
+  final Duration closeKeyboardAnimationDuration = Duration(milliseconds: 300);
+
   /// I use this widget to resize the scaffold after keyboard opened.
   void resizeScaffold() {
     if (context.keyboardSize > 0 && scrollController.hasClients) {
       scrollController.animateTo(
         context.keyboardSize / 2,
-        duration: Duration(milliseconds: 400),
+        duration: openKeyboardAnimationDuration,
         curve: Curves.linear,
       );
+    } else {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          1,
+          duration: closeKeyboardAnimationDuration,
+          curve: Curves.linear,
+        );
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
   final ScrollController scrollController = ScrollController();

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:trivia/core/constants/enums/lottie_enums.dart';
+import 'package:trivia/core/extensions/navigation_extension.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
@@ -36,60 +37,61 @@ class _AddQuestionPageState extends State<AddQuestionPage>
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
       onFloatingActionButtonPressed: () => logger.i(durationValue.text),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Column(
-            children: [
-              // Question number row
-              SizedBox(
-                height: constraints.maxHeight * 0.1,
-                child: _QuestionNumberRow(),
-              ),
+      body: Column(
+        children: [
+          // Question number row
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: AppPaddings.smallPadding),
+            child: SizedBox(
+              height: 64,
+              width: double.maxFinite,
+              child: _QuestionNumberRow(),
+            ),
+          ),
 
-              Expanded(
-                child: PageView.builder(
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        // Cover Image
-                        AddCoverImageContainer(
-                          aspectRatio: 19 / 12,
-                        ),
+          Expanded(
+            child: PageView.builder(
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    // Cover Image
+                    AddCoverImageContainer(
+                      aspectRatio: 19 / 12,
+                    ),
 
-                        Gap(AppPaddings.mediumPadding),
+                    Gap(AppPaddings.mediumPadding),
 
-                        // Duration and question type row
-                        Theme(
-                          data: _themeData,
-                          child: _DurationAndQuestionTypeRow(
-                            initialDurationValue: durationValue,
-                            initialQuestionTypeValue: questionTypeValue,
-                          ),
-                        ),
+                    // Duration and question type row
+                    Theme(
+                      data: _themeData,
+                      child: _DurationAndQuestionTypeRow(
+                        initialDurationValue: durationValue,
+                        initialQuestionTypeValue: questionTypeValue,
+                      ),
+                    ),
 
-                        // Question Field
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: AppPaddings.bigPadding,
-                            bottom: AppPaddings.mediumPadding,
-                          ),
-                          child: QuizNameField(
-                            context,
-                            label: "Add Question",
-                          ),
-                        ),
+                    // Question Field
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppPaddings.bigPadding,
+                        bottom: AppPaddings.mediumPadding,
+                      ),
+                      child: QuizNameField(
+                        context,
+                        label: "Add Question",
+                      ),
+                    ),
 
-                        /// TODO : Here there will be a blocbuilder and swtich case
-                        // Answers grid
-                        _TrueFalseAnswersGrid(),
-                      ],
-                    );
-                  },
-                ),
-              )
-            ],
-          );
-        },
+                    /// TODO : Here there will be a blocbuilder and swtich case
+                    // Answers grid
+                    _MultipleAnswersGrid(),
+                  ],
+                );
+              },
+            ),
+          )
+        ],
       ),
       floatingActionButtonLabel: floatingActionButtonLabel,
       appBarTitle: appBarTitle,

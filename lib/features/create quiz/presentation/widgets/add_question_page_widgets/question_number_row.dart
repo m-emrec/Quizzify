@@ -7,18 +7,22 @@ class _QuestionNumberRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      findChildIndexCallback: (key) {
-        // logger.i(key);
+      // findChildIndexCallback: (key) {
+      //   // logger.i(key);
 
-        return 20;
-      },
-      itemCount: 100,
+      //   return 20;
+      // },
+      itemCount: 20,
       scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => CircleAvatar(
-        radius: 16,
-        // key: ValueKey(index + 1),
-        // backgroundColor: Colors.transparent,
-        child: Text("${index + 1}"),
+
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.only(right: AppPaddings.smallPadding / 2),
+        child: CircleAvatar(
+          // radius: 16,
+          // key: ValueKey(index + 1),
+          backgroundColor: Colors.transparent,
+          child: Text("${index + 1}"),
+        ),
       ),
     );
   }

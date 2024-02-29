@@ -13,13 +13,14 @@ class AnswersGrid extends StatelessWidget {
   final List<Widget> items;
   final double childAspectRatio;
   final int crossAxisCount;
-
   @override
   Widget build(BuildContext context) {
+    final ScrollController _controller = ScrollController();
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(bottom: AppPaddings.bigPadding * 2),
         child: GridView.builder(
+          controller: _controller,
           itemCount: items.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,

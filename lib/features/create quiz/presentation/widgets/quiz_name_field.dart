@@ -15,6 +15,7 @@ class QuizNameField extends BaseTextFormField {
     super.textInputAction,
     super.focusNode,
     super.expands,
+    super.prefix,
   });
 
   @override
@@ -31,6 +32,11 @@ class QuizNameField extends BaseTextFormField {
       );
   @override
   InputDecoration? get decoration => InputDecoration(
+        // prefix: prefix,
+
+        prefixIconConstraints: BoxConstraints(
+          maxHeight: 48,
+        ),
         constraints: BoxConstraints(
           maxHeight: context.dynamicHeight(
             0.1,

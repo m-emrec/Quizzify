@@ -1,5 +1,3 @@
-// ignore_for_file: unused_element
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -8,6 +6,7 @@ import 'package:trivia/core/constants/app_color.dart';
 import 'package:trivia/core/constants/app_paddings.dart';
 import 'package:trivia/core/extensions/context_extension.dart';
 import 'package:trivia/features/create%20quiz/presentation/mixins/create_quiz_base_view_mixin.dart';
+import 'package:trivia/logger.dart';
 
 class CreateQuizBaseView extends StatefulWidget {
   CreateQuizBaseView({
@@ -71,7 +70,6 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView>
 
 class _BaseBody extends StatelessWidget {
   const _BaseBody({
-    super.key,
     required this.scrollController,
     required this.body,
     required this.constraints,
@@ -91,6 +89,7 @@ class _BaseBody extends StatelessWidget {
             constraints.maxHeight + context.mediaQuery.viewInsets.bottom / 2,
         width: constraints.maxWidth,
         child: Card(
+          clipBehavior: Clip.antiAlias,
           surfaceTintColor: Colors.white,
           margin: EdgeInsets.all(AppPaddings.smallPadding),
           shape: RoundedRectangleBorder(
@@ -102,10 +101,6 @@ class _BaseBody extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: AppPaddings().pageHPadding,
-            // +
-            //     EdgeInsets.only(
-            //       top: AppPaddings.mediumPadding,
-            //     ),
             child: body,
           ),
         ),
