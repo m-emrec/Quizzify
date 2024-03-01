@@ -131,6 +131,9 @@ class _CreateQuizAppBar extends AppBar {
   final String deleteButtonLabel = "Delete";
 
   @override
+  ScrollNotificationPredicate get notificationPredicate =>
+      super.notificationPredicate;
+  @override
   List<Widget>? get actions => showAction
       ? [
           PopupMenuButton(

@@ -16,6 +16,7 @@ class QuizNameField extends BaseTextFormField {
     super.focusNode,
     super.expands,
     super.prefix,
+    super.autoFocus,
   });
 
   @override
@@ -30,6 +31,7 @@ class QuizNameField extends BaseTextFormField {
         borderRadius: BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
         gapPadding: 0,
       );
+
   @override
   InputDecoration? get decoration => InputDecoration(
         // prefix: prefix,

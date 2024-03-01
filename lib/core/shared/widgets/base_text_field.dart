@@ -21,13 +21,14 @@ class BaseTextFormField extends TextFormField {
     super.autovalidateMode,
     super.initialValue,
     super.onTapOutside,
-    super.focusNode,
+    this.focusNode,
     super.validator,
     this.hintText,
     this.prefix,
     this.suffixIcon,
     this.fillColor,
     this.label,
+    this.autoFocus = false,
   });
 
   final BuildContext context;
@@ -44,8 +45,13 @@ class BaseTextFormField extends TextFormField {
   final bool expands;
   final TextCapitalization textCapitalization = TextCapitalization.none;
   final Widget? prefix;
+  final bool autoFocus;
+  final FocusNode? focusNode;
+
   @override
   FormFieldBuilder<String> get builder => (_) => TextFormField(
+        onTapOutside: (event) => focusNode?.unfocus(),
+        autofocus: autoFocus,
         textCapitalization: textCapitalization,
         autofillHints: autofillHints,
         controller: controller,
