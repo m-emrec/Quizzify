@@ -1,4 +1,4 @@
-import 'package:trivia/core/resources/data_state.dart';
+import '../../../../core/resources/data_state.dart';
 
 abstract class AuthRepo {
   Future<DataState> signUpUserWithEmail({

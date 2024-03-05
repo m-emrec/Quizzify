@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/core/shared/widgets/custom_appbar.dart';
-import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
-import 'package:trivia/features/main-view/data/models/app_bar_model.dart';
-import 'package:trivia/features/main-view/presentation/mixins/home_appbar_mixin.dart';
-import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
+import '../../../../core/shared/widgets/custom_appbar.dart';
+import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../data/models/app_bar_model.dart';
+import '../mixins/home_appbar_mixin.dart';
+import 'bloc_widget_manager.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});

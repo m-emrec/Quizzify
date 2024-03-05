@@ -1,9 +1,9 @@
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/constants/enums/injection_enums.dart';
-import 'package:trivia/core/resources/data_state.dart';
-import 'package:trivia/features/main-view/data/datasources/home_firebase_connection.dart';
-import 'package:trivia/features/main-view/domain/repositories/home_repo.dart';
 
+import '../../../../core/constants/enums/injection_enums.dart';
+import '../../../../core/resources/data_state.dart';
+import '../../domain/repositories/home_repo.dart';
+import '../datasources/home_firebase_connection.dart';
 import '../models/app_bar_model.dart';
 import '../models/friends_card_model.dart';
 import '../models/live_quizzes_model.dart';

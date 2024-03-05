@@ -9,11 +9,12 @@ import '../../../../core/constants/app_color.dart';
 import '../../../../core/constants/app_paddings.dart';
 import '../../../../core/constants/enums/firestore_enums.dart';
 import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/extensions/navigation_extension.dart';
+import '../mixins/chose_category_page_mixin.dart';
 import '../widgets/create_quiz_base_view.dart';
 
 part '../widgets/choose_category_page_widgets/category_card.dart';
 part '../widgets/choose_category_page_widgets/category_icon.dart';
+part '../widgets/choose_category_page_widgets/colors_.dart';
 
 class ChooseCategoryPage extends StatefulWidget {
   static const route = "choose-category";
@@ -23,42 +24,15 @@ class ChooseCategoryPage extends StatefulWidget {
   State<ChooseCategoryPage> createState() => _ChooseCategoryPageState();
 }
 
-class _ChooseCategoryPageState extends State<ChooseCategoryPage> {
-  late int? chosenCategory = null;
-
-  void selectCategory(int index) {
-    setState(() {
-      chosenCategory = index;
-    });
-  }
-
-  void sendChosenCategory(BuildContext context) {
-    /// If chosenCategory is not null pop the page and send chosenCategory
-    /// to previous page
-    if (chosenCategory != null) {
-      context.navigator.pop(Categories.values[chosenCategory!]);
-    }
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    /// Here check if there is a Category chosen before.
-    try {
-      final arguments = ModalRoute.of(context)?.settings.arguments;
-      final Categories receivedCategory = arguments as Categories;
-      chosenCategory = receivedCategory.index;
-    } catch (e) {}
-  }
-
+class _ChooseCategoryPageState extends State<ChooseCategoryPage>
+    with ChooseCategoryMixin {
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
       delete: false,
       duplicate: false,
       onFloatingActionButtonPressed:
-          chosenCategory == null ? null : () => sendChosenCategory(context),
+          isCategoryChosen ? () => sendChosenCategory(context) : null,
       body: Padding(
         padding: const EdgeInsets.only(bottom: 64.0) +
             EdgeInsets.only(
@@ -81,8 +55,8 @@ class _ChooseCategoryPageState extends State<ChooseCategoryPage> {
           },
         ),
       ),
-      floatingActionButtonLabel: "Next",
-      appBarTitle: "Choose Category",
+      floatingActionButtonLabel: floatingActionButtonLabel,
+      appBarTitle: appBarTitle,
     );
   }
 }

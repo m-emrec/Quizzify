@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/image_icon_extensions.dart';
-import 'package:trivia/core/shared/widgets/buttons/responsive_button.dart';
+import '../../../constants/app_border_radius.dart';
+import '../../../constants/app_color.dart';
+import '../../../constants/app_paddings.dart';
+import '../../../extensions/context_extension.dart';
+import '../../../extensions/image_icon_extensions.dart';
+import 'responsive_button.dart';
 
 class ResponsiveElevatedButton extends ResponsiveButton {
   const ResponsiveElevatedButton({

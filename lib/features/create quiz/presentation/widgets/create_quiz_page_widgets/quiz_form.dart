@@ -4,19 +4,27 @@ class _QuizForm extends StatelessWidget {
   const _QuizForm({
     required this.quizTitleController,
     required this.quizDescController,
+    required this.formKey,
   });
   final TextEditingController quizTitleController;
   final TextEditingController quizDescController;
+  final GlobalKey<FormState> formKey;
+
+  final String _descriptionFieldLabel = "Description";
+  final String _descriptionFieldHintText = "Enter quiz description";
+  final String _titleFieldHintText = "Enter quiz title";
+  final String _titleFieldLabel = "Title";
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           /// QuizTitle field
           QuizNameField(
             context,
-            hintText: "Enter quiz title",
-            label: "Title",
+            hintText: _titleFieldHintText,
+            label: _titleFieldLabel,
             controller: quizTitleController,
           ),
           Gap(AppPaddings.bigPadding),
@@ -29,8 +37,8 @@ class _QuizForm extends StatelessWidget {
           QuizNameField(
             context,
             expands: true,
-            label: "Description",
-            hintText: "Enter quiz description",
+            label: _descriptionFieldLabel,
+            hintText: _descriptionFieldHintText,
             controller: quizDescController,
           ),
         ],

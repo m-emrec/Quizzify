@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
-import 'package:trivia/core/resources/firestore_connection.dart';
-import 'package:trivia/core/shared/models/quiz_model.dart';
-import 'package:trivia/features/main-view/data/models/app_bar_model.dart';
-import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
-import 'package:trivia/features/main-view/data/models/live_quizzes_model.dart';
-import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
+import '../../../../core/resources/firestore_connection.dart';
+import '../../../../core/shared/models/quiz_model.dart';
+import '../models/app_bar_model.dart';
+import '../models/friends_card_model.dart';
+import '../models/live_quizzes_model.dart';
+import '../models/recent_quiz_model.dart';
 
 class HomeFirebaseConnection extends FireStoreConnection {
   /// This function used for getting the info that will be shown on AppBar

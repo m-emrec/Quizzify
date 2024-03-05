@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/image_extension.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/image_extension.dart';
 
 class OnboardingSlider extends StatelessWidget {
   final PageController controller;

@@ -1,6 +1,6 @@
-import 'package:trivia/core/resources/data_state.dart';
-import 'package:trivia/features/onboarding/data/datasources/onboarding_firestore_connection.dart';
-import 'package:trivia/features/onboarding/domain/repositories/onboarding_repo.dart';
+import '../../../../core/resources/data_state.dart';
+import '../../domain/repositories/onboarding_repo.dart';
+import '../datasources/onboarding_firestore_connection.dart';
 
 class OnboardingRepoImpl implements OnboardingRepo {
   final OnboardingFirestoreConnection _firestoreConnection;

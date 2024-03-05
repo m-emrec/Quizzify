@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/constants/strings.dart';
+import 'strings.dart';
 
 class AppErrorText {
   /// With this class I can manage all error codes in one place.

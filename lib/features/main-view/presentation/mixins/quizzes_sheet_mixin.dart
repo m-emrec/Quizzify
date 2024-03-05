@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
+import "../widgets/quizzes_sheet.dart";
 
 import '../../../../core/constants/enums/injection_enums.dart';
 import '../../data/models/live_quizzes_model.dart';

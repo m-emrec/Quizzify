@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/core/shared/widgets/snackbars/custom_snackbar.dart';
-import 'package:trivia/features/onboarding/presentation/bloc/onboarding_bloc.dart';
-import 'package:trivia/features/onboarding/presentation/mixins/onboarding_mixin.dart';
-import 'package:trivia/logger.dart';
 
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
+import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
+import '../../../../logger.dart';
+import '../bloc/onboarding_bloc.dart';
+import '../mixins/onboarding_mixin.dart';
 import '../widgets/form_card.dart';
 import '../widgets/onboarding_slider.dart';
 

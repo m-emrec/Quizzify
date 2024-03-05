@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
+import '../bloc/main_view_bloc.dart';
 
 import '../widgets/home_appbar.dart';
 

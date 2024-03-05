@@ -1,10 +1,9 @@
-import 'package:trivia/core/resources/injection_container.dart';
-import 'package:trivia/features/onboarding/data/datasources/onboarding_firestore_connection.dart';
-import 'package:trivia/features/onboarding/domain/repositories/onboarding_repo.dart';
-
+import '../../../../core/resources/injection_container.dart';
+import '../../domain/repositories/onboarding_repo.dart';
 import '../../domain/usecases/set_name_use_case.dart';
 import '../../presentation/bloc/onboarding_bloc.dart';
 import '../repositories/onboarding_repo_impl.dart';
+import 'onboarding_firestore_connection.dart';
 
 class OnboardingInjectionContainer extends InjectionContainer {
   @override

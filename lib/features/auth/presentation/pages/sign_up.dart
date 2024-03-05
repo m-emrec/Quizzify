@@ -2,15 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/core/shared/widgets/clickable_text.dart';
-import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:trivia/features/auth/presentation/mixins/auth_mixin.dart';
-import 'package:trivia/features/auth/presentation/mixins/sign_up_mixin.dart';
-import 'package:trivia/features/auth/presentation/widgets/base_auth_view.dart';
-
+import '../../../../core/extensions/empty_padding_extension.dart';
+import '../../../../core/shared/widgets/clickable_text.dart';
+import '../bloc/auth_bloc.dart';
+import '../mixins/auth_mixin.dart';
+import '../mixins/sign_up_mixin.dart';
 import '../widgets/alternative_auth_methods.dart';
 import '../widgets/auth_form.dart';
+import '../widgets/base_auth_view.dart';
 
 class SignUpPage extends StatefulWidget {
   static const route = "sign-up";

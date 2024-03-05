@@ -2,11 +2,11 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
-import 'package:trivia/features/create%20quiz/presentation/pages/create_quiz_page.dart';
+import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/navigation_extension.dart';
+import '../../../create%20quiz/presentation/pages/create_quiz_page.dart';
 
 class HomeBaseView extends StatefulWidget {
   final Widget? body;

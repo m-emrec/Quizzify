@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/constants/image_path.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/shared/widgets/shimmer_widget.dart';
-import 'package:trivia/features/main-view/data/models/friends_card_model.dart';
-import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
+import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/image_path.dart';
+import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
+import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../data/models/friends_card_model.dart';
 import '../mixins/friends_card_mixin.dart';
+import 'bloc_widget_manager.dart';
 
 class FriendsCard extends StatefulWidget {
   const FriendsCard({

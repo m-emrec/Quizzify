@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
 
 import '../../constants/app_border_radius.dart';
 import '../../constants/app_color.dart';
 import '../../constants/app_paddings.dart';
+import '../../extensions/context_extension.dart';
 
 class BaseTextFormField extends TextFormField {
   BaseTextFormField(
@@ -29,6 +29,9 @@ class BaseTextFormField extends TextFormField {
     this.fillColor,
     this.label,
     this.autoFocus = false,
+    this.onFieldSubmitted,
+    super.onSaved,
+    super.onEditingComplete,
   });
 
   final BuildContext context;
@@ -47,9 +50,12 @@ class BaseTextFormField extends TextFormField {
   final Widget? prefix;
   final bool autoFocus;
   final FocusNode? focusNode;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   FormFieldBuilder<String> get builder => (_) => TextFormField(
+        onSaved: onSaved,
+        onFieldSubmitted: onFieldSubmitted,
         onTapOutside: (event) => focusNode?.unfocus(),
         autofocus: autoFocus,
         textCapitalization: textCapitalization,

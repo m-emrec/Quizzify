@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/features/discover/presentation/pages/discover_view.dart';
-import 'package:trivia/features/leaderboard/presentation/pages/leaderboard_view.dart';
-import 'package:trivia/features/profile/presentation/pages/profile_view.dart';
 
+import '../../../discover/presentation/pages/discover_view.dart';
+import '../../../leaderboard/presentation/pages/leaderboard_view.dart';
 import '../../../main-view/presentation/pages/home_view.dart';
+import '../../../profile/presentation/pages/profile_view.dart';
 import '../../data/models/home_view_manager_model.dart';
 import '../view manager/home_view_manager.dart';
 

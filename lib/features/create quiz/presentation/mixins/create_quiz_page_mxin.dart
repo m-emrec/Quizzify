@@ -8,4 +8,5 @@ mixin CreateQuizPageMixin on State<CreateQuizPage> {
   final String floatingActionButtonLabel = "Add Question";
   final TextEditingController quizTitleController = TextEditingController();
   final TextEditingController quizDescController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 }

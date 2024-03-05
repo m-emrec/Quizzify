@@ -1,4 +1,4 @@
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
+import '../../constants/enums/firestore_enums.dart';
 
 class QuestionModel {
   final String? question;

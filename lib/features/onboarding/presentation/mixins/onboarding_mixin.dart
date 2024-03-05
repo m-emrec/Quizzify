@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/extensions/image_extension.dart';
-import 'package:trivia/features/onboarding/data/datasources/onboarding_injection_container.dart';
-import 'package:trivia/features/onboarding/domain/repositories/onboarding_repo.dart';
-import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
 
+import '../../../../core/extensions/image_extension.dart';
+import '../../data/datasources/onboarding_injection_container.dart';
+import '../../domain/repositories/onboarding_repo.dart';
 import '../bloc/onboarding_bloc.dart';
+import '../pages/onboarding_page.dart';
 
 mixin OnboardingMixin on State<Onboarding> {
   // Variables

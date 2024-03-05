@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
+import '../../core/constants/app_border_radius.dart';
+import '../../core/constants/app_color.dart';
+import '../../core/constants/app_paddings.dart';
 
 final AppTextThemes _appTextTheme = AppTextThemes();
 

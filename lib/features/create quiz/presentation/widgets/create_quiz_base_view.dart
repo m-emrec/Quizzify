@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/features/create%20quiz/presentation/mixins/create_quiz_base_view_mixin.dart';
-import 'package:trivia/logger.dart';
+import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../mixins/create_quiz_base_view_mixin.dart';
 
 class CreateQuizBaseView extends StatefulWidget {
   CreateQuizBaseView({
@@ -48,12 +47,14 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView>
           onPressed: widget.onFloatingActionButtonPressed,
           floatingActionButtonLabel: widget.floatingActionButtonLabel,
         ),
+        // Appbar
         appBar: _CreateQuizAppBar(
           delete: widget.delete,
           duplicate: widget.duplicate,
           title: Text(widget.appBarTitle),
           showAction: !(widget.delete == false && widget.duplicate == false),
         ),
+        // Body
         body: LayoutBuilder(builder: (context, constraints) {
           resizeScaffold();
 
@@ -147,7 +148,8 @@ class _CreateQuizAppBar extends AppBar {
             itemBuilder: (context) {
               return [
                 //Duplicate button
-                PopupMenuItem(
+                _popMenuItem(
+                  context,
                   height: duplicate ? kMinInteractiveDimension : 0,
                   onTap: onDuplicateTapped,
                   child: duplicate
@@ -166,8 +168,10 @@ class _CreateQuizAppBar extends AppBar {
                         )
                       : SizedBox(),
                 ),
+
                 //Delete button
-                PopupMenuItem(
+                _popMenuItem(
+                  context,
                   onTap: onDeleteTapped,
                   height: delete ? kMinInteractiveDimension : 0,
                   child: delete
@@ -193,6 +197,19 @@ class _CreateQuizAppBar extends AppBar {
           ),
         ]
       : null;
+
+  PopupMenuItem<dynamic> _popMenuItem(
+    BuildContext context, {
+    Function()? onTap,
+    required double height,
+    required Widget? child,
+  }) {
+    return PopupMenuItem(
+      onTap: onTap,
+      height: height,
+      child: child,
+    );
+  }
 }
 
 class _FloatingActionButton extends StatelessWidget {

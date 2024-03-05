@@ -1,13 +1,13 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/onboarding/presentation/bloc/onboarding_bloc.dart';
-import 'package:trivia/features/onboarding/presentation/mixins/form_card_mixin.dart';
-import 'package:trivia/features/onboarding/presentation/widgets/name_field.dart';
 
 import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../bloc/onboarding_bloc.dart';
+import '../mixins/form_card_mixin.dart';
+import 'name_field.dart';
 
 class FormCard extends StatelessWidget with FormCardMixin {
   final String title;

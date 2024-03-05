@@ -1,27 +1,44 @@
 part of add_question_page;
 
-class _QuestionNumberRow extends StatelessWidget {
-  const _QuestionNumberRow();
+class _QuestionNumberRow extends StatefulWidget {
+  const _QuestionNumberRow({
+    required this.tabController,
+    required this.tabLength,
+  });
+  final TabController tabController;
+  final int tabLength;
+
+  @override
+  State<_QuestionNumberRow> createState() => _QuestionNumberRowState();
+}
+
+class _QuestionNumberRowState extends State<_QuestionNumberRow> {
+  bool _isCurrentPage(int index) => widget.tabController.index == index;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      // findChildIndexCallback: (key) {
-      //   // logger.i(key);
-
-      //   return 20;
-      // },
-      itemCount: 20,
-      scrollDirection: Axis.horizontal,
-
-      itemBuilder: (context, index) => Padding(
-        padding: const EdgeInsets.only(right: AppPaddings.smallPadding / 2),
-        child: CircleAvatar(
-          // radius: 16,
-          // key: ValueKey(index + 1),
-          backgroundColor: Colors.transparent,
-          child: Text("${index + 1}"),
+    return TabBar(
+      padding: EdgeInsets.zero,
+      tabAlignment: TabAlignment.center,
+      isScrollable: true,
+      dividerHeight: 0,
+      labelPadding: EdgeInsets.zero,
+      indicatorColor: Colors.transparent,
+      controller: widget.tabController,
+      onTap: (value) => setState(() {}),
+      tabs: List.generate(
+        widget.tabLength,
+        (index) => Tab(
+          child: CircleAvatar(
+            backgroundColor:
+                _isCurrentPage(index) ? Colors.black : Colors.transparent,
+            child: Text(
+              "${index + 1}",
+              style: context.textTheme.labelMedium?.copyWith(
+                color: _isCurrentPage(index) ? Colors.white : null,
+              ),
+            ),
+          ),
         ),
       ),
     );

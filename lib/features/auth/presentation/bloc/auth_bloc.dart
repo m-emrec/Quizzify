@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:trivia/core/constants/error_texts.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
-import 'package:trivia/core/resources/data_state.dart';
-import 'package:trivia/features/auth/domain/usecases/forgotPassword_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithEmail_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithFacebook_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithGoogle_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signup_user_with_email_usecase.dart';
-import 'package:trivia/logger.dart';
+
+import '../../../../core/constants/error_texts.dart';
+import '../../../../core/extensions/navigation_extension.dart';
+import '../../../../core/resources/data_state.dart';
+import '../../../../logger.dart';
+import '../../domain/usecases/forgotPassword_usecase.dart';
+import '../../domain/usecases/signInUserWithEmail_usecase.dart';
+import '../../domain/usecases/signInUserWithFacebook_usecase.dart';
+import '../../domain/usecases/signInUserWithGoogle_usecase.dart';
+import '../../domain/usecases/signup_user_with_email_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

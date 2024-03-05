@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/auth/presentation/mixins/auth_mixin.dart';
-import 'package:trivia/features/auth/presentation/widgets/input_fields.dart';
 
+import '../../../../core/extensions/empty_padding_extension.dart';
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../mixins/auth_mixin.dart';
+import 'input_fields.dart';
 
 class AuthForm extends StatelessWidget with AuthMixin {
   final GlobalKey<FormState> formKey;

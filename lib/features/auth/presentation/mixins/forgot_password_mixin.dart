@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/features/auth/presentation/pages/forgot_password_page.dart';
 
 import '../bloc/auth_bloc.dart';
+import '../pages/forgot_password_page.dart';
 
 mixin ForgotPasswordMixin on State<ForgotPassword> {
   final String pageTitle = "Reset Password";

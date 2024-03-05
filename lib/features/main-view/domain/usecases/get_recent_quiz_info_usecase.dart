@@ -1,8 +1,7 @@
-import 'package:trivia/core/resources/data_state.dart';
-import 'package:trivia/core/resources/use_case.dart';
-import 'package:trivia/features/main-view/domain/repositories/home_repo.dart';
-
+import '../../../../core/resources/data_state.dart';
+import '../../../../core/resources/use_case.dart';
 import '../entities/recent_quiz_entity.dart';
+import '../repositories/home_repo.dart';
 
 class GetRecentQuizInfoUseCase
     implements UseCase<DataState<RecentQuizEntity>, void> {

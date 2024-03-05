@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trivia/core/constants/strings.dart';
-import 'package:trivia/core/resources/data_state.dart';
-import 'package:trivia/core/resources/firestore_connection.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../core/resources/data_state.dart';
+import '../../../../core/resources/firestore_connection.dart';
 
 class AuthFirebaseConnection extends FireStoreConnection {
   /// This class makes the connection between FireBase and AuthRepo.

@@ -1,13 +1,13 @@
-import 'package:trivia/core/resources/injection_container.dart';
-import 'package:trivia/features/auth/data/datasources/auth_firebase_connection.dart';
-import 'package:trivia/features/auth/data/repositories/auth_repo_impl.dart';
-import 'package:trivia/features/auth/domain/repositories/auth_repo.dart';
-import 'package:trivia/features/auth/domain/usecases/forgotPassword_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithEmail_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithFacebook_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signInUserWithGoogle_usecase.dart';
-import 'package:trivia/features/auth/domain/usecases/signup_user_with_email_usecase.dart';
-import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
+import '../../../../core/resources/injection_container.dart';
+import 'auth_firebase_connection.dart';
+import '../repositories/auth_repo_impl.dart';
+import '../../domain/repositories/auth_repo.dart';
+import '../../domain/usecases/forgotPassword_usecase.dart';
+import '../../domain/usecases/signInUserWithEmail_usecase.dart';
+import '../../domain/usecases/signInUserWithFacebook_usecase.dart';
+import '../../domain/usecases/signInUserWithGoogle_usecase.dart';
+import '../../domain/usecases/signup_user_with_email_usecase.dart';
+import '../../presentation/bloc/auth_bloc.dart';
 
 class AuthInjectionContainer extends InjectionContainer {
   @override

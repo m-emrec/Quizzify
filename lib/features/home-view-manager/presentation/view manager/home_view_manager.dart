@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/features/home-view-manager/presentation/mixins/home_view_manager_mixin.dart';
-import 'package:trivia/features/home-view-manager/presentation/pages/home_base_view.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../mixins/home_view_manager_mixin.dart';
+import '../pages/home_base_view.dart';
 
 enum HomeViewEnum {
   home,

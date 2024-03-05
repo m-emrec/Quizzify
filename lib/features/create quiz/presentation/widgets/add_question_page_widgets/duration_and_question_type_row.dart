@@ -20,42 +20,51 @@ class _DurationAndQuestionTypeRow extends StatelessWidget {
           icon: Icons.access_time,
           size: 0.3,
           controller: initialDurationValue,
-          items: List.generate(
-            6,
-            (index) => DropdownMenuItem(
-              child: Text("${(index + 1) * 10} sec"),
-              value: "${(index + 1) * 10}",
-            ),
-          ),
+          items: _durationDropDownItems,
         ),
 
         /// Question Type
-        dropDownButton(context,
-            size: 0.5,
-            icon: Icons.keyboard_arrow_down_outlined,
-            controller: initialQuestionTypeValue,
-            items: [
-              ...List.generate(
-                QuestionType.values.length,
-                (index) => DropdownMenuItem(
-                  child: Text(QuestionType.values[index].text),
-                  value: QuestionType.values[index].name,
-                ),
-              ),
-            ]),
+        dropDownButton(
+          context,
+          size: 0.4,
+          icon: Icons.keyboard_arrow_down_outlined,
+          controller: initialQuestionTypeValue,
+          items: _questionTypeDropDownItems,
+        ),
       ],
     );
   }
 
-  SizedBox dropDownButton(BuildContext context,
-      {required double size,
-      required TextEditingController controller,
-      required IconData icon,
-      required List<DropdownMenuItem<String>>? items}) {
+  List<DropdownMenuItem<String>> get _durationDropDownItems => List.generate(
+        6,
+        (index) => DropdownMenuItem(
+          child: Text("${(index + 1) * 10} sec"),
+          value: "${(index + 1) * 10}",
+        ),
+      );
+  List<DropdownMenuItem<String>> get _questionTypeDropDownItems =>
+      List.generate(
+        QuestionType.values.length,
+        (index) => DropdownMenuItem(
+          child: FittedBox(
+            child: Text(QuestionType.values[index].text),
+          ),
+          value: QuestionType.values[index].name,
+        ),
+      );
+
+  SizedBox dropDownButton(
+    BuildContext context, {
+    required double size,
+    required TextEditingController controller,
+    required IconData icon,
+    required List<DropdownMenuItem<String>>? items,
+  }) {
     return SizedBox(
       height: 40,
       width: context.dynamicWidth(size),
       child: DropdownButtonFormField(
+        isExpanded: true,
         value: controller.text,
         elevation: 3,
         style: context.textTheme.labelMedium,

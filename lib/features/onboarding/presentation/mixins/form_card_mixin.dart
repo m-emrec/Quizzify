@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import '../bloc/onboarding_bloc.dart';
 
 mixin FormCardMixin {
   void onPressed(

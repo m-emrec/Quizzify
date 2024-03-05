@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
+import '../../constants/enums/firestore_enums.dart';
 
 class QuizModel {
   String? qid;

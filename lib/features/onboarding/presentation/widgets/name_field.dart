@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/shared/widgets/base_text_field.dart';
+import '../../../../core/shared/widgets/base_text_field.dart';
 
 class NameField extends BaseTextFormField {
   NameField(

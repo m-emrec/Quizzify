@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
+import 'package:Quizzify/core/extensions/context_extension.dart';
+import 'package:Quizzify/features/create%20quiz/presentation/widgets/create_quiz_base_view.dart';
 
 import '../../../../core/constants/app_color.dart';
 
@@ -23,20 +23,22 @@ mixin CreateQuizBaseViewMixin on State<CreateQuizBaseView> {
   ThemeData get themeData => _themeData(context);
 
   final Duration openKeyboardAnimationDuration = Duration(milliseconds: 300);
-  final Duration closeKeyboardAnimationDuration = Duration(milliseconds: 300);
+  final Duration closeKeyboardAnimationDuration = Duration(milliseconds: 600);
 
-  /// I use this widget to resize the scaffold after keyboard opened.
+  /// I use this function to scroll the scaffold after keyboard opened.
   void resizeScaffold() {
+    //if keyboard is opened scroll to keyboardSize / 2
     if (context.keyboardSize > 0 && scrollController.hasClients) {
       scrollController.animateTo(
         context.keyboardSize / 2,
         duration: openKeyboardAnimationDuration,
         curve: Curves.linear,
       );
+      // if keyboard is not opened and [scrollController] has clients . Scroll  to top
     } else {
       if (scrollController.hasClients) {
         scrollController.animateTo(
-          1,
+          scrollController.position.minScrollExtent,
           duration: closeKeyboardAnimationDuration,
           curve: Curves.linear,
         );

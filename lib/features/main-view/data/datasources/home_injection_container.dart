@@ -1,12 +1,12 @@
-import 'package:trivia/core/resources/injection_container.dart';
-import 'package:trivia/features/main-view/data/datasources/home_firebase_connection.dart';
-import 'package:trivia/features/main-view/data/repositories/home_repo_impl.dart';
-import 'package:trivia/features/main-view/domain/repositories/home_repo.dart';
-import 'package:trivia/features/main-view/domain/usecases/get_app_bar_info_usecase.dart';
-import 'package:trivia/features/main-view/domain/usecases/get_friends_info_usecase.dart';
-import 'package:trivia/features/main-view/domain/usecases/get_live_quizzes_usecase.dart';
-import 'package:trivia/features/main-view/domain/usecases/get_recent_quiz_info_usecase.dart';
-import 'package:trivia/features/main-view/presentation/bloc/main_view_bloc.dart';
+import '../../../../core/resources/injection_container.dart';
+import '../../domain/repositories/home_repo.dart';
+import '../../domain/usecases/get_app_bar_info_usecase.dart';
+import '../../domain/usecases/get_friends_info_usecase.dart';
+import '../../domain/usecases/get_live_quizzes_usecase.dart';
+import '../../domain/usecases/get_recent_quiz_info_usecase.dart';
+import '../../presentation/bloc/main_view_bloc.dart';
+import '../repositories/home_repo_impl.dart';
+import 'home_firebase_connection.dart';
 
 class HomeInjectionContainer extends InjectionContainer {
   @override

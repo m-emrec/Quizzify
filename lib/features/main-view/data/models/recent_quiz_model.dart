@@ -1,5 +1,5 @@
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
-import 'package:trivia/features/main-view/domain/entities/recent_quiz_entity.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
+import '../../domain/entities/recent_quiz_entity.dart';
 
 class RecentQuizModel extends RecentQuizEntity {
   RecentQuizModel({

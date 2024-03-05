@@ -1,5 +1,5 @@
-import 'package:trivia/core/shared/models/quiz_model.dart';
-import 'package:trivia/features/main-view/domain/entities/live_quizzes_entity.dart';
+import '../../../../core/shared/models/quiz_model.dart';
+import '../../domain/entities/live_quizzes_entity.dart';
 
 class LiveQuizzesModel extends LiveQuizzesEntity {
   LiveQuizzesModel({

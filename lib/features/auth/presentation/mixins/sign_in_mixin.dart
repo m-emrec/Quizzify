@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/extensions/navigation_extension.dart';
-import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:trivia/features/auth/presentation/pages/forgot_password_page.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_up.dart';
+import '../../../../core/extensions/navigation_extension.dart';
+import '../bloc/auth_bloc.dart';
+import '../pages/forgot_password_page.dart';
+import '../pages/sign_in.dart';
+import '../pages/sign_up.dart';
 
 mixin SignInMixin on State<SignInPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

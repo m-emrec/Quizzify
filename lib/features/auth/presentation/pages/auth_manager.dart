@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/features/auth/data/datasources/auth_injection_container.dart';
-import 'package:trivia/features/auth/presentation/pages/sign_in.dart';
-import 'package:trivia/features/onboarding/presentation/pages/onboarding_page.dart';
 
 import '../../../home-view-manager/presentation/view manager/home_view_manager.dart';
+import '../../../onboarding/presentation/pages/onboarding_page.dart';
+import '../../data/datasources/auth_injection_container.dart';
 import '../../domain/repositories/auth_repo.dart';
+import 'sign_in.dart';
 
 class AuthManager extends StatefulWidget {
   static const route = "/";

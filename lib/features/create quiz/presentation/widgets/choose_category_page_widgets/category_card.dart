@@ -6,23 +6,12 @@ class _CategoryCard extends StatelessWidget {
     this.chosenIndex,
     required this.onTap,
   });
+
   final Categories category;
   final int? chosenIndex;
   final void Function(int) onTap;
 
   bool get _isChosen => chosenIndex == category.index;
-
-  final Color selectedIconAndTextColor = Colors.white;
-
-  Color get selectedCardColor => Color(0xffFF8FA2);
-
-  Color get selectedIconCardColor => Color(0xffFFA5B5);
-
-  final Color unSelectedIconAndTextColor = AppColors.elevatedButtonColor;
-
-  final Color unSelectedCardColor = AppColors.scaffoldColor;
-
-  final Color unSelectedIconCardColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +20,9 @@ class _CategoryCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppBorderRadius.mediumBorderRadius),
       child: Material(
         elevation: 1,
-        color: _isChosen ? selectedCardColor : unSelectedCardColor,
+        color: _isChosen
+            ? _CategoryPageColors.selectedCardColor
+            : _CategoryPageColors.unSelectedCardColor,
         child: InkWell(
           onTap: () => onTap(category.index),
           child: Card(
@@ -41,30 +32,38 @@ class _CategoryCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                /// Category Icon
                 _CategoryIcon(
                   iconLink: category.iconLink,
                   iconColor: _isChosen
-                      ? selectedIconAndTextColor
-                      : unSelectedIconAndTextColor,
+                      ? _CategoryPageColors.selectedIconAndTextColor
+                      : _CategoryPageColors.unSelectedIconAndTextColor,
                   iconCardColor: _isChosen
-                      ? selectedIconCardColor
-                      : unSelectedIconCardColor,
+                      ? _CategoryPageColors.selectedIconCardColor
+                      : _CategoryPageColors.unSelectedIconCardColor,
                 ),
+
+                /// Gap
                 Gap(AppPaddings.smallPadding),
+
+                /// Category name
                 Text(
                   category.name,
                   style: context.textTheme.labelLarge?.copyWith(
                     color: _isChosen
-                        ? selectedIconAndTextColor
-                        : unSelectedIconAndTextColor,
+                        ? _CategoryPageColors.selectedIconAndTextColor
+                        : _CategoryPageColors.unSelectedIconAndTextColor,
                   ),
                 ),
+
+                /// Number of quizzes belong to Category
+                /// TODO: Get this from bloc
                 Text(
                   "21 Quizzes",
                   style: context.textTheme.labelSmall?.copyWith(
                     color: _isChosen
-                        ? selectedIconAndTextColor
-                        : unSelectedIconAndTextColor,
+                        ? _CategoryPageColors.selectedIconAndTextColor
+                        : _CategoryPageColors.unSelectedIconAndTextColor,
                   ),
                 ),
               ],

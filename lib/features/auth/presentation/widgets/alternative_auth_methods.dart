@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:trivia/features/auth/presentation/mixins/alternative_auth_methods_mixin.dart';
 
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
 import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../bloc/auth_bloc.dart';
+import '../mixins/alternative_auth_methods_mixin.dart';
 
 class AlternativeAuthMethods extends StatelessWidget
     with AlternativeAuthMethodsMixin {

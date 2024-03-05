@@ -2,12 +2,12 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trivia/core/constants/strings.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/features/auth/presentation/bloc/auth_bloc.dart';
 
+import '../../../../core/constants/strings.dart';
+import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/shared/widgets/pop_up_dialog.dart';
 import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
+import '../bloc/auth_bloc.dart';
 
 /// This mixin made for using on SignIn and SignUp pages.
 mixin AuthMixin {

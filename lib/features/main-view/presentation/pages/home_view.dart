@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/main-view/data/datasources/home_injection_container.dart';
-import 'package:trivia/features/main-view/presentation/widgets/home_appbar.dart';
-import 'package:trivia/features/main-view/presentation/widgets/quizzes_sheet.dart';
 
 import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
+import '../../data/datasources/home_injection_container.dart';
 import '../widgets/friends_card.dart';
+import '../widgets/home_appbar.dart';
+import '../widgets/quizzes_sheet.dart';
 import '../widgets/recent_quiz_card.dart';
 
 class HomeView extends StatefulWidget {

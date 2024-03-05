@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/constants/app_border_radius.dart';
-import 'package:trivia/core/constants/app_color.dart';
-import 'package:trivia/core/constants/app_paddings.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
-import 'package:trivia/core/extensions/empty_padding_extension.dart';
-import 'package:trivia/features/main-view/data/models/recent_quiz_model.dart';
-import 'package:trivia/features/main-view/presentation/mixins/recent_quiz_card_mixin.dart';
-import 'package:trivia/features/main-view/presentation/widgets/bloc_widget_manager.dart';
 
+import '../../../../core/constants/app_border_radius.dart';
+import '../../../../core/constants/app_color.dart';
+import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/empty_padding_extension.dart';
 import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../data/models/recent_quiz_model.dart';
+import '../mixins/recent_quiz_card_mixin.dart';
+import 'bloc_widget_manager.dart';
 
 class RecentQuizCard extends StatefulWidget {
   const RecentQuizCard({

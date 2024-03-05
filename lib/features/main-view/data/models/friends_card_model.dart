@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trivia/core/constants/enums/firestore_enums.dart';
-import 'package:trivia/features/main-view/domain/entities/friends_card_entity.dart';
+import '../../../../core/constants/enums/firestore_enums.dart';
+import '../../domain/entities/friends_card_entity.dart';
 
 class FriendsCardModel extends FriendsCardEntity {
   FriendsCardModel({

@@ -1,10 +1,5 @@
 part of add_question_page;
 
-enum _TrueFalse {
-  True,
-  False;
-}
-
 class _TrueFalseAnswersGrid extends StatefulWidget {
   const _TrueFalseAnswersGrid();
 
@@ -13,55 +8,9 @@ class _TrueFalseAnswersGrid extends StatefulWidget {
 }
 
 class _TrueFalseAnswersGridState extends State<_TrueFalseAnswersGrid>
-    with SingleTickerProviderStateMixin {
-  _TrueFalse? chosenIndex = null;
-  void onPressed(ValueKey<_TrueFalse> key) {
-    setState(() {
-      chosenIndex = key.value;
-    });
-    _animationController.reset();
-    _animationController.forward();
-  }
-
-  late AnimationController _animationController;
-  Duration animationDuration = Duration(milliseconds: 300);
-
+    with SingleTickerProviderStateMixin, TrueFalseAnswerGridMixin {
   @override
-  void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: animationDuration,
-      upperBound: 0.7,
-    );
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-  }
-
-  List<Widget> get _items => [
-        _Button(
-          key: ValueKey(_TrueFalse.False),
-          text: _TrueFalse.False.name,
-          color: AppColors.dangerColor,
-          controller: _animationController,
-          chosenIndex: chosenIndex,
-          onPressed: onPressed,
-        ),
-        _Button(
-          key: ValueKey(_TrueFalse.True),
-          text: _TrueFalse.True.name,
-          color: AppColors.successColor,
-          controller: _animationController,
-          onPressed: onPressed,
-          chosenIndex: chosenIndex,
-        ),
-      ];
-
+  TickerProvider get vsync => this;
   @override
   Widget build(BuildContext context) {
     return AnswersGrid(
@@ -72,14 +21,14 @@ class _TrueFalseAnswersGridState extends State<_TrueFalseAnswersGrid>
 }
 
 class _Button extends StatelessWidget {
-  final ValueKey<_TrueFalse> key;
+  final ValueKey<_TrueFalse> answerIndex;
   final String text;
   final Color color;
   final AnimationController controller;
   final _TrueFalse? chosenIndex;
   final Function(ValueKey<_TrueFalse> key) onPressed;
   const _Button({
-    required this.key,
+    required this.answerIndex,
     required this.text,
     required this.color,
     required this.controller,
@@ -89,8 +38,7 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _isSelected = chosenIndex == key.value;
-    ;
+    bool _isSelected = chosenIndex == answerIndex.value;
 
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
@@ -102,10 +50,8 @@ class _Button extends StatelessWidget {
         backgroundColor: color,
         foregroundColor: Colors.white,
       ),
-      onPressed: () => onPressed(key),
+      onPressed: () => onPressed(answerIndex),
       child: Stack(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // fit: StackFit.expand,
         children: [
           /// title
           Center(
@@ -114,7 +60,7 @@ class _Button extends StatelessWidget {
             ),
           ),
 
-          /// Selected Icon
+          ///Animated Selected Icon
           Align(
             alignment: Alignment.centerRight,
             child: Visibility(

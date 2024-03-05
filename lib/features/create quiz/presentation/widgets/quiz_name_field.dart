@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/core/extensions/context_extension.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
 import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/shared/widgets/base_text_field.dart';
 
 class QuizNameField extends BaseTextFormField {
@@ -17,6 +17,7 @@ class QuizNameField extends BaseTextFormField {
     super.expands,
     super.prefix,
     super.autoFocus,
+    super.onFieldSubmitted,
   });
 
   @override
@@ -34,8 +35,6 @@ class QuizNameField extends BaseTextFormField {
 
   @override
   InputDecoration? get decoration => InputDecoration(
-        // prefix: prefix,
-
         prefixIconConstraints: BoxConstraints(
           maxHeight: 48,
         ),
