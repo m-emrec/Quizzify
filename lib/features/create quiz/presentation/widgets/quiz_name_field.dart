@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/shared/widgets/base_text_field.dart';
+import '../../../../core/utils/shared/widgets/base_text_field.dart';
 
 class QuizNameField extends BaseTextFormField {
   QuizNameField(

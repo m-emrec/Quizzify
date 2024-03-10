@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
-import '../../../../core/constants/app_paddings.dart';
-import '../../../../core/constants/image_path.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
+import '../../../../core/constants/enums/image_path_enum.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/list_tiles/quiz_list_tile.dart';
-import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../../../core/utils/shared/widgets/list_tiles/quiz_list_tile.dart';
+import '../../../../core/utils/shared/widgets/shimmer_widget.dart';
 import '../../data/models/live_quizzes_model.dart';
 import '../mixins/quizzes_sheet_mixin.dart';
 import 'bloc_widget_manager.dart';
@@ -105,7 +105,9 @@ class _LoadedQuizzesSheet extends StatelessWidget {
               title: data?[index].title ?? "",
               category: data?[index].category ?? "",
               numberOfQuestions: data?[index].numberOfQuestions ?? "",
-              image: AssetImage(ImgPath.friendsCardBgImg),
+              image: AssetImage(
+                Img.pngImagePath(Img.friendsCardBgImg.path),
+              ),
             );
           },
         ),

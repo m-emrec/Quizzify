@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../../../../core/utils/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../mixins/form_card_mixin.dart';
 import 'name_field.dart';

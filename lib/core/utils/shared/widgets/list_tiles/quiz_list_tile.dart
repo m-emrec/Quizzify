@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:overflow_text_animated/overflow_text_animated.dart';
 
-import '../../../constants/app_border_radius.dart';
-import '../../../constants/app_color.dart';
-import '../../../constants/app_paddings.dart';
-import '../../../extensions/context_extension.dart';
+import '../../../../constants/app_border_radius.dart';
+import '../../../../constants/app_color.dart';
+import '../../../../constants/enums/app_paddings.dart';
+import '../../../../extensions/context_extension.dart';
 
 class QuizListTile extends StatelessWidget {
   const QuizListTile({

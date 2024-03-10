@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../../../../core/utils/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../bloc/auth_bloc.dart';
 import '../mixins/alternative_auth_methods_mixin.dart';
 

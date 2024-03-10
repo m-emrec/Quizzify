@@ -1,4 +1,4 @@
-import '../../../../core/shared/models/quiz_model.dart';
+import '../../../../core/utils/shared/models/quiz_model.dart';
 import '../../domain/entities/live_quizzes_entity.dart';
 
 class LiveQuizzesModel extends LiveQuizzesEntity {

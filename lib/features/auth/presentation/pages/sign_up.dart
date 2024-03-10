@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/clickable_text.dart';
+import '../../../../core/utils/shared/widgets/clickable_text.dart';
 import '../bloc/auth_bloc.dart';
 import '../mixins/auth_mixin.dart';
 import '../mixins/sign_up_mixin.dart';

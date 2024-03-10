@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../../../../core/utils/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../mixins/auth_mixin.dart';
 import 'input_fields.dart';
 

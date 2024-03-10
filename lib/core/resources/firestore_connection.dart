@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../constants/enums/firestore_enums.dart';
-import '../shared/models/quiz_model.dart';
+import '../utils/shared/models/quiz_model.dart';
 import 'data_state.dart';
 
 abstract class FireStoreConnection {

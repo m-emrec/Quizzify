@@ -63,6 +63,7 @@ dependencies:
 
   either_dart: ^1.0.0
   very_good_analysis: ^5.1.0
+  flutter_custom_clippers: ^2.1.0
   
 
 dev_dependencies:

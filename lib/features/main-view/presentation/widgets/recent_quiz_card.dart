@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../../../core/utils/shared/widgets/shimmer_widget.dart';
 import '../../data/models/recent_quiz_model.dart';
 import '../mixins/recent_quiz_card_mixin.dart';
 import 'bloc_widget_manager.dart';

@@ -6,7 +6,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/constants/enums/firestore_enums.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../mixins/chose_category_page_mixin.dart';

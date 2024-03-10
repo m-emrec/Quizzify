@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
-import '../../../../core/constants/image_path.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
+import '../../../../core/constants/enums/image_path_enum.dart';
 import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/shared/widgets/list_tiles/friends_tile.dart';
-import '../../../../core/shared/widgets/shimmer_widget.dart';
+import '../../../../core/utils/shared/widgets/list_tiles/friends_tile.dart';
+import '../../../../core/utils/shared/widgets/shimmer_widget.dart';
 import '../../data/models/friends_card_model.dart';
 import '../mixins/friends_card_mixin.dart';
 import 'bloc_widget_manager.dart';
@@ -52,7 +52,9 @@ class _LoadedFriendsCard extends StatelessWidget {
       children: [
         _BaseFriendsCard(
           image: DecorationImage(
-            image: AssetImage(ImgPath.friendsCardWithFriendsBgImg),
+            image: AssetImage(
+              Img.pngImagePath(Img.friendsCardWithFriendsBgImg.path),
+            ),
             fit: BoxFit.cover,
           ),
           child: ListView.builder(
@@ -87,7 +89,9 @@ class _NoFriendsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BaseFriendsCard(
       image: DecorationImage(
-        image: AssetImage(ImgPath.friendsCardBgImg),
+        image: AssetImage(
+          Img.pngImagePath(Img.friendsCardBgImg.path),
+        ),
         fit: BoxFit.fill,
       ),
       child:

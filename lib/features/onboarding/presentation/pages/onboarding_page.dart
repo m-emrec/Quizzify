@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
+import '../../../../core/utils/shared/widgets/snackbars/custom_snackbar.dart';
 import '../../../../logger.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../mixins/onboarding_mixin.dart';

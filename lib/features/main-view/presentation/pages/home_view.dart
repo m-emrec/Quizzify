@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
 import '../../data/datasources/home_injection_container.dart';
 import '../widgets/friends_card.dart';

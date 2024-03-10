@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_paddings.dart';
+import '../../../constants/enums/app_paddings.dart';
 
 class AnswersGrid extends StatelessWidget {
   const AnswersGrid({

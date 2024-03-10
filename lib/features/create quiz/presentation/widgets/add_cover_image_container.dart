@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/navigation_extension.dart';
 import '../mixins/add_cover_image_container_mixin.dart';
@@ -38,9 +38,11 @@ class AddCoverImageContainer extends StatefulWidget {
   const AddCoverImageContainer({
     super.key,
     this.aspectRatio = 19 / 13,
+    this.imageUrl,
   });
 
   final double aspectRatio;
+  final String? imageUrl;
 
   @override
   State<AddCoverImageContainer> createState() => _AddCoverImageContainerState();
@@ -61,12 +63,13 @@ class _AddCoverImageContainerState extends State<AddCoverImageContainer>
           child: Container(
             /// Change it with bloc
             decoration: BoxDecoration(
-                image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                _CoverImages.image2.link,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  _CoverImages.image2.link,
+                ),
               ),
-            )),
+            ),
 
             /// Remove child if there is image data  using bloc
             child: Center(

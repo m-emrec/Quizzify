@@ -6,7 +6,7 @@ import 'config/theme/theme.dart';
 import 'core/constants/app_color.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   await SystemChrome.setPreferredOrientations([

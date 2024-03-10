@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../mixins/create_quiz_base_view_mixin.dart';
 

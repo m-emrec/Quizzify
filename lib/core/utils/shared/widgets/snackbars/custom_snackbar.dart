@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../extensions/context_extension.dart';
+import '../../../../extensions/context_extension.dart';
 
 abstract class Snack extends SnackBar {
   const Snack(

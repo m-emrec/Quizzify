@@ -1,17 +1,18 @@
 library add_question_page;
 
+import 'package:Quizzify/features/create%20quiz/presentation/pages/overview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/constants/enums/firestore_enums.dart';
 import '../../../../core/constants/enums/lottie_enums.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/navigation_extension.dart';
-import '../../../../core/shared/widgets/answers_grid.dart';
+import '../../../../core/utils/shared/widgets/answers_grid.dart';
 import '../widgets/add_cover_image_container.dart';
 import '../widgets/create_quiz_base_view.dart';
 import '../widgets/quiz_name_field.dart';
@@ -43,7 +44,8 @@ class _AddQuestionPageState extends State<AddQuestionPage>
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
-      onFloatingActionButtonPressed: () => null,
+      onFloatingActionButtonPressed: () =>
+          context.navigator.pushNamed(OverViewPage.route),
       body: Column(
         children: [
           Padding(

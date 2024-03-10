@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/constants/enums/firestore_enums.dart';
 import '../../../../core/resources/firestore_connection.dart';
-import '../../../../core/shared/models/quiz_model.dart';
+import '../../../../core/utils/shared/models/quiz_model.dart';
 import '../models/app_bar_model.dart';
 import '../models/friends_card_model.dart';
 import '../models/live_quizzes_model.dart';

@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../core/constants/strings.dart';
 import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/shared/widgets/pop_up_dialog.dart';
-import '../../../../core/shared/widgets/snackbars/custom_snackbar.dart';
+import '../../../../core/utils/shared/widgets/pop_up_dialog.dart';
+import '../../../../core/utils/shared/widgets/snackbars/custom_snackbar.dart';
 import '../bloc/auth_bloc.dart';
 
 /// This mixin made for using on SignIn and SignUp pages.

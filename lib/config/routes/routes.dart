@@ -13,7 +13,7 @@ import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 
 class AppRoutes {
   final Map<String, Widget Function(BuildContext)> _routes = {
-    "/": (p0) => const AuthManager(),
+    "/": (p0) => const AuthManager(), //OverViewPage(),
     ForgotPassword.route: (p0) => const ForgotPassword(),
     SignUpPage.route: (p0) => const SignUpPage(),
     SignInPage.route: (p0) => const SignInPage(),

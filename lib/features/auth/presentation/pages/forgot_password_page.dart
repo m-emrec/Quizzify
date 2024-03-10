@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../core/constants/app_paddings.dart';
+import '../../../../core/constants/enums/app_paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/empty_padding_extension.dart';
-import '../../../../core/shared/widgets/buttons/responsive_elevated_button.dart';
+import '../../../../core/utils/shared/widgets/buttons/responsive_elevated_button.dart';
 import '../mixins/auth_mixin.dart';
 import '../mixins/forgot_password_mixin.dart';
 import '../widgets/base_auth_view.dart';
