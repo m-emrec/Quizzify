@@ -1,5 +1,6 @@
 library add_cover_image_container;
 
+import 'package:Quizzify/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -126,24 +127,19 @@ class _SelectCoverImageBottomSheetState
       animationController: animationController,
       onClosing: () => context.navigator.pop(),
       builder: (context) {
-        return Stack(
-          children: [
-            Container(
-              height: containerHeight * animationController.value,
-              constraints:
-                  BoxConstraints(maxHeight: context.dynamicHeight(0.8)),
-              width: double.maxFinite,
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                children: images,
-              ),
+        return Container(
+          height: containerHeight * animationController.value,
+          constraints: BoxConstraints(maxHeight: context.dynamicHeight(0.8)),
+          width: double.maxFinite,
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
             ),
-          ],
+            children: images,
+          ),
         );
       },
     );

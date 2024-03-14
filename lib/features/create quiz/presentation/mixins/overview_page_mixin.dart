@@ -16,4 +16,5 @@ mixin OverViewPageMixin on State<OverViewPage> {
         cardColor: Colors.white,
         scaffoldBackgroundColor: AppColors.homeScaffoldColor,
       );
+  final String appBarTitle = "Create Quiz";
 }

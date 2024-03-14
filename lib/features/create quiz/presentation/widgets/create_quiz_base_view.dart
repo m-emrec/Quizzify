@@ -17,8 +17,8 @@ class CreateQuizBaseView extends StatefulWidget {
     this.onDuplicateTapped,
     this.onDeleteTapped,
     this.actions,
-    this.delete = true,
-    this.duplicate = true,
+    this.discard = true,
+    this.done = true,
   });
   final Widget body;
   final String floatingActionButtonLabel;
@@ -27,8 +27,8 @@ class CreateQuizBaseView extends StatefulWidget {
   final void Function()? onDuplicateTapped;
   final void Function()? onDeleteTapped;
   final List<Widget>? actions;
-  final bool duplicate;
-  final bool delete;
+  final bool done;
+  final bool discard;
 
   @override
   State<CreateQuizBaseView> createState() => _CreateQuizBaseViewState();
@@ -49,10 +49,10 @@ class _CreateQuizBaseViewState extends State<CreateQuizBaseView>
         ),
         // Appbar
         appBar: _CreateQuizAppBar(
-          delete: widget.delete,
-          duplicate: widget.duplicate,
+          discard: widget.discard,
+          save: widget.done,
           title: Text(widget.appBarTitle),
-          showAction: !(widget.delete == false && widget.duplicate == false),
+          showAction: !(widget.discard == false && widget.done == false),
         ),
         // Body
         body: LayoutBuilder(builder: (context, constraints) {
@@ -111,25 +111,25 @@ class _BaseBody extends StatelessWidget {
 }
 
 class _CreateQuizAppBar extends AppBar {
-  final bool duplicate;
+  final bool save;
 
-  final bool delete;
+  final bool discard;
   final bool showAction;
 
-  final Function()? onDeleteTapped;
+  final Function()? onDiscardTapped;
 
-  final Function()? onDuplicateTapped;
+  final Function()? onSaveTapped;
   _CreateQuizAppBar({
     super.title,
-    required this.duplicate,
-    required this.delete,
+    required this.save,
+    required this.discard,
     required this.showAction,
-    this.onDeleteTapped,
-    this.onDuplicateTapped,
+    this.onDiscardTapped,
+    this.onSaveTapped,
   });
-  final String duplicateButtonLabel = "Duplicate";
+  final String doneButtonLabel = "Done";
 
-  final String deleteButtonLabel = "Delete";
+  final String discardButtonLabel = "Discard";
 
   @override
   ScrollNotificationPredicate get notificationPredicate =>
@@ -147,46 +147,47 @@ class _CreateQuizAppBar extends AppBar {
             color: Colors.white,
             itemBuilder: (context) {
               return [
-                //Duplicate button
+                //Delete button
                 _popMenuItem(
                   context,
-                  height: duplicate ? kMinInteractiveDimension : 0,
-                  onTap: onDuplicateTapped,
-                  child: duplicate
+                  onTap: onDiscardTapped,
+                  height: discard ? kMinInteractiveDimension : 0,
+                  child: discard
                       ? Row(
                           children: [
                             Icon(
-                              Icons.copy_outlined,
-                              color: context.textTheme.labelSmall?.color,
+                              Icons.remove,
+                              color: AppColors.dangerColor,
                             ),
                             Gap(8),
                             Text(
-                              duplicateButtonLabel,
-                              style: context.textTheme.labelMedium,
+                              discardButtonLabel,
+                              style: context.textTheme.labelMedium?.copyWith(
+                                color: AppColors.dangerColor,
+                              ),
                             ),
                           ],
                         )
                       : SizedBox(),
                 ),
-
-                //Delete button
+                //Duplicate button
                 _popMenuItem(
                   context,
-                  onTap: onDeleteTapped,
-                  height: delete ? kMinInteractiveDimension : 0,
-                  child: delete
+                  height: save ? kMinInteractiveDimension : 0,
+                  onTap: onSaveTapped,
+                  child: save
                       ? Row(
                           children: [
                             Icon(
-                              Icons.delete_outlined,
-                              color: AppColors.dangerColor,
+                              Icons.done,
+                              color: AppColors
+                                  .successColor, //context.textTheme.labelSmall?.color,
                             ),
                             Gap(8),
                             Text(
-                              deleteButtonLabel,
-                              style: context.textTheme.labelMedium?.copyWith(
-                                color: AppColors.dangerColor,
-                              ),
+                              doneButtonLabel,
+                              style: context.textTheme.labelMedium
+                                  ?.copyWith(color: AppColors.successColor),
                             ),
                           ],
                         )

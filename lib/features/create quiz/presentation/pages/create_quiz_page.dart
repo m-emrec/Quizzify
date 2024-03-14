@@ -33,7 +33,8 @@ class _CreateQuizPageState extends State<CreateQuizPage>
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
-      duplicate: false,
+      discard: false,
+      done: false,
       appBarTitle: appBarTitle,
       body: Padding(
         padding: EdgeInsets.only(

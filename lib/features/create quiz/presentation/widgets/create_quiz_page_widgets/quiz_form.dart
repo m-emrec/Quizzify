@@ -27,7 +27,7 @@ class _QuizForm extends StatelessWidget {
             label: _titleFieldLabel,
             controller: quizTitleController,
           ),
-          Gap(AppPaddings.bigPadding),
+          Gap(AppPaddings.mediumPadding),
 
           /// Choose category button
           _ChooseQuizCategoryButton(),

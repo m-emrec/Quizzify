@@ -38,18 +38,19 @@ mixin SelectCoverImageSheetMixin on State<SelectCoverImageBottomSheet> {
       child: Image(
         image: NetworkImage(url),
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-          switch (wasSynchronouslyLoaded) {
-            case true:
-              return SizedBox(
-                child: child,
-              );
-            case false:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            default:
-              return SizedBox();
+          return child;
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          /// if image is loaded return image
+          if (loadingProgress?.cumulativeBytesLoaded ==
+              loadingProgress?.expectedTotalBytes) {
+            return child;
           }
+
+          /// else show progress indicator.
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

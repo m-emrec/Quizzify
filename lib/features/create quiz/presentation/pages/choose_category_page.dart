@@ -29,8 +29,8 @@ class _ChooseCategoryPageState extends State<ChooseCategoryPage>
   @override
   Widget build(BuildContext context) {
     return CreateQuizBaseView(
-      delete: false,
-      duplicate: false,
+      discard: false,
+      done: false,
       onFloatingActionButtonPressed:
           isCategoryChosen ? () => sendChosenCategory(context) : null,
       body: Padding(
